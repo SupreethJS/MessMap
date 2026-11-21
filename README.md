@@ -1,25 +1,19 @@
-# QuBite – Modern Mess Management System (MessMate)
+# Smart Mess Management System (SmartMess OS)
 
-> **Eat • Track • Manage**  
-> A world-class, premium SaaS-style Mess Management System engineered with **Next.js 14 App Router**, **TypeScript**, **Supabase PostgreSQL**, **Tailwind CSS**, and **Recharts**. Designed with modern minimalism, soft neubrutalism, high-definition food photography, and glassmorphic card layouts to eliminate institutional food waste, streamline student dining, and empower mess administrators.
+> **Intelligent Campus Dining • Zero Food Waste • Seamless Operations**  
+> Engineered by **Supreeth J Sudheer** with **Next.js 14 App Router**, **TypeScript**, **Supabase PostgreSQL**, **Tailwind CSS**, and **Recharts**. Designed with a modern cyber-slate & glassmorphic tech aesthetic to eliminate institutional food waste, streamline student dining, and empower mess administrators.
 
 ---
 
 ## 🎨 Design System & Brand Identity
 
-QuBite was crafted from the ground up to break away from generic college dashboard templates, delivering a commercial-grade SaaS experience:
+Smart Mess Management features an executive high-tech design system built for modern university dining halls:
 
-- **Primary Brand Yellow**: `#FFC83D` (Active states, primary CTA accents, indicators)
-- **Secondary Yellow**: `#FFD66B` (Hover highlights, subtle glows)
-- **Deep Black**: `#151515` (Fixed navigation sidebars, headers, prominent typography)
-- **Background Cream**: `#FFF9F3` (Gentle, warm, non-straining canvas)
-- **Card Background**: `#FFFFFF` with `#EEE8E0` light borders & soft neubrutalist shadows
-- **Soft Semantic Accents**:
-  - Green (`#DDF5E8` / `#43B978`) – Current Balance & positive indicators
-  - Purple (`#E9E2FF`) – Average Rating trend highlights
-  - Orange (`#FFE9CC`) – Quick actions and alert notifications
-  - Red (`#FDE8E8` / `#EF6464`) – Pending tickets and complaint resolution
-- **Interactive Visuals**: Realistic culinary photography across 4 daily meals (*Breakfast, Lunch, Evening Snacks, Dinner*), Recharts attendance analytics with current-day highlights, and interactive modal dialogs.
+- **Primary Brand Indigo**: `#4F46E5` / `#6366F1` (Active states, primary CTA accents, indicators)
+- **Secondary Cyan & Emerald**: `#06B6D4` / `#10B981` (Glows, positive indicators, sustainability metrics)
+- **Deep Slate Canvas**: `#0F172A` / `#1E293B` (Modern navigation bars, dark surfaces, prominent typography)
+- **Glassmorphic Cards**: `bg-slate-900/80` with fine slate-700/80 borders & subtle glows
+- **Clean Contrast**: Engineered for maximum readability, mobile responsiveness, and high information density.
 
 ---
 

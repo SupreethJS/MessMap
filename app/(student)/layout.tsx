@@ -33,7 +33,7 @@ export default async function StudentLayout({
 
         {/* Minimal Footer */}
         <footer className="border-t border-slate-200 bg-white/70 py-4 px-8 text-center text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} QuBite (MessMate) • Smart Digital Mess Platform</p>
+          <p>© {new Date().getFullYear()} Smart Mess Management System • Campus Dining Operations Platform</p>
         </footer>
       </div>
     </div>

@@ -30,7 +30,7 @@ export default async function AdminLayout({
           <div className="flex items-center gap-3">
             <QubiteLogo size="xs" />
             <span className="text-xs font-black uppercase tracking-wider text-slate-950 bg-amber-400 px-2.5 py-1 rounded-lg">
-              QuBite Admin Console
+              Smart Mess Admin Console
             </span>
             <span className="text-xs text-slate-300 hidden sm:inline">•</span>
             <span className="text-xs font-semibold text-slate-500 hidden sm:inline">

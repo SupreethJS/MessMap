@@ -171,7 +171,7 @@ export default function StudentSettingsPage() {
         {/* Sign Out Card */}
         <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-center justify-between">
           <div>
-            <h3 className="text-sm font-semibold text-slate-900">Sign Out of QuBite</h3>
+            <h3 className="text-sm font-semibold text-slate-900">Sign Out of Smart Mess</h3>
             <p className="text-xs text-slate-500">End your active dining portal session</p>
           </div>
 

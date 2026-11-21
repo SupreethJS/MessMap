@@ -46,14 +46,14 @@ export function QubiteSidebar({ unreadNotifsCount = 0 }: QubiteSidebarProps) {
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
                 <h1 className="font-extrabold text-xl text-white tracking-tight">
-                  QuBite
+                  Smart Mess
                 </h1>
-                <span className="text-[10px] font-bold uppercase bg-amber-400/20 text-amber-300 border border-amber-400/30 px-1.5 py-0.5 rounded">
-                  MESSMATE
+                <span className="text-[10px] font-bold uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-1.5 py-0.5 rounded">
+                  STUDENT
                 </span>
               </div>
               <p className="text-[11px] text-slate-400 font-medium tracking-wide">
-                Eat • Track • Manage
+                Campus Dining OS
               </p>
             </div>
           </Link>

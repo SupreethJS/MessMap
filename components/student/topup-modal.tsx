@@ -47,7 +47,7 @@ export function TopUpModal({ open, onOpenChange, currentBalance }: TopUpModalPro
             <div className="h-9 w-9 rounded-xl bg-emerald-50 border border-emerald-200/60 flex items-center justify-center text-emerald-700">
               <Wallet className="w-5 h-5" />
             </div>
-            <DialogTitle className="text-lg font-bold">Top Up QuBite Wallet</DialogTitle>
+            <DialogTitle className="text-lg font-bold">Top Up Dining Wallet</DialogTitle>
           </div>
           <DialogDescription className="text-xs text-slate-500">
             Instant wallet recharge for hostel meal bookings and special dishes.

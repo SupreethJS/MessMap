@@ -54,8 +54,8 @@ export default function LoginPage() {
           <Link href="/" className="inline-block hover:scale-105 transition-transform">
             <QubiteLogo size="xl" />
           </Link>
-          <h1 className="text-2xl font-black text-brand-dark tracking-tight">
-            QuBite <span className="text-amber-500">Portal</span>
+          <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+            Smart Mess <span className="text-indigo-600">Portal</span>
           </h1>
           <p className="text-xs text-zinc-500 font-medium">
             M. S. Ramaiah University of Applied Sciences (MSRUAS)

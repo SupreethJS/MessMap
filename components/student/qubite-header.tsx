@@ -35,7 +35,7 @@ export function QubiteHeader({ user, notifications = [] }: QubiteHeaderProps) {
       <div className="lg:hidden flex items-center shrink-0">
         <Link href="/student/dashboard" className="flex items-center gap-2 group">
           <QubiteLogo size="xs" />
-          <span className="font-extrabold text-sm text-slate-900 group-hover:text-amber-600 transition-colors">QuBite</span>
+          <span className="font-extrabold text-sm text-slate-900 group-hover:text-indigo-600 transition-colors">Smart Mess</span>
         </Link>
       </div>
 

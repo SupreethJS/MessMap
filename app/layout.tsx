@@ -6,8 +6,8 @@ import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "QuBite • Smart Mess Management System",
-  description: "Next.js & Supabase Intelligent Hostel Catering & Waste Reduction Platform",
+  title: "Smart Mess Management • Intelligent Campus Dining Platform",
+  description: "Next-generation campus dining operations and zero-waste platform engineered by Supreeth J Sudheer.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },

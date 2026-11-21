@@ -26,7 +26,7 @@ export function Navbar({ user, notifications = [] }: NavbarProps) {
             className="flex items-center gap-2.5 font-extrabold text-slate-900 text-lg tracking-tight hover:opacity-95 transition-opacity"
           >
             <QubiteLogo size="sm" />
-            <span>Qu<span className="text-amber-500">Bite</span></span>
+            <span>Smart<span className="text-indigo-600">Mess</span></span>
           </Link>
 
           {/* Student Desktop Nav Links */}
