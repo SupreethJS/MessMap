@@ -1,5 +1,5 @@
 import { getCurrentUser } from "@/app/actions/auth-actions";
-import { getAllMenus, getStore } from "@/lib/data/mess-store";
+import { getDbMenus, getDbRatings } from "@/lib/supabase/db";
 import { StarRating } from "@/components/shared/star-rating";
 import { RateMealDialog } from "@/components/student/rate-meal-dialog";
 import { Star, MessageSquare, CheckCircle2, Award } from "lucide-react";
@@ -8,14 +8,14 @@ export const dynamic = "force-dynamic";
 
 export default async function StudentFeedbackPage() {
   const user = await getCurrentUser();
-  const store = getStore();
   const today = new Date().toISOString().split("T")[0];
 
-  const studentRatings = user
-    ? store.ratings.filter((r) => r.student_id === user.id)
-    : [];
+  const [studentRatings, allMenus] = await Promise.all([
+    user ? getDbRatings(user.id) : Promise.resolve([]),
+    getDbMenus(),
+  ]);
 
-  const pastMenus = getAllMenus()
+  const pastMenus = allMenus
     .filter((m) => m.menu_date <= today)
     .sort((a, b) => b.menu_date.localeCompare(a.menu_date))
     .slice(0, 10);

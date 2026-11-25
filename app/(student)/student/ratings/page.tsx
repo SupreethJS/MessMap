@@ -1,5 +1,5 @@
 import { getCurrentUser } from "@/app/actions/auth-actions";
-import { getAllMenus, getStore } from "@/lib/data/mess-store";
+import { getDbMenus, getDbRatings } from "@/lib/supabase/db";
 import { RateMealDialog } from "@/components/student/rate-meal-dialog";
 import { StarRating } from "@/components/shared/star-rating";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -9,14 +9,12 @@ export const dynamic = "force-dynamic";
 
 export default async function StudentRatingsPage() {
   const user = await getCurrentUser();
-  const store = getStore();
-
-  const userRatings = user
-    ? store.ratings.filter((r) => r.student_id === user.id)
-    : [];
-
   const today = new Date().toISOString().split("T")[0];
-  const allMenus = getAllMenus();
+
+  const [userRatings, allMenus] = await Promise.all([
+    user ? getDbRatings(user.id) : Promise.resolve([]),
+    getDbMenus(),
+  ]);
 
   // Past served meals that the student can rate
   const pastServedMenus = allMenus

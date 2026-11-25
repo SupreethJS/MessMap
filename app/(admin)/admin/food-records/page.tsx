@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getAllMenus, getStore } from "@/lib/data/mess-store";
-import { saveFoodRecordAction } from "@/app/actions/food-record-actions";
+import { saveFoodRecordAction, getFoodRecordsDataAction } from "@/app/actions/food-record-actions";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,8 +13,15 @@ import { useRouter } from "next/navigation";
 
 export default function AdminFoodRecordsPage() {
   const router = useRouter();
-  const store = getStore();
-  const menus = getAllMenus();
+  const [menus, setMenus] = useState(getAllMenus());
+  const [foodRecords, setFoodRecords] = useState(getStore().foodRecords);
+
+  useEffect(() => {
+    getFoodRecordsDataAction().then((data) => {
+      if (data?.menus && data.menus.length > 0) setMenus(data.menus);
+      if (data?.records && data.records.length > 0) setFoodRecords(data.records);
+    });
+  }, []);
 
   // Sort past menus first
   const sortedMenus = [...menus].sort((a, b) => b.menu_date.localeCompare(a.menu_date));
@@ -37,7 +44,7 @@ export default function AdminFoodRecordsPage() {
 
   const handleMenuSelect = (menuId: string) => {
     setSelectedMenuId(menuId);
-    const existingRecord = store.foodRecords.find((r) => r.menu_id === menuId);
+    const existingRecord = foodRecords.find((r) => r.menu_id === menuId);
     if (existingRecord) {
       setPreparedQty(existingRecord.prepared_qty);
       setLeftoverQty(existingRecord.leftover_qty);
@@ -234,8 +241,8 @@ export default function AdminFoodRecordsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {store.foodRecords.slice(-12).reverse().map((rec) => {
-                  const m = store.menus.find((menu) => menu.id === rec.menu_id);
+                {foodRecords.slice(-12).reverse().map((rec) => {
+                  const m = menus.find((menu) => menu.id === rec.menu_id);
                   const isHighWaste = rec.wastage_percentage > 15;
 
                   return (

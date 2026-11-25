@@ -1,7 +1,7 @@
 import { getCurrentUser } from "@/app/actions/auth-actions";
 import { QubiteSidebar } from "@/components/student/qubite-sidebar";
 import { QubiteHeader } from "@/components/student/qubite-header";
-import { getNotificationsForUser } from "@/lib/data/mess-store";
+import { getDbNotifications } from "@/lib/supabase/db";
 
 export const dynamic = "force-dynamic";
 
@@ -11,7 +11,7 @@ export default async function StudentLayout({
   children: React.ReactNode;
 }) {
   const user = await getCurrentUser();
-  const notifications = user ? getNotificationsForUser(user.id) : [];
+  const notifications = user ? await getDbNotifications(user.id) : [];
   const unreadCount = notifications.filter((n) => !n.is_read).length;
 
   return (

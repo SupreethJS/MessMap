@@ -1,5 +1,5 @@
 import { getCurrentUser } from "@/app/actions/auth-actions";
-import { getComplaintsFromStore } from "@/lib/data/mess-store";
+import { getDbComplaints } from "@/lib/supabase/db";
 import { AlertCircle, Clock, CheckCircle2, MessageSquare, ShieldCheck, HelpCircle } from "lucide-react";
 import { ComplaintStatusButton } from "@/components/student/complaint-status-button";
 
@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 export default async function StudentComplaintsPage() {
   const user = await getCurrentUser();
-  const complaints = user ? getComplaintsFromStore(user.id) : [];
+  const complaints = user ? await getDbComplaints(user.id) : [];
 
   const pendingCount = complaints.filter((c) => c.status !== "Resolved").length;
   const resolvedCount = complaints.filter((c) => c.status === "Resolved").length;

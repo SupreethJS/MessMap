@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getAllMenus } from "@/lib/data/mess-store";
+import { getDbMenus } from "@/lib/supabase/db";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -15,7 +15,7 @@ export default async function AdminMenusPage({
 }: {
   searchParams?: { date?: string; meal_type?: string };
 }) {
-  const allMenus = getAllMenus();
+  const allMenus = await getDbMenus();
   const filterDate = searchParams?.date;
   const filterMeal = searchParams?.meal_type;
 

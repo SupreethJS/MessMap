@@ -3,12 +3,11 @@
 import { revalidatePath } from "next/cache";
 import { groceryItemSchema, GroceryItemInput } from "@/lib/validations/grocery";
 import {
-  getGroceriesFromStore,
-  updateGroceryStockInStore,
-  addGroceryItemInStore,
-  deleteGroceryItemInStore,
-  getRecipesWithStockMatching,
-} from "@/lib/data/mess-store";
+  updateDbGroceryStock,
+  addDbGroceryItem,
+  deleteDbGroceryItem,
+  getDbRecipesWithStock,
+} from "@/lib/supabase/db";
 import { getCurrentUser } from "./auth-actions";
 
 export async function updateGroceryStockAction(id: string, newStock: number) {
@@ -22,7 +21,7 @@ export async function updateGroceryStockAction(id: string, newStock: number) {
   }
 
   try {
-    const item = updateGroceryStockInStore(id, newStock);
+    const item = await updateDbGroceryStock(id, newStock);
     revalidatePath("/admin/groceries");
     revalidatePath("/admin/recipes");
     return { success: true, item };
@@ -43,7 +42,7 @@ export async function addGroceryItemAction(input: GroceryItemInput) {
   }
 
   try {
-    const newItem = addGroceryItemInStore(result.data);
+    const newItem = await addDbGroceryItem(result.data);
     revalidatePath("/admin/groceries");
     revalidatePath("/admin/recipes");
     return { success: true, item: newItem };
@@ -59,7 +58,7 @@ export async function deleteGroceryItemAction(id: string) {
   }
 
   try {
-    deleteGroceryItemInStore(id);
+    await deleteDbGroceryItem(id);
     revalidatePath("/admin/groceries");
     revalidatePath("/admin/recipes");
     return { success: true };
@@ -69,5 +68,10 @@ export async function deleteGroceryItemAction(id: string) {
 }
 
 export async function getRecipeSuggestionsAction() {
-  return getRecipesWithStockMatching();
+  return getDbRecipesWithStock();
+}
+
+export async function getGroceriesAction() {
+  const { getDbGroceries } = await import("@/lib/supabase/db");
+  return getDbGroceries();
 }

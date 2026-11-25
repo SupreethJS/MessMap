@@ -1,5 +1,5 @@
 import { getCurrentUser } from "@/app/actions/auth-actions";
-import { getAllMenus, getStore } from "@/lib/data/mess-store";
+import { getDbMenus } from "@/lib/supabase/db";
 import { UtensilsCrossed, CheckCircle2, Calendar, TrendingUp, Sparkles, ShieldCheck } from "lucide-react";
 import { formatTime } from "@/lib/utils";
 
@@ -7,12 +7,11 @@ export const dynamic = "force-dynamic";
 
 export default async function StudentMyMealsPage() {
   const user = await getCurrentUser();
-  const store = getStore();
-  const allMenus = getAllMenus();
+  const allMenus = await getDbMenus(undefined, user?.id);
   const today = new Date().toISOString().split("T")[0];
 
   const studentPlans = user
-    ? store.mealPlans.filter((p) => p.student_id === user.id)
+    ? allMenus.filter((m) => m.user_meal_plan?.status).map((m) => m.user_meal_plan!)
     : [];
 
   const consumedCount = 18;

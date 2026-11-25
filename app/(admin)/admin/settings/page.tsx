@@ -1,3 +1,9 @@
+import {
+  getDbMenus,
+  getDbFoodRecords,
+  getDbRatings,
+  getDbGroceries,
+} from "@/lib/supabase/db";
 import { getStore } from "@/lib/data/mess-store";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Settings, Shield, Database, Clock } from "lucide-react";
@@ -5,6 +11,12 @@ import { Settings, Shield, Database, Clock } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export default async function AdminSettingsPage() {
+  const [menus, foodRecords, ratings, groceries] = await Promise.all([
+    getDbMenus(),
+    getDbFoodRecords(),
+    getDbRatings(),
+    getDbGroceries(),
+  ]);
   const store = getStore();
 
   return (
@@ -79,19 +91,19 @@ export default async function AdminSettingsPage() {
             </div>
             <div className="flex justify-between py-2 border-b border-slate-100">
               <span className="text-slate-500">Total Menus Published</span>
-              <span className="font-bold text-slate-800">{store.menus.length} meals</span>
+              <span className="font-bold text-slate-800">{menus.length} meals</span>
             </div>
             <div className="flex justify-between py-2 border-b border-slate-100">
               <span className="text-slate-500">Historical Wastage Logs</span>
-              <span className="font-bold text-slate-800">{store.foodRecords.length} records</span>
+              <span className="font-bold text-slate-800">{foodRecords.length} records</span>
             </div>
             <div className="flex justify-between py-2 border-b border-slate-100">
               <span className="text-slate-500">Student Ratings Collected</span>
-              <span className="font-bold text-slate-800">{store.ratings.length} reviews</span>
+              <span className="font-bold text-slate-800">{ratings.length} reviews</span>
             </div>
             <div className="flex justify-between py-2">
               <span className="text-slate-500">Inventory Items Tracked</span>
-              <span className="font-bold text-slate-800">{store.groceries.length} items</span>
+              <span className="font-bold text-slate-800">{groceries.length} items</span>
             </div>
           </CardContent>
         </Card>

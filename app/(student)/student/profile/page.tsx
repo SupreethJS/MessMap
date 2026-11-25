@@ -1,15 +1,13 @@
 import { getCurrentUser } from "@/app/actions/auth-actions";
-import { getStore } from "@/lib/data/mess-store";
+import { getDbRatings, getDbMenus } from "@/lib/supabase/db";
 import { User, Building2, DoorClosed, Award, Utensils, Phone, Hash, ShieldCheck, CheckCircle2 } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
 export default async function StudentProfilePage() {
   const user = await getCurrentUser();
-  const store = getStore();
-
-  const studentPlans = user ? store.mealPlans.filter((p) => p.student_id === user.id) : [];
-  const studentRatings = user ? store.ratings.filter((r) => r.student_id === user.id) : [];
+  const studentRatings = user ? await getDbRatings(user.id) : [];
+  const studentPlans = user?.id ? (await getDbMenus(undefined, user.id)).filter((m: any) => m.user_meal_plan).map((m: any) => m.user_meal_plan!) : [];
 
   return (
     <div className="space-y-8 max-w-5xl mx-auto">

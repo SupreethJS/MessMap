@@ -1,10 +1,9 @@
 import { getCurrentUser } from "@/app/actions/auth-actions";
 import {
-  getAllMenus,
-  getStore,
-  getRecentActivities,
-  getComplaintsFromStore,
-} from "@/lib/data/mess-store";
+  getDbMenus,
+  getDbRecentActivities,
+  getDbComplaints,
+} from "@/lib/supabase/db";
 import { QubiteStatCards } from "@/components/student/qubite-stat-card";
 import { TodaysMenuCard } from "@/components/student/todays-menu-card";
 import { MealAttendanceChart } from "@/components/student/attendance-chart";
@@ -17,12 +16,14 @@ export const dynamic = "force-dynamic";
 
 export default async function StudentDashboardPage() {
   const user = await getCurrentUser();
-  const store = getStore();
   const todayStr = new Date().toISOString().split("T")[0];
 
-  const todayMenus = getAllMenus(todayStr);
-  const activities = getRecentActivities();
-  const complaints = user ? getComplaintsFromStore(user.id) : [];
+  const [todayMenus, activities, complaints] = await Promise.all([
+    getDbMenus(todayStr, user?.id),
+    getDbRecentActivities(user?.id),
+    user ? getDbComplaints(user.id) : Promise.resolve([]),
+  ]);
+
   const pendingComplaints = complaints.filter((c) => c.status !== "Resolved").length;
 
   const hour = new Date().getHours();

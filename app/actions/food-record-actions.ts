@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { foodRecordSchema, FoodRecordInput } from "@/lib/validations/food-record";
-import { saveFoodRecordInStore } from "@/lib/data/mess-store";
+import { saveDbFoodRecord } from "@/lib/supabase/db";
 import { getCurrentUser } from "./auth-actions";
 
 export async function saveFoodRecordAction(input: FoodRecordInput) {
@@ -17,7 +17,7 @@ export async function saveFoodRecordAction(input: FoodRecordInput) {
   }
 
   try {
-    const record = saveFoodRecordInStore(result.data);
+    const record = await saveDbFoodRecord(result.data);
     revalidatePath("/admin/food-records");
     revalidatePath("/admin/dashboard");
     revalidatePath("/admin/reports");
@@ -26,4 +26,10 @@ export async function saveFoodRecordAction(input: FoodRecordInput) {
   } catch (err: any) {
     return { success: false, error: err.message || "Failed to record food quantities." };
   }
+}
+
+export async function getFoodRecordsDataAction() {
+  const { getDbFoodRecords, getDbMenus } = await import("@/lib/supabase/db");
+  const [records, menus] = await Promise.all([getDbFoodRecords(), getDbMenus()]);
+  return { records, menus };
 }

@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { topUpWalletInStore } from "@/lib/data/mess-store";
+import { topUpDbWallet } from "@/lib/supabase/db";
 import { getCurrentUser } from "./auth-actions";
 
 export async function topUpWalletAction(amount: number) {
@@ -15,7 +15,7 @@ export async function topUpWalletAction(amount: number) {
   }
 
   try {
-    const newBalance = topUpWalletInStore(user.id, amount);
+    const newBalance = await topUpDbWallet(user.id, amount);
     revalidatePath("/student/dashboard");
     revalidatePath("/student/payments");
     return { success: true, newBalance };

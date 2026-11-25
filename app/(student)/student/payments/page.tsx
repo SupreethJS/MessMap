@@ -1,5 +1,5 @@
 import { getCurrentUser } from "@/app/actions/auth-actions";
-import { getWalletDataForStudent } from "@/lib/data/mess-store";
+import { getDbWalletData } from "@/lib/supabase/db";
 import { ArrowDownRight, ArrowUpRight, CreditCard, Sparkles, TrendingUp } from "lucide-react";
 import { TopUpModalButton } from "@/components/student/topup-modal-button";
 import { DownloadReceiptButton } from "@/components/student/download-receipt-button";
@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 export default async function StudentPaymentsPage() {
   const user = await getCurrentUser();
-  const walletData = getWalletDataForStudent(user?.id || "u-student-001");
+  const walletData = await getDbWalletData(user?.id || "u-student-001");
 
   return (
     <div className="space-y-8">

@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getGroceriesFromStore } from "@/lib/data/mess-store";
 import {
   updateGroceryStockAction,
   addGroceryItemAction,
   deleteGroceryItemAction,
+  getGroceriesAction,
 } from "@/app/actions/grocery-actions";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -25,7 +26,15 @@ import { useRouter } from "next/navigation";
 
 export default function AdminGroceriesPage() {
   const router = useRouter();
-  const groceries = getGroceriesFromStore();
+  const [groceries, setGroceries] = useState(getGroceriesFromStore());
+
+  useEffect(() => {
+    getGroceriesAction().then((items) => {
+      if (items && items.length > 0) {
+        setGroceries(items);
+      }
+    });
+  }, []);
 
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editStockValue, setEditStockValue] = useState<number>(0);
@@ -45,8 +54,11 @@ export default function AdminGroceriesPage() {
   };
 
   const handleSaveStock = async (id: string) => {
-    await updateGroceryStockAction(id, Number(editStockValue));
+    const res = await updateGroceryStockAction(id, Number(editStockValue));
     setEditingId(null);
+    if (res.success && res.item) {
+      setGroceries((prev) => prev.map((g) => (g.id === id ? res.item! : g)));
+    }
     router.refresh();
   };
 
@@ -62,7 +74,8 @@ export default function AdminGroceriesPage() {
       unit: newUnit,
     });
 
-    if (res.success) {
+    if (res.success && res.item) {
+      setGroceries((prev) => [...prev, res.item!]);
       setOpenAddModal(false);
       setNewName("");
       router.refresh();
@@ -73,6 +86,7 @@ export default function AdminGroceriesPage() {
 
   const handleDeleteItem = async (id: string) => {
     await deleteGroceryItemAction(id);
+    setGroceries((prev) => prev.filter((g) => g.id !== id));
     router.refresh();
   };
 

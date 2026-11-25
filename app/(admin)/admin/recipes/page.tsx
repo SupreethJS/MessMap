@@ -1,4 +1,4 @@
-import { getRecipesWithStockMatching } from "@/lib/data/mess-store";
+import { getDbRecipesWithStock } from "@/lib/supabase/db";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ChefHat, Check, X, Sparkles, BookOpen } from "lucide-react";
@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 export const dynamic = "force-dynamic";
 
 export default async function AdminRecipesPage() {
-  const matchedRecipes = getRecipesWithStockMatching();
+  const matchedRecipes = await getDbRecipesWithStock();
 
   return (
     <div className="space-y-6">

@@ -1,5 +1,5 @@
 import { getCurrentUser } from "@/app/actions/auth-actions";
-import { getNotificationsForUser } from "@/lib/data/mess-store";
+import { getDbNotifications } from "@/lib/supabase/db";
 import { Bell, CheckCheck, Utensils, CreditCard, AlertCircle, Sparkles, ShieldCheck } from "lucide-react";
 import { markAllNotificationsReadAction } from "@/app/actions/notification-actions";
 import { formatDistanceToNow } from "date-fns";
@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 export default async function StudentNotificationsPage() {
   const user = await getCurrentUser();
-  const notifications = user ? getNotificationsForUser(user.id) : [];
+  const notifications = user ? await getDbNotifications(user.id) : [];
   const unreadCount = notifications.filter((n) => !n.is_read).length;
 
   const typeIcons: Record<string, any> = {

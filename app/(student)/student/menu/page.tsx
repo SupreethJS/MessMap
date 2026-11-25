@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getAllMenus, FOOD_IMAGES } from "@/lib/data/mess-store";
+import { getAllMenusAction } from "@/app/actions/menu-actions";
 import { resolveDishImage } from "@/lib/data/dish-images";
 import { formatTime } from "@/lib/utils";
 import { Clock, Flame, Sparkles, Check, X, Calendar as CalendarIcon, ShieldCheck, Utensils } from "lucide-react";
@@ -36,7 +37,15 @@ function getTargetDateForWeekday(dayName: string): { dateStr: string; label: str
 }
 
 export default function StudentWeeklyMenuPage() {
-  const allMenus = getAllMenus();
+  const [allMenus, setAllMenus] = useState(getAllMenus());
+
+  useEffect(() => {
+    getAllMenusAction().then((menus) => {
+      if (menus && menus.length > 0) {
+        setAllMenus(menus);
+      }
+    });
+  }, []);
   const currentDayName = new Date().toLocaleDateString("en-US", { weekday: "long" });
   const [activeDay, setActiveDay] = useState<string>(
     daysOfWeek.includes(currentDayName) ? currentDayName : "Monday"

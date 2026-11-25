@@ -1,11 +1,13 @@
-import { getAllMenus } from "@/lib/data/mess-store";
+import { getDbMenus } from "@/lib/supabase/db";
+import { getCurrentUser } from "@/app/actions/auth-actions";
 import { MealOptInCard } from "@/components/student/meal-opt-in-card";
 import { Utensils } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
 export default async function StudentMealPlansPage() {
-  const allMenus = getAllMenus();
+  const user = await getCurrentUser();
+  const allMenus = await getDbMenus(undefined, user?.id);
   const today = new Date().toISOString().split("T")[0];
 
   const upcomingMenus = allMenus

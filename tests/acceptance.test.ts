@@ -113,7 +113,7 @@ async function runTestSuite() {
   // ---------------------------------------------------------
   // Test 6: Admin can create, edit and delete menus
   // ---------------------------------------------------------
-  const testDate = "2026-12-01";
+  const testDate = "2027-01-10";
   const created = createMenuInStore({
     menu_date: testDate,
     meal_type: "dinner",
@@ -150,7 +150,7 @@ async function runTestSuite() {
   // ---------------------------------------------------------
   const initialNotifCount = store.notifications.length;
   createMenuInStore({
-    menu_date: "2026-12-05",
+    menu_date: "2027-01-11",
     meal_type: "lunch",
     cutoff_time: "10:00:00",
     serving_start_time: "12:30:00",

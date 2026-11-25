@@ -1,4 +1,4 @@
-import { getStore } from "@/lib/data/mess-store";
+import { getDbRatings } from "@/lib/supabase/db";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { StarRating } from "@/components/shared/star-rating";
 import { Star, MessageSquare, TrendingUp, Users } from "lucide-react";
@@ -6,8 +6,7 @@ import { Star, MessageSquare, TrendingUp, Users } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export default async function AdminRatingsPage() {
-  const store = getStore();
-  const ratings = store.ratings;
+  const ratings = await getDbRatings();
 
   // Calculate statistics
   const totalRatings = ratings.length;
@@ -87,8 +86,8 @@ export default async function AdminRatingsPage() {
           ) : (
             <div className="divide-y divide-slate-100">
               {ratings.slice(-15).reverse().map((r) => {
-                const student = store.profiles.find((p) => p.id === r.student_id);
-                const menu = store.menus.find((m) => m.id === r.menu_id);
+                const studentName = (r as any).student?.full_name || "Student";
+                const mealTypeLabel = r.meal_type || "Meal";
 
                 return (
                   <div key={r.id} className="py-4 space-y-2">
@@ -96,15 +95,15 @@ export default async function AdminRatingsPage() {
                       <div className="flex items-center gap-2.5">
                         <StarRating value={r.rating} readOnly size="sm" />
                         <span className="font-semibold text-xs text-slate-800">
-                          {student?.full_name || "Student"}
+                          {studentName}
                         </span>
-                        <span className="text-[11px] text-slate-400">
-                          ({student?.roll_number || "Hostel Student"})
+                        <span className="text-[11px] text-slate-400 capitalize">
+                          ({mealTypeLabel})
                         </span>
                       </div>
 
                       <span className="text-[11px] text-slate-400">
-                        {menu?.menu_date} • <span className="capitalize">{menu?.meal_type}</span>
+                        {r.created_at ? new Date(r.created_at).toLocaleDateString() : "Recent"}
                       </span>
                     </div>
 

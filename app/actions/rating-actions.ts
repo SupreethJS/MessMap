@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { ratingSchema, RatingInput } from "@/lib/validations/rating";
-import { getMenuById, saveRatingInStore } from "@/lib/data/mess-store";
+import { getDbMenuById, saveDbRating } from "@/lib/supabase/db";
 import { getCurrentUser } from "./auth-actions";
 
 export async function submitRatingAction(input: RatingInput) {
@@ -17,13 +17,13 @@ export async function submitRatingAction(input: RatingInput) {
   }
 
   const { menu_id, rating, comment } = result.data;
-  const menu = getMenuById(menu_id);
+  const menu = await getDbMenuById(menu_id, user.id);
 
   if (!menu) {
     return { success: false, error: "Menu not found." };
   }
 
-  // FR5: Permit ratings only after the meal serving start time
+  // Permit ratings strictly after meal serving begins
   const mealStart = new Date(`${menu.menu_date}T${menu.serving_start_time}`);
   const now = new Date();
 
@@ -35,11 +35,12 @@ export async function submitRatingAction(input: RatingInput) {
   }
 
   try {
-    const saved = saveRatingInStore({
+    const saved = await saveDbRating({
       student_id: user.id,
-      menu_id,
+      menu_id: menu.id,
       rating,
-      comment,
+      comment: comment || undefined,
+      meal_type: menu.meal_type,
     });
 
     revalidatePath("/student/dashboard");

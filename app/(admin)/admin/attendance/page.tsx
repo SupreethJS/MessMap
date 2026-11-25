@@ -1,4 +1,4 @@
-import { getAllMenus, getDemandPredictionForMenu } from "@/lib/data/mess-store";
+import { getDbMenus, getDbDemandPredictionForMenu } from "@/lib/supabase/db";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Users, Sparkles, Scale, Calendar, Clock } from "lucide-react";
@@ -7,7 +7,7 @@ import { formatTime } from "@/lib/utils";
 export const dynamic = "force-dynamic";
 
 export default async function AdminAttendancePage() {
-  const allMenus = getAllMenus();
+  const allMenus = await getDbMenus();
   const today = new Date().toISOString().split("T")[0];
 
   // Upcoming and today's menus
@@ -34,7 +34,7 @@ export default async function AdminAttendancePage() {
           </Card>
         ) : (
           activeMenus.map((menu) => {
-            const prediction = getDemandPredictionForMenu(menu.id);
+            const prediction = getDbDemandPredictionForMenu(menu.id);
             const formattedDate = new Date(menu.menu_date + "T00:00:00").toLocaleDateString("en-US", {
               weekday: "short",
               month: "short",

@@ -3,12 +3,11 @@
 import { revalidatePath } from "next/cache";
 import { menuSchema, MenuInput } from "@/lib/validations/menu";
 import {
-  createMenuInStore,
-  updateMenuInStore,
-  deleteMenuFromStore,
-  getAllMenus,
-  getMenuById,
-} from "@/lib/data/mess-store";
+  createDbMenu,
+  updateDbMenu,
+  deleteDbMenu,
+  getDbMenus,
+} from "@/lib/supabase/db";
 import { getCurrentUser } from "./auth-actions";
 
 export async function createMenuAction(input: MenuInput) {
@@ -23,7 +22,7 @@ export async function createMenuAction(input: MenuInput) {
   }
 
   try {
-    const newMenu = createMenuInStore(result.data);
+    const newMenu = await createDbMenu(result.data);
     revalidatePath("/admin/menus");
     revalidatePath("/admin/dashboard");
     revalidatePath("/student/dashboard");
@@ -46,7 +45,7 @@ export async function updateMenuAction(menuId: string, input: MenuInput) {
   }
 
   try {
-    const updated = updateMenuInStore(menuId, result.data);
+    const updated = await updateDbMenu(menuId, result.data);
     revalidatePath("/admin/menus");
     revalidatePath(`/admin/menus/${menuId}/edit`);
     revalidatePath("/student/dashboard");
@@ -64,7 +63,7 @@ export async function deleteMenuAction(menuId: string) {
   }
 
   try {
-    deleteMenuFromStore(menuId);
+    await deleteDbMenu(menuId);
     revalidatePath("/admin/menus");
     revalidatePath("/student/dashboard");
     revalidatePath("/student/menu");
@@ -75,8 +74,8 @@ export async function deleteMenuAction(menuId: string) {
 }
 
 export async function getSevenDayMenusAction() {
-  const allMenus = getAllMenus();
   const today = new Date().toISOString().split("T")[0];
+  const allMenus = await getDbMenus();
 
   const futureLimit = new Date();
   futureLimit.setDate(new Date().getDate() + 7);
@@ -85,4 +84,8 @@ export async function getSevenDayMenusAction() {
   return allMenus.filter(
     (m) => m.menu_date >= today && m.menu_date <= futureLimitStr && m.is_published
   );
+}
+
+export async function getAllMenusAction() {
+  return getDbMenus();
 }

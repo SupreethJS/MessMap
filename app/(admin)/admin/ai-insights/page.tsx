@@ -1,8 +1,8 @@
 import {
-  getAllMenus,
-  getDemandPredictionForMenu,
-  getAIRecommendationsForMess,
-} from "@/lib/data/mess-store";
+  getDbMenus,
+  getDbDemandPredictionForMenu,
+  getDbAIRecommendations,
+} from "@/lib/supabase/db";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, TrendingUp, AlertTriangle, Scale, Brain, ShieldAlert, CheckCircle2 } from "lucide-react";
@@ -11,7 +11,7 @@ import { formatTime } from "@/lib/utils";
 export const dynamic = "force-dynamic";
 
 export default async function AdminAIInsightsPage() {
-  const allMenus = getAllMenus();
+  const allMenus = await getDbMenus();
   const today = new Date().toISOString().split("T")[0];
 
   // Upcoming meals for prediction
@@ -19,7 +19,7 @@ export default async function AdminAIInsightsPage() {
     .filter((m) => m.menu_date >= today)
     .slice(0, 6);
 
-  const recommendations = getAIRecommendationsForMess();
+  const recommendations = await getDbAIRecommendations();
 
   return (
     <div className="space-y-8">
@@ -48,7 +48,7 @@ export default async function AdminAIInsightsPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {recommendations.map((rec, idx) => {
-              const priorityIcons = {
+              const priorityIcons: Record<string, any> = {
                 critical: ShieldAlert,
                 high: AlertTriangle,
                 medium: TrendingUp,
@@ -56,7 +56,7 @@ export default async function AdminAIInsightsPage() {
               };
               const Icon = priorityIcons[rec.priority] || Sparkles;
 
-              const borderStyles = {
+              const borderStyles: Record<string, string> = {
                 critical: "border-rose-300 bg-rose-50/40",
                 high: "border-amber-300 bg-amber-50/40",
                 medium: "border-blue-200 bg-blue-50/30",
@@ -105,7 +105,7 @@ export default async function AdminAIInsightsPage() {
 
         <div className="space-y-4">
           {upcomingMenus.map((menu) => {
-            const pred = getDemandPredictionForMenu(menu.id);
+            const pred = getDbDemandPredictionForMenu(menu.id);
             const formattedDate = new Date(menu.menu_date + "T00:00:00").toLocaleDateString("en-US", {
               weekday: "short",
               month: "short",

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getReportAnalytics } from "@/lib/data/mess-store";
+import { getDbReportAnalytics } from "@/lib/supabase/db";
 import { MetricCard } from "@/components/admin/metric-card";
 import { AnalyticsCharts } from "@/components/admin/analytics-charts";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,7 @@ export default async function AdminReportsPage({
   searchParams?: { range?: "week" | "month" };
 }) {
   const range = searchParams?.range === "month" ? "month" : "week";
-  const analytics = getReportAnalytics(range);
+  const analytics = await getDbReportAnalytics(range);
 
   return (
     <div className="space-y-8">

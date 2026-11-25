@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { saveComplaintInStore } from "@/lib/data/mess-store";
+import { saveDbComplaint } from "@/lib/supabase/db";
 import { getCurrentUser } from "./auth-actions";
 
 export async function submitComplaintAction(data: {
@@ -20,8 +20,9 @@ export async function submitComplaintAction(data: {
   }
 
   try {
-    const complaint = saveComplaintInStore({
+    const complaint = await saveDbComplaint({
       student_id: user.id,
+      student_name: user.full_name,
       category: data.category,
       title: data.title.trim(),
       description: data.description.trim(),

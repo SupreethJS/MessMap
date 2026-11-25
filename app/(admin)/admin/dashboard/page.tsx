@@ -15,37 +15,41 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
-  getAllMenus,
-  getStore,
-  getAIRecommendationsForMess,
-} from "@/lib/data/mess-store";
+  getDbMenus,
+  getDbFoodRecords,
+  getDbGroceries,
+  getDbRatings,
+  getDbAIRecommendations,
+} from "@/lib/supabase/db";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboardPage() {
-  const store = getStore();
   const today = new Date().toISOString().split("T")[0];
 
-  const todayMenus = getAllMenus(today);
+  const [todayMenus, foodRecords, groceries, allRatings, aiRecommendations] = await Promise.all([
+    getDbMenus(today),
+    getDbFoodRecords(),
+    getDbGroceries(),
+    getDbRatings(),
+    getDbAIRecommendations(),
+  ]);
+
   const totalOptedInToday = todayMenus.reduce((sum, m) => sum + (m.expected_attendance || 0), 0);
 
   // Active wastage calculation from recent records
-  const recentRecords = store.foodRecords.slice(-10);
+  const recentRecords = foodRecords.slice(-10);
   const totalPrepared = recentRecords.reduce((sum, r) => sum + r.prepared_qty, 0);
   const totalLeftover = recentRecords.reduce((sum, r) => sum + r.leftover_qty, 0);
   const currentWastagePct = totalPrepared > 0 ? ((totalLeftover / totalPrepared) * 100).toFixed(1) : "0.0";
 
   // Low stock items count
-  const lowStockCount = store.groceries.filter((g) => g.current_stock <= g.min_threshold).length;
+  const lowStockCount = groceries.filter((g) => g.current_stock <= g.min_threshold).length;
 
   // Average student rating
-  const allRatings = store.ratings;
   const avgRating = allRatings.length > 0
     ? (allRatings.reduce((sum, r) => sum + r.rating, 0) / allRatings.length).toFixed(1)
     : "4.2";
-
-  // Active recommendations
-  const aiRecommendations = getAIRecommendationsForMess();
 
   return (
     <div className="space-y-8">
