@@ -3,6 +3,7 @@ import { getDbMenus } from "@/lib/supabase/db";
 import { UtensilsCrossed, CheckCircle2, Calendar, TrendingUp, Sparkles, ShieldCheck } from "lucide-react";
 import { formatTime } from "@/lib/utils";
 import { MyMealsActions } from "@/components/student/my-meals-actions";
+import { DishImageBadge } from "@/components/shared/dish-image-badge";
 
 export const dynamic = "force-dynamic";
 
@@ -124,9 +125,22 @@ export default async function StudentMyMealsPage() {
                       {m.meal_type}
                     </span>
                   </div>
-                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-snug">
-                    {m.items?.map((i) => i.name).join(" • ") || "Scheduled Dishes"}
-                  </p>
+                  <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                    {m.items && m.items.length > 0 ? (
+                      m.items.map((item) => (
+                        <DishImageBadge
+                          key={item.id}
+                          name={item.name}
+                          category={item.category}
+                          imageUrl={item.image_url}
+                          isVegetarian={item.is_vegetarian}
+                          size="sm"
+                        />
+                      ))
+                    ) : (
+                      <span className="text-xs text-slate-500">Scheduled Dishes</span>
+                    )}
+                  </div>
                   <div className="flex items-center justify-between pt-2 border-t border-slate-200/60 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400">
                     <span>{formatTime(m.serving_start_time)} – {formatTime(m.serving_end_time)}</span>
                     <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/60">
@@ -170,8 +184,23 @@ export default async function StudentMyMealsPage() {
                       <td className="py-3.5 px-3 font-bold uppercase text-[11px] text-amber-700 dark:text-amber-400">
                         {m.meal_type}
                       </td>
-                      <td className="py-3.5 px-3 text-slate-600 dark:text-slate-300">
-                        {m.items?.map((i) => i.name).join(" • ") || "Scheduled Dishes"}
+                      <td className="py-3.5 px-3">
+                        <div className="flex flex-wrap items-center gap-1.5 max-w-sm">
+                          {m.items && m.items.length > 0 ? (
+                            m.items.map((item) => (
+                              <DishImageBadge
+                                key={item.id}
+                                name={item.name}
+                                category={item.category}
+                                imageUrl={item.image_url}
+                                isVegetarian={item.is_vegetarian}
+                                size="sm"
+                              />
+                            ))
+                          ) : (
+                            <span className="text-slate-400">Scheduled Dishes</span>
+                          )}
+                        </div>
                       </td>
                       <td className="py-3.5 px-3 text-slate-400 dark:text-slate-500">
                         {formatTime(m.serving_start_time)} – {formatTime(m.serving_end_time)}

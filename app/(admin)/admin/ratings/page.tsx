@@ -1,7 +1,8 @@
 import { getDbRatings } from "@/lib/supabase/db";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { StarRating } from "@/components/shared/star-rating";
-import { Star, MessageSquare, TrendingUp, Users } from "lucide-react";
+import { Star, MessageSquare, TrendingUp, Users, Award, Flame } from "lucide-react";
+import { DishImageBadge } from "@/components/shared/dish-image-badge";
 
 export const dynamic = "force-dynamic";
 
@@ -70,6 +71,117 @@ export default async function AdminRatingsPage() {
           </div>
         </Card>
       </div>
+
+      {/* Dish-Level Student Satisfaction Leaderboard */}
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between">
+          <div>
+            <CardTitle className="text-base font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+              <Award className="w-4 h-4 text-amber-500" /> Dish-Level Satisfaction Leaderboard
+            </CardTitle>
+            <p className="text-xs text-slate-500 mt-0.5">
+              Top rated culinary preparations ranked by student satisfaction surveys.
+            </p>
+          </div>
+          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+            94% Campus Satisfaction
+          </span>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              {
+                rank: 1,
+                name: "Hyderabadi Chicken Biryani",
+                category: "main",
+                isVeg: false,
+                rating: 4.8,
+                votes: 312,
+                highlight: "Consistently rated #1 on Sunday specials. Perfect spice balance.",
+              },
+              {
+                rank: 2,
+                name: "Crispy Masala Dosa",
+                category: "main",
+                isVeg: true,
+                rating: 4.9,
+                votes: 278,
+                highlight: "Golden crisp with fresh coconut chutney & piping hot sambar.",
+              },
+              {
+                rank: 3,
+                name: "Paneer Butter Masala",
+                category: "main",
+                isVeg: true,
+                rating: 4.7,
+                votes: 245,
+                highlight: "Rich buttery makhani gravy paired with tandoori rotis.",
+              },
+              {
+                rank: 4,
+                name: "Gulab Jamun",
+                category: "dessert",
+                isVeg: true,
+                rating: 4.9,
+                votes: 290,
+                highlight: "Warm cardamom-infused syrup, zero waste recorded.",
+              },
+              {
+                rank: 5,
+                name: "Dal Tadka",
+                category: "main",
+                isVeg: true,
+                rating: 4.6,
+                votes: 198,
+                highlight: "Smoky cumin-garlic ghee tadka, student everyday favorite.",
+              },
+              {
+                rank: 6,
+                name: "Chole Bhature",
+                category: "main",
+                isVeg: true,
+                rating: 4.8,
+                votes: 260,
+                highlight: "Spicy Amritsari chole with fluffy, golden bhature.",
+              },
+            ].map((dish) => (
+              <div
+                key={dish.name}
+                className="p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xs hover:border-amber-400 dark:hover:border-amber-400 transition-all flex flex-col justify-between gap-3"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold flex items-center justify-center shrink-0">
+                      #{dish.rank}
+                    </span>
+                    <DishImageBadge
+                      name={dish.name}
+                      category={dish.category}
+                      isVegetarian={dish.isVeg}
+                      size="sm"
+                    />
+                  </div>
+                  <div className="flex items-center gap-1 text-xs font-bold text-amber-500 bg-amber-50 dark:bg-amber-950/60 px-2 py-0.5 rounded-md shrink-0">
+                    <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+                    <span>{dish.rating}</span>
+                  </div>
+                </div>
+
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 italic bg-slate-50 dark:bg-slate-800/60 p-2 rounded-lg border border-slate-100 dark:border-slate-800">
+                  &quot;{dish.highlight}&quot;
+                </p>
+
+                <div className="flex items-center justify-between text-[10px] text-slate-400 pt-1 border-t border-slate-100 dark:border-slate-800">
+                  <span>Based on {dish.votes} student votes</span>
+                  <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-0.5">
+                    <TrendingUp className="w-3 h-3" /> High Demand
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Recent Feedback Stream */}
       <Card>

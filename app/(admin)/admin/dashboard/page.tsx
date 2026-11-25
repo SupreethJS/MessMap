@@ -21,6 +21,7 @@ import {
   getDbRatings,
   getDbAIRecommendations,
 } from "@/lib/supabase/db";
+import { DishImageBadge } from "@/components/shared/dish-image-badge";
 
 export const dynamic = "force-dynamic";
 
@@ -178,14 +179,27 @@ export default async function AdminDashboardPage() {
                           {m.serving_start_time} - {m.serving_end_time}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-500 truncate max-w-md">
-                        {m.items?.map((i) => i.name).join(", ") || "No dishes specified"}
-                      </p>
+                      {m.items && m.items.length > 0 ? (
+                        <div className="flex flex-wrap gap-1.5 pt-1.5">
+                          {m.items.map((i, idx) => (
+                            <DishImageBadge
+                              key={i.id || idx}
+                              name={i.name}
+                              category={i.category}
+                              imageUrl={i.image_url}
+                              isVegetarian={i.is_vegetarian}
+                              size="sm"
+                            />
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="text-xs text-slate-400 italic">No dishes specified</p>
+                      )}
                     </div>
 
                     <div className="flex items-center gap-3 shrink-0">
                       <div className="text-right">
-                        <span className="text-xs font-bold text-emerald-700 block">
+                        <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 block">
                           {m.expected_attendance || 0} students
                         </span>
                         <span className="text-[10px] text-slate-400">Opted in</span>
@@ -204,14 +218,14 @@ export default async function AdminDashboardPage() {
         {/* Quick Operations Checklist */}
         <Card>
           <CardHeader className="pb-3">
-            <CardTitle className="text-base font-bold text-slate-800">
+            <CardTitle className="text-base font-bold text-slate-800 dark:text-slate-100">
               Operational Actions
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2.5">
             <Link
               href="/admin/attendance"
-              className="flex items-center justify-between p-3 rounded-xl border border-slate-100 hover:border-emerald-200 hover:bg-emerald-50/30 transition-all text-xs font-semibold text-slate-700"
+              className="flex items-center justify-between p-3 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-emerald-200 hover:bg-emerald-50/30 dark:hover:bg-slate-800 transition-all text-xs font-semibold text-slate-700 dark:text-slate-200"
             >
               <span className="flex items-center gap-2.5">
                 <Users className="w-4 h-4 text-emerald-600" /> Review Attendance Demand
@@ -221,7 +235,7 @@ export default async function AdminDashboardPage() {
 
             <Link
               href="/admin/food-records"
-              className="flex items-center justify-between p-3 rounded-xl border border-slate-100 hover:border-emerald-200 hover:bg-emerald-50/30 transition-all text-xs font-semibold text-slate-700"
+              className="flex items-center justify-between p-3 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-emerald-200 hover:bg-emerald-50/30 dark:hover:bg-slate-800 transition-all text-xs font-semibold text-slate-700 dark:text-slate-200"
             >
               <span className="flex items-center gap-2.5">
                 <Scale className="w-4 h-4 text-emerald-600" /> Enter Leftover Weights
@@ -231,7 +245,7 @@ export default async function AdminDashboardPage() {
 
             <Link
               href="/admin/reports"
-              className="flex items-center justify-between p-3 rounded-xl border border-slate-100 hover:border-emerald-200 hover:bg-emerald-50/30 transition-all text-xs font-semibold text-slate-700"
+              className="flex items-center justify-between p-3 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-emerald-200 hover:bg-emerald-50/30 dark:hover:bg-slate-800 transition-all text-xs font-semibold text-slate-700 dark:text-slate-200"
             >
               <span className="flex items-center gap-2.5">
                 <TrendingUp className="w-4 h-4 text-emerald-600" /> Weekly Wastage Charts
@@ -241,16 +255,70 @@ export default async function AdminDashboardPage() {
 
             <Link
               href="/admin/recipes"
-              className="flex items-center justify-between p-3 rounded-xl border border-slate-100 hover:border-emerald-200 hover:bg-emerald-50/30 transition-all text-xs font-semibold text-slate-700"
+              className="flex items-center justify-between p-3 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-emerald-200 hover:bg-emerald-50/30 dark:hover:bg-slate-800 transition-all text-xs font-semibold text-slate-700 dark:text-slate-200"
             >
               <span className="flex items-center gap-2.5">
                 <Sparkles className="w-4 h-4 text-emerald-600" /> Match Recipes to Inventory
               </span>
               <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
             </Link>
+
+            <Link
+              href="/admin/ratings"
+              className="flex items-center justify-between p-3 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-emerald-200 hover:bg-emerald-50/30 dark:hover:bg-slate-800 transition-all text-xs font-semibold text-slate-700 dark:text-slate-200"
+            >
+              <span className="flex items-center gap-2.5">
+                <Star className="w-4 h-4 text-amber-500 fill-amber-500" /> Student Ratings & Leaderboard
+              </span>
+              <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
+            </Link>
           </CardContent>
         </Card>
       </div>
+
+      {/* Culinary Satisfaction Highlights */}
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between pb-3">
+          <CardTitle className="text-base font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+            <Star className="w-4 h-4 text-amber-500 fill-amber-500" /> Top Rated Student Favorites
+          </CardTitle>
+          <Button asChild variant="ghost" size="sm" className="text-xs text-slate-500">
+            <Link href="/admin/ratings">Full Ratings & Reviews →</Link>
+          </Button>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+            {[
+              { name: "Hyderabadi Chicken Biryani", category: "main", isVeg: false, rating: "4.8", reviews: 142 },
+              { name: "Paneer Butter Masala", category: "main", isVeg: true, rating: "4.7", reviews: 98 },
+              { name: "Crispy Masala Dosa", category: "main", isVeg: true, rating: "4.9", reviews: 215 },
+              { name: "Gulab Jamun", category: "dessert", isVeg: true, rating: "4.9", reviews: 180 },
+            ].map((dish) => (
+              <div
+                key={dish.name}
+                className="p-2.5 rounded-xl border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50 flex items-center justify-between gap-2"
+              >
+                <DishImageBadge
+                  name={dish.name}
+                  category={dish.category}
+                  isVegetarian={dish.isVeg}
+                  size="sm"
+                  className="bg-transparent border-0 shadow-none p-0 min-h-0"
+                />
+                <div className="text-right shrink-0">
+                  <div className="flex items-center gap-1 justify-end text-xs font-bold text-amber-600 dark:text-amber-400">
+                    <Star className="w-3 h-3 fill-amber-500 text-amber-500" />
+                    <span>{dish.rating}</span>
+                  </div>
+                  <span className="text-[10px] text-slate-400">
+                    {dish.reviews} ratings
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

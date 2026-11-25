@@ -5,6 +5,7 @@ import {
   getDbComplaints,
 } from "@/lib/supabase/db";
 import { QubiteStatCards } from "@/components/student/qubite-stat-card";
+import { NextMealHeroBanner } from "@/components/student/next-meal-hero-banner";
 import { TodaysMenuCard } from "@/components/student/todays-menu-card";
 import { MealAttendanceChart } from "@/components/student/attendance-chart";
 import { QuickActionsCard } from "@/components/student/quick-actions-card";
@@ -107,13 +108,16 @@ export default async function StudentDashboardPage() {
         </div>
       </div>
 
-      {/* 2. STATS OVERVIEW CARDS */}
+      {/* 2. NEXT MEAL HERO BANNER (Full-Bleed Food Image + Cutoff + Attendance Switcher) */}
+      <NextMealHeroBanner menus={todayMenus} user={user} />
+
+      {/* 3. STATS OVERVIEW CARDS */}
       <QubiteStatCards
         walletBalance={user?.wallet_balance ?? 450}
         pendingComplaintsCount={pendingComplaints > 0 ? pendingComplaints : 1}
       />
 
-      {/* 3. TODAY'S MENU SECTION */}
+      {/* 4. TODAY'S MENU SECTION */}
       <TodaysMenuCard menus={todayMenus} />
 
       {/* 4. ASYMMETRIC GRID: 8 columns (Attendance & Timeline) + 4 columns (Quick Actions & Banner) */}

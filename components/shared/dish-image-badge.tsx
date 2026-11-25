@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { resolveDishImage, getDishCdnFallback, CATEGORY_FALLBACKS } from "@/lib/data/dish-images";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { Utensils, Sparkles, ZoomIn } from "lucide-react";
+import { resolveDishImage, getDishCdnFallback, CATEGORY_FALLBACKS, getDishFullDetails } from "@/lib/data/dish-images";
+import { DishDetailModal } from "@/components/shared/dish-detail-modal";
+import { Utensils, ZoomIn } from "lucide-react";
 
 interface DishImageBadgeProps {
   name: string;
@@ -61,10 +61,12 @@ export function DishImageBadge({
   };
 
   const imgDimensions = {
-    sm: { w: 24, h: 24, class: "w-6 h-6" },
-    md: { w: 28, h: 28, class: "w-7 h-7" },
-    lg: { w: 36, h: 36, class: "w-9 h-9" },
+    sm: { w: 28, h: 28, class: "w-7 h-7" },
+    md: { w: 32, h: 32, class: "w-8 h-8" },
+    lg: { w: 40, h: 40, class: "w-10 h-10" },
   };
+
+  const dishDetails = getDishFullDetails(name, imageUrl || currentUrl, category);
 
   return (
     <>
@@ -102,11 +104,17 @@ export function DishImageBadge({
         </span>
 
         {/* Pure Veg Indicator */}
-        {isVegetarian && (
+        {isVegetarian ? (
           <span
             className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"
             title="Pure Vegetarian"
             aria-label="Pure Vegetarian"
+          />
+        ) : (
+          <span
+            className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0"
+            title="Non-Vegetarian"
+            aria-label="Non-Vegetarian"
           />
         )}
 
@@ -122,56 +130,12 @@ export function DishImageBadge({
         )}
       </button>
 
-      {/* High-Resolution Preview Dialog */}
       {enablePreview && (
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogContent className="max-w-sm sm:max-w-md bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-0 overflow-hidden shadow-2xl">
-            <div className="relative h-56 sm:h-64 w-full bg-slate-100 dark:bg-slate-800">
-              <Image
-                src={currentUrl}
-                alt={descriptiveAlt}
-                fill
-                unoptimized
-                onError={handleImageError}
-                className="object-cover"
-              />
-              <div className="absolute top-3 left-3 flex gap-2">
-                <span className="px-3 py-1 rounded-full text-[11px] font-extrabold uppercase bg-black/85 text-amber-300 backdrop-blur-xs">
-                  {category || "Mess Dish"}
-                </span>
-                {isVegetarian && (
-                  <span className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-600 text-white">
-                    Pure Veg
-                  </span>
-                )}
-              </div>
-            </div>
-
-            <div className="p-5 space-y-3">
-              <DialogHeader>
-                <DialogTitle className="text-xl font-black text-slate-900 dark:text-slate-100 tracking-tight">
-                  {name}
-                </DialogTitle>
-                <DialogDescription className="text-xs text-slate-500 dark:text-slate-400 pt-1 leading-relaxed">
-                  {description || `Fresh culinary serving prepared daily in the campus mess hall according to standard recipes and nutritional guidelines.`}
-                </DialogDescription>
-              </DialogHeader>
-
-              <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-600 dark:text-slate-300">
-                <span className="flex items-center gap-1.5 font-medium">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-500" /> Authentic Mess Preparation
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  className="min-h-[44px] px-4 py-2 rounded-xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 text-xs font-bold hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors cursor-pointer"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </DialogContent>
-        </Dialog>
+        <DishDetailModal
+          open={open}
+          onOpenChange={setOpen}
+          dish={dishDetails}
+        />
       )}
     </>
   );

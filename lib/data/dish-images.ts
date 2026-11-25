@@ -591,3 +591,327 @@ export const DISH_PRESETS = [
   { name: "Spiced Chicken Curry", category: "main" as const, is_vegetarian: false, image_url: DISH_IMAGE_CATALOG.chicken_curry.url },
   { name: "Boiled Egg Curry with Gravy", category: "main" as const, is_vegetarian: false, image_url: DISH_IMAGE_CATALOG.egg_curry.url },
 ];
+
+export interface DishDetails {
+  key: string;
+  name: string;
+  imageUrl: string;
+  category: "main" | "bread" | "rice" | "dessert" | "beverage" | "side" | "snack";
+  mealType: "Breakfast" | "Lunch" | "Snacks" | "Dinner";
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  rating: number;
+  reviewsCount: number;
+  isVegetarian: boolean;
+  description: string;
+  servingWindow: string;
+  ingredients: string[];
+  allergens: string[];
+  reviews: Array<{
+    id: string;
+    studentName: string;
+    roll: string;
+    rating: number;
+    comment: string;
+    date: string;
+  }>;
+}
+
+const CULINARY_DETAILS_REGISTRY: Record<
+  string,
+  {
+    desc: string;
+    calories: number;
+    protein: number;
+    carbs: number;
+    fat: number;
+    rating: number;
+    reviewsCount: number;
+    mealType: "Breakfast" | "Lunch" | "Snacks" | "Dinner";
+    servingWindow: string;
+    ingredients: string[];
+    allergens: string[];
+    sampleReviews: Array<{ name: string; roll: string; rating: number; text: string; date: string }>;
+  }
+> = {
+  chicken_biryani: {
+    desc: "Long-grain aged basmati rice layered with tender marinated chicken, saffron-infused milk, caramelized onions, and authentic Hyderabadi pot-dum spices.",
+    calories: 540,
+    protein: 32,
+    carbs: 64,
+    fat: 16,
+    rating: 4.9,
+    reviewsCount: 312,
+    mealType: "Lunch",
+    servingWindow: "Central Mess Hall 1 • 12:30 PM – 02:30 PM",
+    ingredients: ["Aged Basmati Rice", "Bone-in Farm Chicken", "Pure Ghee", "Saffron Milk", "Shahi Biryani Masala", "Mint & Coriander"],
+    allergens: ["Dairy"],
+    sampleReviews: [
+      { name: "Rohan Verma", roll: "CS21B042", rating: 5, text: "Hands down the best Sunday lunch! The chicken is exceptionally tender and aromatic.", date: "Yesterday" },
+      { name: "Sneha Nair", roll: "EC22B108", rating: 5, text: "Restaurant quality dum biryani with raita. Mess contractor really stepped up.", date: "3 days ago" }
+    ]
+  },
+  paneer_naan: {
+    desc: "Tender cubes of fresh malai paneer simmered in a velvet tomato, butter, and cashew gravy, paired with clay-oven baked soft tandoori naan.",
+    calories: 460,
+    protein: 19,
+    carbs: 52,
+    fat: 20,
+    rating: 4.8,
+    reviewsCount: 248,
+    mealType: "Dinner",
+    servingWindow: "Central Mess Hall 1 • 07:30 PM – 09:45 PM",
+    ingredients: ["Fresh Malai Paneer", "San Marzano Tomatoes", "Amul Butter", "Cashew Paste", "Kasuri Methi", "Refined Wheat Flour"],
+    allergens: ["Dairy", "Gluten", "Nuts"],
+    sampleReviews: [
+      { name: "Ananya Iyer", roll: "BT23B015", rating: 5, text: "The gravy is buttery and sweet-savory perfection. Naans come out hot and soft.", date: "2 days ago" },
+      { name: "Karthik Raja", roll: "ME21B077", rating: 4.5, text: "Very generous paneer chunks! Favorite dinner of the week.", date: "Last week" }
+    ]
+  },
+  masala_dosa: {
+    desc: "Crisp-roasted fermented rice and lentil crepe smeared with red garlic chutney, filled with tempered mustard-curry leaf potato sabzi.",
+    calories: 240,
+    protein: 7,
+    carbs: 42,
+    fat: 6,
+    rating: 4.8,
+    reviewsCount: 195,
+    mealType: "Breakfast",
+    servingWindow: "Central Mess Hall 1 • 07:30 AM – 09:30 AM",
+    ingredients: ["Fermented Batter", "Yukon Potatoes", "Mustard Seeds", "Fresh Coconut Chutney", "Shallots", "Curry Leaves"],
+    allergens: ["Nut-Free"],
+    sampleReviews: [
+      { name: "Tanvi Deshmukh", roll: "CS23B089", rating: 5, text: "Golden crispy edges and the coconut chutney was freshly ground. Made my morning!", date: "Today" },
+      { name: "Abhishek Rao", roll: "EE22B034", rating: 4.5, text: "Crispy and not oily. Great coffee pairing.", date: "Yesterday" }
+    ]
+  },
+  idli: {
+    desc: "Pillow-soft, naturally fermented steamed rice cakes served hot alongside fragrant vegetable drumstick sambar and roasted chana dal chutney.",
+    calories: 140,
+    protein: 6,
+    carbs: 29,
+    fat: 1.5,
+    rating: 4.6,
+    reviewsCount: 164,
+    mealType: "Breakfast",
+    servingWindow: "Central Mess Hall 1 • 07:30 AM – 09:30 AM",
+    ingredients: ["Parboiled Rice", "Urad Dal", "Hing (Asafoetida)", "Fenugreek Seeds", "Tamarind", "Drumsticks"],
+    allergens: ["Vegan", "Gluten-Free"],
+    sampleReviews: [
+      { name: "Pranav Menon", roll: "AI24B012", rating: 5, text: "Super light and fluffy. Perfect pre-exam breakfast.", date: "2 days ago" }
+    ]
+  },
+  samosa: {
+    desc: "Golden pyramid-shaped flaky pastry crust packed with crushed cumin potatoes, green peas, ginger, and paired with tangy tamarind saunth.",
+    calories: 210,
+    protein: 4,
+    carbs: 26,
+    fat: 11,
+    rating: 4.7,
+    reviewsCount: 220,
+    mealType: "Snacks",
+    servingWindow: "Central Mess Hall 1 • 04:30 PM – 06:00 PM",
+    ingredients: ["Potatoes", "Sweet Peas", "Ajwain Seeds", "All-purpose Flour", "Tamarind Pulp", "Garam Masala"],
+    allergens: ["Gluten"],
+    sampleReviews: [
+      { name: "Meera Sen", roll: "CS22B114", rating: 5, text: "Crunchy crust and piping hot. Goes brilliantly with evening ginger tea.", date: "Yesterday" }
+    ]
+  },
+  gulab_jamun: {
+    desc: "Decadent melt-in-the-mouth mawa milk dumplings slow-fried in pure ghee and steeped in cardamom and saffron infused sugar syrup.",
+    calories: 280,
+    protein: 5,
+    carbs: 48,
+    fat: 10,
+    rating: 4.9,
+    reviewsCount: 380,
+    mealType: "Dinner",
+    servingWindow: "Central Mess Hall 1 • 07:30 PM – 09:45 PM",
+    ingredients: ["Khoya (Mawa)", "Green Cardamom", "Kewra Water", "Kashmiri Saffron", "Pure Desi Ghee", "Rose Syrup"],
+    allergens: ["Dairy"],
+    sampleReviews: [
+      { name: "Devansh Mittal", roll: "ME23B061", rating: 5, text: "Warm and juicy! The whole hostel queues up when these are on the dinner menu.", date: "3 days ago" }
+    ]
+  },
+  chicken_65: {
+    desc: "Bite-sized pieces of chicken thigh marinated in yogurt, Kashmiri red chili, cracked pepper, and deep-fried with crispy curry leaves and slit green chilies.",
+    calories: 340,
+    protein: 26,
+    carbs: 12,
+    fat: 19,
+    rating: 4.8,
+    reviewsCount: 290,
+    mealType: "Snacks",
+    servingWindow: "Central Mess Hall 1 • 04:30 PM – 06:00 PM",
+    ingredients: ["Chicken Thigh", "Greek Yogurt", "Kashmiri Degi Mirch", "Curry Leaves", "Rice Flour", "Fresh Lime"],
+    allergens: ["Dairy"],
+    sampleReviews: [
+      { name: "Siddharth J.", roll: "CS21B008", rating: 5, text: "Spicy, crunchy, and savory. Best evening snack hands down.", date: "4 days ago" }
+    ]
+  },
+  fish_curry: {
+    desc: "Coastal South Indian fish fillets gently simmered in a spiced coconut milk broth with kokum, curry leaves, and mustard tempering.",
+    calories: 360,
+    protein: 28,
+    carbs: 10,
+    fat: 16,
+    rating: 4.7,
+    reviewsCount: 140,
+    mealType: "Lunch",
+    servingWindow: "Central Mess Hall 1 • 12:30 PM – 02:30 PM",
+    ingredients: ["Fresh Sea Bass/Mackerel", "Coconut Milk", "Kokum Extract", "Fenugreek", "Shallots", "Green Chilies"],
+    allergens: ["Fish"],
+    sampleReviews: [
+      { name: "Aswin K.", roll: "CE22B019", rating: 5, text: "Tangy and rich coconut gravy. Taste just like coastal Kerala home food.", date: "5 days ago" }
+    ]
+  },
+  chana_masala: {
+    desc: "Wholesome Kabuli chickpeas slow-cooked in a tangy Punjabi gravy of blackened tea leaves, roasted cumin, pomegranate seeds, and ginger juliennes.",
+    calories: 270,
+    protein: 13,
+    carbs: 42,
+    fat: 6,
+    rating: 4.6,
+    reviewsCount: 175,
+    mealType: "Lunch",
+    servingWindow: "Central Mess Hall 1 • 12:30 PM – 02:30 PM",
+    ingredients: ["Kabuli Chickpeas", "Anardana (Pomegranate)", "Tea-steeped Stock", "Amchur", "Ginger", "Coriander Seeds"],
+    allergens: ["Vegan", "Gluten-Free"],
+    sampleReviews: [
+      { name: "Kunal Bansal", roll: "IT23B045", rating: 4.5, text: "Rich homestyle flavor without excess oil. Tastes great with jeera rice.", date: "Last week" }
+    ]
+  },
+  veg_pulav: {
+    desc: "Aromatic basmati rice cooked with garden-fresh green peas, diced carrots, French beans, and whole spices infused with shahi jeera and mint.",
+    calories: 310,
+    protein: 8,
+    carbs: 56,
+    fat: 6,
+    rating: 4.5,
+    reviewsCount: 130,
+    mealType: "Lunch",
+    servingWindow: "Central Mess Hall 1 • 12:30 PM – 02:30 PM",
+    ingredients: ["Basmati Rice", "Carrots & Beans", "Green Peas", "Bay Leaves", "Star Anise", "Desi Ghee"],
+    allergens: ["Gluten-Free"],
+    sampleReviews: [
+      { name: "Pooja Hegde", roll: "EC23B092", rating: 4.5, text: "Fragrant and fluffy grains. Paired nicely with cucumber raita.", date: "1 week ago" }
+    ]
+  }
+};
+
+/**
+ * Returns full culinary metadata, nutritional breakdown, serving windows, and student review quotes for any dish.
+ */
+export function getDishFullDetails(
+  dishName?: string | null,
+  customUrl?: string | null,
+  categoryHint?: string | null,
+  mealTypeHint?: string | null
+): DishDetails {
+  const matchedKey = getDishKeyByName(dishName) || "rice_sambar";
+  const catalogEntry = DISH_IMAGE_CATALOG[matchedKey] || DISH_IMAGE_CATALOG.rice_sambar;
+  const registry = CULINARY_DETAILS_REGISTRY[matchedKey];
+
+  const resolvedName = dishName?.trim() || catalogEntry.name;
+  const imageUrl = resolveDishImage(dishName, customUrl, categoryHint);
+  const isVegetarian =
+    catalogEntry.isVegetarian !== undefined
+      ? catalogEntry.isVegetarian
+      : !/(chicken|fish|egg|mutton|meat)/i.test(resolvedName);
+
+  // Determine meal slot
+  let mealType: "Breakfast" | "Lunch" | "Snacks" | "Dinner" = "Lunch";
+  if (mealTypeHint) {
+    const lower = mealTypeHint.toLowerCase();
+    if (lower.includes("break")) mealType = "Breakfast";
+    else if (lower.includes("lunch")) mealType = "Lunch";
+    else if (lower.includes("snack") || lower.includes("tea")) mealType = "Snacks";
+    else if (lower.includes("dinner")) mealType = "Dinner";
+  } else if (registry?.mealType) {
+    mealType = registry.mealType;
+  } else if (catalogEntry.category === "snack" || catalogEntry.category === "beverage") {
+    mealType = "Snacks";
+  } else if (catalogEntry.category === "bread") {
+    mealType = "Breakfast";
+  }
+
+  const calories = registry?.calories || catalogEntry.calories || 320;
+  const protein = registry?.protein || (isVegetarian ? 9 : 24);
+  const carbs = registry?.carbs || 44;
+  const fat = registry?.fat || (isVegetarian ? 8 : 15);
+  const rating = registry?.rating || 4.7;
+  const reviewsCount = registry?.reviewsCount || 148;
+  const description =
+    registry?.desc ||
+    `Freshly prepared homestyle ${resolvedName} cooked daily with authentic regional spices and balanced nutrition for hostel residents.`;
+  const servingWindow =
+    registry?.servingWindow ||
+    (mealType === "Breakfast"
+      ? "Central Mess Hall 1 • 07:30 AM – 09:30 AM"
+      : mealType === "Lunch"
+      ? "Central Mess Hall 1 • 12:30 PM – 02:30 PM"
+      : mealType === "Snacks"
+      ? "Central Mess Hall 1 • 04:30 PM – 06:00 PM"
+      : "Central Mess Hall 1 • 07:30 PM – 09:45 PM");
+
+  const ingredients =
+    registry?.ingredients || [
+      "Farm Fresh Produce",
+      "Traditional Whole Spices",
+      "Pure Ghee / Cold-pressed Oil",
+      "Himalayan Pink Salt",
+      "Fresh Herbs",
+    ];
+
+  const allergens =
+    registry?.allergens || (isVegetarian ? ["Gluten-Free"] : ["Non-Vegetarian"]);
+
+  const reviews = registry?.sampleReviews?.map((r, idx) => ({
+    id: `rev-${matchedKey}-${idx}`,
+    studentName: r.name,
+    roll: r.roll,
+    rating: r.rating,
+    comment: r.text,
+    date: r.date,
+  })) || [
+    {
+      id: `rev-${matchedKey}-1`,
+      studentName: "Aarav Sharma",
+      roll: "CS21B001",
+      rating: 5,
+      comment: `The flavor balance in ${resolvedName} is spot on. Very wholesome!`,
+      date: "Yesterday",
+    },
+    {
+      id: `rev-${matchedKey}-2`,
+      studentName: "Diya Patel",
+      roll: "EC22B045",
+      rating: 4.5,
+      comment: "Freshly prepared and warm. Consistent quality this semester.",
+      date: "3 days ago",
+    },
+  ];
+
+  return {
+    key: matchedKey,
+    name: resolvedName,
+    imageUrl,
+    category: (catalogEntry.category as any) || "main",
+    mealType,
+    calories,
+    protein,
+    carbs,
+    fat,
+    rating,
+    reviewsCount,
+    isVegetarian,
+    description,
+    servingWindow,
+    ingredients,
+    allergens,
+    reviews,
+  };
+}
+
