@@ -53,7 +53,8 @@ async function runBookingVerification() {
 
   // 2. Test Book ("yes") across all 4 meal types for future dates
   console.log("\n--- 2. Testing Book ('yes') across all 4 meal types ---");
-  const targetDate = "2026-11-25"; // Wednesday next week (within active window)
+  const futureDate = new Date(Date.now() + 86400000 * 2);
+  const targetDate = futureDate.toISOString().split("T")[0]; // Future date (within active window)
   const mealTypes = ["breakfast", "lunch", "snacks", "dinner"] as const;
 
   for (const mealType of mealTypes) {
@@ -100,7 +101,8 @@ async function runBookingVerification() {
 
   // 4. Test Weekday synthesized ID booking
   console.log("\n--- 4. Testing Weekday Synthesized ID Booking ---");
-  const weekdayMenuId = "menu-Wednesday-dinner";
+  const futureDayName = futureDate.toLocaleDateString("en-US", { weekday: "long" });
+  const weekdayMenuId = `menu-${futureDayName}-dinner`;
   const weekdayRes = await submitMealPlanAction({ menu_id: weekdayMenuId, status: "yes" });
   assert(
     weekdayRes.success === true,

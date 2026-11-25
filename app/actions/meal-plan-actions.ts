@@ -37,12 +37,16 @@ export async function submitMealPlanAction(input: MealPlanInput) {
   try {
     const savedPlan = await saveDbMealPlan(user.id, menu.id, status);
 
-    revalidatePath("/student/dashboard");
-    revalidatePath("/student/my-meals");
-    revalidatePath("/student/meal-plans");
-    revalidatePath("/student/menu");
-    revalidatePath("/admin/dashboard");
-    revalidatePath("/admin/attendance");
+    try {
+      revalidatePath("/student/dashboard");
+      revalidatePath("/student/my-meals");
+      revalidatePath("/student/meal-plans");
+      revalidatePath("/student/menu");
+      revalidatePath("/admin/dashboard");
+      revalidatePath("/admin/attendance");
+    } catch {
+      // Ignored outside Next.js request context (e.g. CLI tests)
+    }
 
     return {
       success: true,

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
@@ -6,9 +6,22 @@ import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
+export const viewport: Viewport = {
+  themeColor: "#f59e0b",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
   title: "Smart Mess Management • Intelligent Campus Dining Platform",
   description: "Next-generation campus dining operations and zero-waste platform engineered by Supreeth J Sudheer.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Qubite Mess",
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
