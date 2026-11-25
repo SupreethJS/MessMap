@@ -9,8 +9,8 @@ export type GroceryCategory = "grains" | "pulses" | "vegetables" | "spices" | "d
 export type NotificationType = "menu_update" | "cutoff_alert" | "announcement" | "system" | "payment" | "complaint";
 export type RecommendationType = "reduce_prep" | "replace_dish" | "day_anomaly" | "high_performer" | "small_batch";
 export type PriorityLevel = "low" | "medium" | "high" | "critical";
-export type ComplaintStatus = "Pending" | "In Progress" | "Resolved";
-export type ComplaintCategory = "Food Quality" | "Hygiene" | "Food Quantity" | "Late Serving" | "Menu Issues" | "Other";
+export type ComplaintStatus = "Pending" | "In Progress" | "Resolved" | "open" | "in_progress" | "resolved";
+export type ComplaintCategory = "Food Quality" | "Hygiene" | "Food Quantity" | "Late Serving" | "Menu Issues" | "Billing" | "Other";
 
 export interface Profile {
   id: string;
@@ -177,6 +177,32 @@ export interface Complaint {
   created_at: string;
   resolved_at?: string;
   admin_remarks?: string;
+  rebate_amount?: number;
+}
+
+export interface MealCheckIn {
+  id: string;
+  menu_id: string;
+  student_id: string;
+  student_roll_number?: string | null;
+  student_name?: string | null;
+  scanned_at: string;
+  method: "qr_scan" | "manual_roll";
+  meal_type: MealType;
+  menu_date: string;
+}
+
+export interface HostelLeave {
+  id: string;
+  student_id: string;
+  start_date: string;
+  end_date: string;
+  reason: string;
+  days_count: number;
+  estimated_rebate: number;
+  status: "Pending" | "Approved" | "Rejected" | "Cancelled";
+  created_at: string;
+  student?: Profile;
 }
 
 export interface WalletTransaction {

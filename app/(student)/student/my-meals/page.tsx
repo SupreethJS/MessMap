@@ -2,6 +2,7 @@ import { getCurrentUser } from "@/app/actions/auth-actions";
 import { getDbMenus } from "@/lib/supabase/db";
 import { UtensilsCrossed, CheckCircle2, Calendar, TrendingUp, Sparkles, ShieldCheck } from "lucide-react";
 import { formatTime } from "@/lib/utils";
+import { MyMealsActions } from "@/components/student/my-meals-actions";
 
 export const dynamic = "force-dynamic";
 
@@ -38,6 +39,9 @@ export default async function StudentMyMealsPage() {
           <p className="text-sm text-slate-500 mt-1">
             Track consumed meals, upcoming booked dining slots, and your individual consumption footprint.
           </p>
+          <div className="mt-3">
+            <MyMealsActions user={user} menus={allMenus} />
+          </div>
         </div>
 
         {/* Right-aligned compact KPI stat cards */}

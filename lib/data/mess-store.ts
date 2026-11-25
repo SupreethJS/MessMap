@@ -13,9 +13,12 @@ import {
   GroceryItem,
   Recipe,
   Complaint,
+  ComplaintStatus,
   WalletTransaction,
   ActivityItem,
   MealType,
+  MealCheckIn,
+  HostelLeave,
 } from "@/lib/types/database";
 import { calculateDemandPrediction } from "@/lib/services/ai-prediction";
 import { evaluateMessRecommendations } from "@/lib/services/recommendations";
@@ -39,6 +42,8 @@ interface MessStoreState {
   complaints: Complaint[];
   transactions: WalletTransaction[];
   activities: ActivityItem[];
+  checkIns: MealCheckIn[];
+  leaves: HostelLeave[];
 }
 
 export const FOOD_IMAGES: Record<MealType, { url: string; label: string; desc: string; calories: number }> = {
@@ -478,6 +483,20 @@ function generateInitialSeed(): MessStoreState {
     complaints,
     transactions,
     activities,
+    checkIns: [],
+    leaves: [
+      {
+        id: "leave-101",
+        student_id: "s-01",
+        start_date: "2026-12-24",
+        end_date: "2026-12-28",
+        reason: "Winter Semester Break & Family Visit",
+        days_count: 5,
+        estimated_rebate: 750,
+        status: "Approved",
+        created_at: new Date(Date.now() - 86400000 * 2).toISOString(),
+      },
+    ],
   };
 }
 
@@ -903,6 +922,184 @@ export function saveComplaintInStore(data: {
   });
 
   return newComplaint;
+}
+
+export function updateComplaintInStore(
+  id: string,
+  updates: {
+    status?: ComplaintStatus;
+    admin_remarks?: string;
+    rebate_amount?: number;
+  }
+): Complaint {
+  const store = getStore();
+  const index = store.complaints.findIndex((c) => c.id === id);
+  if (index === -1) {
+    throw new Error(`Complaint with id ${id} not found.`);
+  }
+
+  const existing = store.complaints[index];
+  const updated: Complaint = {
+    ...existing,
+    status: updates.status || existing.status,
+    admin_remarks: updates.admin_remarks !== undefined ? updates.admin_remarks : existing.admin_remarks,
+    rebate_amount: updates.rebate_amount !== undefined ? updates.rebate_amount : existing.rebate_amount,
+    resolved_at:
+      updates.status === "Resolved" || updates.status === "resolved"
+        ? new Date().toISOString()
+        : existing.resolved_at,
+  };
+
+  store.complaints[index] = updated;
+
+  // Add activity log
+  store.activities.unshift({
+    id: `act-${Date.now()}`,
+    student_id: updated.student_id,
+    title: `Admin updated Complaint #${updated.id} status to ${updated.status}`,
+    timestamp: "Just now",
+    type: "complaint",
+  });
+
+  return updated;
+}
+
+// ----------------- Meal Check-In & Scanner API -----------------
+export function recordMealCheckInInStore(data: {
+  menu_id: string;
+  student_id: string;
+  student_roll_number?: string | null;
+  student_name?: string | null;
+  method: "qr_scan" | "manual_roll";
+  meal_type: MealType;
+  menu_date: string;
+}): MealCheckIn {
+  const store = getStore();
+
+  // Check for duplicate check-in
+  const duplicate = store.checkIns.find(
+    (c) => c.menu_id === data.menu_id && c.student_id === data.student_id
+  );
+  if (duplicate) {
+    throw new Error(
+      `Duplicate check-in blocked: Student ${data.student_roll_number || data.student_id} already checked in at ${new Date(
+        duplicate.scanned_at
+      ).toLocaleTimeString()}.`
+    );
+  }
+
+  const checkIn: MealCheckIn = {
+    id: `chk-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
+    menu_id: data.menu_id,
+    student_id: data.student_id,
+    student_roll_number: data.student_roll_number || null,
+    student_name: data.student_name || null,
+    scanned_at: new Date().toISOString(),
+    method: data.method,
+    meal_type: data.meal_type,
+    menu_date: data.menu_date,
+  };
+
+  store.checkIns.unshift(checkIn);
+
+  // Update actual attendance on food record if exists
+  const foodRec = store.foodRecords.find((r) => r.menu_id === data.menu_id);
+  if (foodRec) {
+    foodRec.actual_attendance = (foodRec.actual_attendance || 0) + 1;
+  }
+
+  return checkIn;
+}
+
+export function getCheckInsForMenuFromStore(menu_id: string): MealCheckIn[] {
+  const store = getStore();
+  return store.checkIns.filter((c) => c.menu_id === menu_id);
+}
+
+// ----------------- Hostel Leave & Rebate API -----------------
+export function applyHostelLeaveInStore(data: {
+  student_id: string;
+  start_date: string;
+  end_date: string;
+  reason: string;
+  days_count: number;
+  estimated_rebate: number;
+}): HostelLeave {
+  const store = getStore();
+  const student = store.profiles.find((p) => p.id === data.student_id);
+
+  const newLeave: HostelLeave = {
+    id: `leave-${Date.now()}`,
+    student_id: data.student_id,
+    start_date: data.start_date,
+    end_date: data.end_date,
+    reason: data.reason,
+    days_count: data.days_count,
+    estimated_rebate: data.estimated_rebate,
+    status: "Approved",
+    created_at: new Date().toISOString(),
+    student,
+  };
+
+  store.leaves.unshift(newLeave);
+
+  // Automatically opt-out student from all meals between start_date and end_date
+  store.menus.forEach((m) => {
+    if (m.menu_date >= data.start_date && m.menu_date <= data.end_date) {
+      const planIdx = store.mealPlans.findIndex(
+        (p) => p.student_id === data.student_id && p.menu_id === m.id
+      );
+      if (planIdx !== -1) {
+        store.mealPlans[planIdx].status = "no";
+        store.mealPlans[planIdx].updated_at = new Date().toISOString();
+      } else {
+        store.mealPlans.push({
+          id: `mp-${Date.now()}-${m.id}`,
+          student_id: data.student_id,
+          menu_id: m.id,
+          status: "no",
+          submitted_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        });
+      }
+    }
+  });
+
+  // Credit student wallet or record pending refund transaction
+  store.transactions.unshift({
+    id: `tx-rebate-${Date.now()}`,
+    student_id: data.student_id,
+    amount: data.estimated_rebate,
+    type: "refund",
+    description: `Mess Rebate Credit (${data.days_count} days: ${data.start_date} to ${data.end_date})`,
+    status: "Success",
+    created_at: new Date().toISOString(),
+  });
+
+  if (student) {
+    student.wallet_balance += data.estimated_rebate;
+  }
+
+  // Create notification
+  store.notifications.unshift({
+    id: `notif-${Date.now()}`,
+    user_id: data.student_id,
+    title: "Hostel Mess Leave Approved",
+    message: `Your leave for ${data.days_count} days (${data.start_date} to ${data.end_date}) was approved. An estimated rebate of ₹${data.estimated_rebate} has been credited to your dining wallet.`,
+    type: "system",
+    is_read: false,
+    created_at: new Date().toISOString(),
+  });
+
+  return newLeave;
+}
+
+export function getHostelLeavesFromStore(student_id?: string): HostelLeave[] {
+  const store = getStore();
+  if (student_id) {
+    return store.leaves.filter((l) => l.student_id === student_id);
+  }
+  return store.leaves;
 }
 
 // ----------------- Wallet & Payments API -----------------

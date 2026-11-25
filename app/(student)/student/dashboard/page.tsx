@@ -123,7 +123,7 @@ export default async function StudentDashboardPage() {
           <RecentActivityCard activities={activities} />
         </div>
         <div className="lg:col-span-4 space-y-6">
-          <QuickActionsCard />
+          <QuickActionsCard user={user} menus={todayMenus} />
           <PromotionalBanner />
         </div>
       </div>

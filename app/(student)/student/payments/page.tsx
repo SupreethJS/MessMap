@@ -166,7 +166,7 @@ export default async function StudentPaymentsPage() {
                   <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/60">
                     {tx.status}
                   </span>
-                  <DownloadReceiptButton transactionId={tx.id} />
+                  <DownloadReceiptButton transactionId={tx.id} transaction={tx} />
                 </div>
               </div>
             );
@@ -237,7 +237,7 @@ export default async function StudentPaymentsPage() {
                     </td>
 
                     <td className="py-3.5 px-3 text-right">
-                      <DownloadReceiptButton transactionId={tx.id} />
+                      <DownloadReceiptButton transactionId={tx.id} transaction={tx} />
                     </td>
                   </tr>
                 );

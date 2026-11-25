@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getDbReportAnalytics } from "@/lib/supabase/db";
 import { MetricCard } from "@/components/admin/metric-card";
 import { AnalyticsCharts } from "@/components/admin/analytics-charts";
+import { ExportReportsButton } from "@/components/admin/export-reports-button";
 import { Button } from "@/components/ui/button";
 import { Scale, Users, Star, BarChart3, Calendar } from "lucide-react";
 
@@ -28,24 +29,28 @@ export default async function AdminReportsPage({
           </p>
         </div>
 
-        {/* Range Selector */}
-        <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-lg border border-slate-200">
-          <Button
-            asChild
-            variant={range === "week" ? "default" : "ghost"}
-            size="sm"
-            className="text-xs h-8"
-          >
-            <Link href="/admin/reports?range=week">Last 7 Days</Link>
-          </Button>
-          <Button
-            asChild
-            variant={range === "month" ? "default" : "ghost"}
-            size="sm"
-            className="text-xs h-8"
-          >
-            <Link href="/admin/reports?range=month">Last 30 Days</Link>
-          </Button>
+        {/* Actions Row: Range Selector & CSV Export */}
+        <div className="flex flex-wrap items-center gap-2.5">
+          <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            <Button
+              asChild
+              variant={range === "week" ? "default" : "ghost"}
+              size="sm"
+              className="text-xs h-8"
+            >
+              <Link href="/admin/reports?range=week">Last 7 Days</Link>
+            </Button>
+            <Button
+              asChild
+              variant={range === "month" ? "default" : "ghost"}
+              size="sm"
+              className="text-xs h-8"
+            >
+              <Link href="/admin/reports?range=month">Last 30 Days</Link>
+            </Button>
+          </div>
+
+          <ExportReportsButton range={range} analytics={analytics} />
         </div>
       </div>
 

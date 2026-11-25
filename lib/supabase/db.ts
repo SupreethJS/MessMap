@@ -9,6 +9,7 @@ import {
   FoodRecord,
   Rating,
   Complaint,
+  ComplaintStatus,
   WalletTransaction,
   GroceryItem,
   Notification,
@@ -16,6 +17,8 @@ import {
   Profile,
   ComplaintCategory,
   MealType,
+  MealCheckIn,
+  HostelLeave,
 } from "@/lib/types/database";
 import {
   getAllMenus as getStoreAllMenus,
@@ -28,6 +31,11 @@ import {
   saveRatingInStore,
   getComplaintsFromStore,
   saveComplaintInStore,
+  updateComplaintInStore,
+  recordMealCheckInInStore,
+  getCheckInsForMenuFromStore,
+  applyHostelLeaveInStore,
+  getHostelLeavesFromStore,
   getWalletDataForStudent,
   topUpWalletInStore,
   getGroceriesFromStore,
@@ -631,6 +639,195 @@ export async function saveDbComplaint(data: {
   } catch (err) {
     console.warn("⚠️ saveDbComplaint error:", err);
     return storeComplaint;
+  }
+}
+
+export async function updateDbComplaint(
+  id: string,
+  updates: {
+    status?: ComplaintStatus;
+    admin_remarks?: string;
+    rebate_amount?: number;
+  }
+): Promise<Complaint> {
+  const storeComplaint = updateComplaintInStore(id, updates);
+
+  if (isDemoMode()) {
+    return storeComplaint;
+  }
+
+  try {
+    const supabase = getSupabase(true);
+    const updatePayload: any = {};
+    if (updates.status) updatePayload.status = updates.status;
+    if (updates.admin_remarks !== undefined) updatePayload.admin_remarks = updates.admin_remarks;
+    if (updates.rebate_amount !== undefined) updatePayload.rebate_amount = updates.rebate_amount;
+    if (updates.status === "Resolved" || updates.status === "resolved") {
+      updatePayload.resolved_at = new Date().toISOString();
+    }
+
+    if (UUID_REGEX.test(id)) {
+      await supabase.from("complaints").update(updatePayload).eq("id", id);
+    }
+    return storeComplaint;
+  } catch (err) {
+    console.warn("⚠️ updateDbComplaint error:", err);
+    return storeComplaint;
+  }
+}
+
+// ============================================================================
+// 5.1 MEAL CHECK-IN & ATTENDANCE SCANNER
+// ============================================================================
+
+export async function recordDbMealCheckIn(data: {
+  menu_id: string;
+  student_id: string;
+  student_roll_number?: string | null;
+  student_name?: string | null;
+  method: "qr_scan" | "manual_roll";
+  meal_type: MealType;
+  menu_date: string;
+}): Promise<MealCheckIn> {
+  const storeCheckIn = recordMealCheckInInStore(data);
+
+  if (isDemoMode()) {
+    return storeCheckIn;
+  }
+
+  try {
+    const supabase = getSupabase(true);
+    if (UUID_REGEX.test(data.menu_id) && UUID_REGEX.test(data.student_id)) {
+      await supabase.from("meal_check_ins").insert({
+        menu_id: data.menu_id,
+        student_id: data.student_id,
+        student_roll_number: data.student_roll_number || null,
+        student_name: data.student_name || null,
+        method: data.method,
+        meal_type: data.meal_type,
+        menu_date: data.menu_date,
+      });
+    }
+    return storeCheckIn;
+  } catch (err) {
+    console.warn("⚠️ recordDbMealCheckIn error:", err);
+    return storeCheckIn;
+  }
+}
+
+export async function getDbCheckInsForMenu(menu_id: string): Promise<MealCheckIn[]> {
+  if (isDemoMode() || !UUID_REGEX.test(menu_id)) {
+    return getCheckInsForMenuFromStore(menu_id);
+  }
+
+  try {
+    const supabase = getSupabase();
+    const { data, error } = await supabase
+      .from("meal_check_ins")
+      .select("*")
+      .eq("menu_id", menu_id)
+      .order("scanned_at", { ascending: false });
+
+    if (error || !data || data.length === 0) {
+      return getCheckInsForMenuFromStore(menu_id);
+    }
+
+    return data.map((d: any) => ({
+      id: d.id,
+      menu_id: d.menu_id,
+      student_id: d.student_id,
+      student_roll_number: d.student_roll_number,
+      student_name: d.student_name,
+      scanned_at: d.scanned_at,
+      method: d.method,
+      meal_type: d.meal_type as MealType,
+      menu_date: d.menu_date,
+    }));
+  } catch (err) {
+    console.warn("⚠️ getDbCheckInsForMenu error:", err);
+    return getCheckInsForMenuFromStore(menu_id);
+  }
+}
+
+// ============================================================================
+// 5.2 HOSTEL LEAVE & MESS REBATE
+// ============================================================================
+
+export async function applyDbHostelLeave(data: {
+  student_id: string;
+  start_date: string;
+  end_date: string;
+  reason: string;
+  days_count: number;
+  estimated_rebate: number;
+}): Promise<HostelLeave> {
+  const storeLeave = applyHostelLeaveInStore(data);
+
+  if (isDemoMode()) {
+    return storeLeave;
+  }
+
+  try {
+    const supabase = getSupabase(true);
+    if (UUID_REGEX.test(data.student_id)) {
+      await supabase.from("hostel_leaves").insert({
+        student_id: data.student_id,
+        start_date: data.start_date,
+        end_date: data.end_date,
+        reason: data.reason,
+        days_count: data.days_count,
+        estimated_rebate: data.estimated_rebate,
+        status: "Approved",
+      });
+
+      // Credit wallet
+      await topUpDbWallet(data.student_id, data.estimated_rebate);
+
+      // Add notification
+      await supabase.from("notifications").insert({
+        user_id: data.student_id,
+        title: "Hostel Mess Leave Approved",
+        message: `Your leave for ${data.days_count} days (${data.start_date} to ${data.end_date}) was approved. An estimated rebate of ₹${data.estimated_rebate} has been credited to your dining wallet.`,
+        type: "system",
+      });
+    }
+    return storeLeave;
+  } catch (err) {
+    console.warn("⚠️ applyDbHostelLeave error:", err);
+    return storeLeave;
+  }
+}
+
+export async function getDbHostelLeaves(student_id?: string): Promise<HostelLeave[]> {
+  if (isDemoMode()) {
+    return getHostelLeavesFromStore(student_id);
+  }
+
+  try {
+    const supabase = getSupabase();
+    let query = supabase.from("hostel_leaves").select("*, student:profiles(*)").order("created_at", { ascending: false });
+    if (student_id && UUID_REGEX.test(student_id)) {
+      query = query.eq("student_id", student_id);
+    }
+    const { data, error } = await query;
+    if (error || !data || data.length === 0) {
+      return getHostelLeavesFromStore(student_id);
+    }
+    return data.map((d: any) => ({
+      id: d.id,
+      student_id: d.student_id,
+      start_date: d.start_date,
+      end_date: d.end_date,
+      reason: d.reason,
+      days_count: d.days_count,
+      estimated_rebate: Number(d.estimated_rebate),
+      status: d.status,
+      created_at: d.created_at,
+      student: d.student,
+    }));
+  } catch (err) {
+    console.warn("⚠️ getDbHostelLeaves error:", err);
+    return getHostelLeavesFromStore(student_id);
   }
 }
 
