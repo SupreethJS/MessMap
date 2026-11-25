@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -13,12 +14,16 @@ import {
   User,
   Settings,
   Headphones,
+  X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { QubiteLogo } from "@/components/shared/qubite-logo";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
 
 interface QubiteSidebarProps {
   unreadNotifsCount?: number;
+  isOpenMobile?: boolean;
+  onCloseMobile?: () => void;
 }
 
 const navItems = [
@@ -33,21 +38,41 @@ const navItems = [
   { href: "/student/settings", label: "Settings", icon: Settings },
 ];
 
-export function QubiteSidebar({ unreadNotifsCount = 0 }: QubiteSidebarProps) {
+export function QubiteSidebar({
+  unreadNotifsCount = 0,
+  isOpenMobile = false,
+  onCloseMobile,
+}: QubiteSidebarProps) {
   const pathname = usePathname();
 
-  return (
-    <aside className="w-64 fixed/sticky h-screen bg-slate-900 text-slate-300 flex flex-col justify-between p-4 border-r border-slate-800 shrink-0 sticky top-0 select-none z-40">
+  // Escape key handler for mobile drawer
+  useEffect(() => {
+    if (!isOpenMobile || !onCloseMobile) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onCloseMobile();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpenMobile, onCloseMobile]);
+
+  const sidebarContent = (
+    <div className="flex flex-col h-full justify-between p-4 bg-slate-900 dark:bg-slate-950 text-slate-300 border-r border-slate-800">
       {/* Top Brand Header */}
       <div>
-        <div className="p-2 pb-4">
-          <Link href="/student/dashboard" className="flex items-center gap-3 group">
+        <div className="p-2 pb-4 flex items-center justify-between">
+          <Link
+            href="/student/dashboard"
+            onClick={onCloseMobile}
+            className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-lg p-1"
+          >
             <QubiteLogo size="md" className="group-hover:scale-105 transition-transform shrink-0" />
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
-                <h1 className="font-extrabold text-xl text-white tracking-tight">
+                <span className="font-extrabold text-xl text-white tracking-tight">
                   Smart Mess
-                </h1>
+                </span>
                 <span className="text-[10px] font-bold uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-1.5 py-0.5 rounded">
                   STUDENT
                 </span>
@@ -57,10 +82,22 @@ export function QubiteSidebar({ unreadNotifsCount = 0 }: QubiteSidebarProps) {
               </p>
             </div>
           </Link>
+
+          {/* Close button for mobile drawer */}
+          {onCloseMobile && (
+            <button
+              type="button"
+              onClick={onCloseMobile}
+              aria-label="Close navigation drawer"
+              className="lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          )}
         </div>
 
-        {/* Dynamic Navigation Menu */}
-        <nav className="px-1 py-1 space-y-1 overflow-y-auto max-h-[calc(100vh-250px)]">
+        {/* Dynamic Semantic Navigation Menu */}
+        <nav aria-label="Student Navigation" className="px-1 py-1 space-y-1.5 overflow-y-auto max-h-[calc(100vh-270px)]">
           {navItems.map((item) => {
             const isActive =
               pathname === item.href ||
@@ -73,11 +110,12 @@ export function QubiteSidebar({ unreadNotifsCount = 0 }: QubiteSidebarProps) {
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={onCloseMobile}
                 className={cn(
-                  "flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all duration-150 group",
+                  "flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-semibold min-h-[44px] transition-all duration-150 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400",
                   isActive
-                    ? "bg-amber-400 text-slate-950 font-semibold rounded-xl shadow-xs"
-                    : "text-slate-400 hover:text-white hover:bg-slate-800/60 rounded-xl"
+                    ? "bg-amber-400 text-slate-950 font-bold shadow-xs"
+                    : "text-slate-300 hover:text-white hover:bg-slate-800/70"
                 )}
               >
                 <div className="flex items-center gap-3">
@@ -95,7 +133,7 @@ export function QubiteSidebar({ unreadNotifsCount = 0 }: QubiteSidebarProps) {
                 {item.badge && unreadNotifsCount > 0 && (
                   <span
                     className={cn(
-                      "text-[10px] font-bold px-1.5 py-0.2 rounded-full",
+                      "text-[10px] font-bold px-2 py-0.5 rounded-full",
                       isActive ? "bg-slate-950 text-amber-400" : "bg-amber-400 text-slate-950"
                     )}
                   >
@@ -108,8 +146,13 @@ export function QubiteSidebar({ unreadNotifsCount = 0 }: QubiteSidebarProps) {
         </nav>
       </div>
 
-      {/* Bottom Need Assistance Support Card */}
-      <div className="p-1 pt-2">
+      {/* Footer Area: Theme Toggle & Support Card */}
+      <div className="p-1 pt-2 space-y-2">
+        <div className="flex items-center justify-between px-2 py-1 bg-slate-800/50 rounded-xl border border-slate-800">
+          <span className="text-xs font-semibold text-slate-300">Theme</span>
+          <ThemeToggle showLabel />
+        </div>
+
         <div className="bg-slate-800/80 border border-slate-700/60 rounded-xl p-3.5 space-y-2 text-slate-300">
           <div className="flex items-center gap-2 text-amber-400">
             <Headphones className="w-4 h-4" />
@@ -126,6 +169,40 @@ export function QubiteSidebar({ unreadNotifsCount = 0 }: QubiteSidebarProps) {
           </div>
         </div>
       </div>
-    </aside>
+    </div>
+  );
+
+  return (
+    <>
+      {/* Desktop Sticky Sidebar */}
+      <aside
+        aria-label="Student Navigation Sidebar"
+        className="hidden lg:flex flex-col w-64 h-screen shrink-0 sticky top-0 select-none z-40"
+      >
+        {sidebarContent}
+      </aside>
+
+      {/* Mobile Accessible Slide-over Drawer */}
+      {isOpenMobile && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile Navigation Menu"
+          className="fixed inset-0 z-50 lg:hidden flex"
+        >
+          {/* Backdrop overlay */}
+          <div
+            className="fixed inset-0 bg-black/70 backdrop-blur-xs transition-opacity"
+            onClick={onCloseMobile}
+            aria-hidden="true"
+          />
+
+          {/* Drawer Panel */}
+          <div className="relative w-72 max-w-[85vw] h-full shadow-2xl animate-in slide-in-from-left duration-200">
+            {sidebarContent}
+          </div>
+        </div>
+      )}
+    </>
   );
 }

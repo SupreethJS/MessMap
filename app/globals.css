@@ -4,9 +4,9 @@
 
 @layer base {
   :root {
-    /* QuBite Modern Slate & Clean Surfaces (#F8FAFC) */
+    /* QuBite Crisp Light Surface (#F8FAFC) */
     --background: 210 40% 98%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 222.2 84% 4.9%; /* #020817 - 15:1 contrast */
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -21,8 +21,9 @@
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
+    /* High contrast muted text (> 4.8:1 on light) */
     --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted-foreground: 215.4 16.3% 40%;
 
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
@@ -37,6 +38,38 @@
 
     --radius: 1rem;
   }
+
+  .dark {
+    /* QuBite Deep Slate Surface (#0B0F19) */
+    --background: 222.2 47.4% 6%;
+    --foreground: 210 40% 98%; /* #F8FAFC - 16:1 contrast */
+
+    --card: 222.2 47.4% 9%; /* #0F172A */
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 47.4% 9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 43 96% 56%;
+    --primary-foreground: 222.2 84% 4.9%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    /* High contrast muted text on dark slate (> 5.2:1) */
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 68%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 45%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 18%;
+    --input: 217.2 32.6% 18%;
+    --ring: 43 96% 56%;
+  }
 }
 
 @layer base {
@@ -44,11 +77,17 @@
     @apply border-border;
   }
   body {
-    @apply bg-slate-50 text-slate-900 font-sans antialiased min-h-screen selection:bg-amber-400 selection:text-slate-950;
+    @apply bg-background text-foreground font-sans antialiased min-h-screen selection:bg-amber-400 selection:text-slate-950 transition-colors duration-150;
+  }
+
+  /* Accessible focus indicators across the application */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
   }
 }
 
-/* Custom scrollbars for clean UI */
+/* Custom scrollbars for clean UI in both light & dark */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -60,6 +99,12 @@
   background: #CBD5E1;
   border-radius: 9999px;
 }
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
 ::-webkit-scrollbar-thumb:hover {
   background: #94A3B8;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
 }

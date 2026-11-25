@@ -53,28 +53,31 @@ export function ComplaintModal({ open, onOpenChange }: ComplaintModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg bg-white rounded-2xl border border-slate-200 p-6 shadow-xl">
+      <DialogContent className="max-w-lg bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-2xl">
         <form onSubmit={handleSubmit}>
           <DialogHeader className="space-y-1">
-            <div className="flex items-center gap-2 text-slate-900">
-              <div className="h-9 w-9 rounded-xl bg-rose-50 border border-rose-200/60 flex items-center justify-center text-rose-700">
+            <div className="flex items-center gap-2.5 text-slate-900 dark:text-slate-100">
+              <div className="h-10 w-10 rounded-xl bg-rose-50 dark:bg-rose-950/60 border border-rose-200/60 dark:border-rose-900/60 flex items-center justify-center text-rose-600 dark:text-rose-400 shrink-0">
                 <AlertCircle className="w-5 h-5" />
               </div>
               <DialogTitle className="text-lg font-bold">Raise a Hostel Mess Complaint</DialogTitle>
             </div>
-            <DialogDescription className="text-xs text-slate-500">
+            <DialogDescription className="text-xs text-slate-500 dark:text-slate-400">
               Submit an issue directly to the hostel catering committee and mess contractor.
             </DialogDescription>
           </DialogHeader>
 
-          <div className="space-y-3.5 py-4">
-            <div className="grid grid-cols-2 gap-3">
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-700">Complaint Category</label>
+          <div className="space-y-4 py-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="space-y-1.5">
+                <label htmlFor="complaint-category" className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                  Complaint Category
+                </label>
                 <select
+                  id="complaint-category"
                   value={category}
                   onChange={(e) => setCategory(e.target.value as any)}
-                  className="w-full h-10 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                  className="w-full h-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 text-xs font-medium text-slate-800 dark:text-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                 >
                   <option value="Food Quality">Food Quality</option>
                   <option value="Hygiene">Hygiene & Cleanliness</option>
@@ -85,12 +88,15 @@ export function ComplaintModal({ open, onOpenChange }: ComplaintModalProps) {
                 </select>
               </div>
 
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-700">Urgency Level</label>
+              <div className="space-y-1.5">
+                <label htmlFor="complaint-urgency" className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                  Urgency Level
+                </label>
                 <select
+                  id="complaint-urgency"
                   value={urgency}
                   onChange={(e) => setUrgency(e.target.value as any)}
-                  className="w-full h-10 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                  className="w-full h-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 text-xs font-medium text-slate-800 dark:text-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
                 >
                   <option value="Normal">Normal</option>
                   <option value="High">High</option>
@@ -99,46 +105,52 @@ export function ComplaintModal({ open, onOpenChange }: ComplaintModalProps) {
               </div>
             </div>
 
-            <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-700">Subject / Title</label>
+            <div className="space-y-1.5">
+              <label htmlFor="complaint-title" className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                Subject / Title
+              </label>
               <input
+                id="complaint-title"
                 type="text"
                 placeholder="Brief summary of the issue..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
-                className="w-full h-10 px-3 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:bg-white"
+                className="w-full h-11 px-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus:bg-white dark:focus:bg-slate-900 transition-colors"
               />
             </div>
 
-            <div className="space-y-1">
-              <label className="text-xs font-semibold text-slate-700">Description</label>
+            <div className="space-y-1.5">
+              <label htmlFor="complaint-desc" className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                Detailed Description
+              </label>
               <textarea
+                id="complaint-desc"
                 rows={3}
                 placeholder="Provide specific details (meal time, table, dish name, or observation)..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 required
-                className="w-full p-3 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:bg-white"
+                className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus:bg-white dark:focus:bg-slate-900 transition-colors"
               />
             </div>
           </div>
 
-          <DialogFooter className="gap-2">
+          <DialogFooter className="gap-2.5">
             <button
               type="button"
               onClick={() => onOpenChange(false)}
-              className="px-4 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+              className="min-h-[44px] px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs font-semibold flex items-center justify-center gap-1.5 shadow-xs transition-colors"
+              className="min-h-[44px] px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-500 text-slate-950 text-xs font-bold flex items-center justify-center gap-2 shadow-xs transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 disabled:opacity-50"
             >
               {loading ? "Submitting..." : "Submit Complaint"}
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="w-4 h-4" />
             </button>
           </DialogFooter>
         </form>

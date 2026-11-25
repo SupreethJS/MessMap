@@ -225,47 +225,96 @@ export default function AdminFoodRecordsPage() {
         {/* Existing Food Records Table */}
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle className="text-base font-bold text-slate-800">
+            <CardTitle className="text-base font-bold text-slate-800 dark:text-slate-100">
               Historical Food Waste Records
             </CardTitle>
           </CardHeader>
-          <CardContent className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="border-b border-slate-200 text-slate-400 uppercase tracking-wider">
-                <tr>
-                  <th className="pb-3 font-semibold">Date & Meal</th>
-                  <th className="pb-3 font-semibold">Prepared</th>
-                  <th className="pb-3 font-semibold">Leftover</th>
-                  <th className="pb-3 font-semibold">Turnout</th>
-                  <th className="pb-3 font-semibold">Wastage %</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                {foodRecords.slice(-12).reverse().map((rec) => {
-                  const m = menus.find((menu) => menu.id === rec.menu_id);
-                  const isHighWaste = rec.wastage_percentage > 15;
+          <CardContent className="space-y-3">
+            {/* Mobile Responsive Cards (< 768px) */}
+            <div className="md:hidden space-y-3">
+              {foodRecords.slice(-12).reverse().map((rec) => {
+                const m = menus.find((menu) => menu.id === rec.menu_id);
+                const isHighWaste = rec.wastage_percentage > 15;
 
-                  return (
-                    <tr key={rec.id} className="hover:bg-slate-50/50">
-                      <td className="py-3 font-medium text-slate-800">
-                        {m?.menu_date} <span className="capitalize text-slate-500 font-normal">({m?.meal_type})</span>
-                      </td>
-                      <td className="py-3">{rec.prepared_qty} {rec.unit}</td>
-                      <td className="py-3">{rec.leftover_qty} {rec.unit}</td>
-                      <td className="py-3">{rec.actual_attendance || "—"}</td>
-                      <td className="py-3">
-                        <Badge
-                          variant={isHighWaste ? "destructive" : "success"}
-                          className="text-[11px] font-bold"
-                        >
-                          {rec.wastage_percentage}%
-                        </Badge>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                return (
+                  <div
+                    key={rec.id}
+                    className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-850/50 space-y-2"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-xs text-slate-900 dark:text-slate-100">
+                        {m?.menu_date} ({m?.meal_type})
+                      </span>
+                      <Badge
+                        variant={isHighWaste ? "destructive" : "success"}
+                        className="text-[10px] font-bold"
+                      >
+                        {rec.wastage_percentage}% Waste
+                      </Badge>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 text-xs pt-1 border-t border-slate-200/60 dark:border-slate-800">
+                      <div>
+                        <span className="text-[10px] text-slate-400 block">Prepared</span>
+                        <span className="font-semibold text-slate-700 dark:text-slate-300">{rec.prepared_qty} {rec.unit}</span>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-slate-400 block">Leftover</span>
+                        <span className="font-semibold text-slate-700 dark:text-slate-300">{rec.leftover_qty} {rec.unit}</span>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-slate-400 block">Turnout</span>
+                        <span className="font-semibold text-slate-700 dark:text-slate-300">{rec.actual_attendance || "—"}</span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Desktop Table (>= 768px) */}
+            <div
+              role="region"
+              aria-label="Historical Food Waste Records"
+              tabIndex={0}
+              className="hidden md:block overflow-x-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-xl"
+            >
+              <table className="w-full text-left text-xs">
+                <thead className="border-b border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                  <tr>
+                    <th className="pb-3 font-semibold">Date & Meal</th>
+                    <th className="pb-3 font-semibold">Prepared</th>
+                    <th className="pb-3 font-semibold">Leftover</th>
+                    <th className="pb-3 font-semibold">Turnout</th>
+                    <th className="pb-3 font-semibold">Wastage %</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                  {foodRecords.slice(-12).reverse().map((rec) => {
+                    const m = menus.find((menu) => menu.id === rec.menu_id);
+                    const isHighWaste = rec.wastage_percentage > 15;
+
+                    return (
+                      <tr key={rec.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-850/50">
+                        <td className="py-3 font-medium text-slate-800 dark:text-slate-200">
+                          {m?.menu_date} <span className="capitalize text-slate-500 dark:text-slate-400 font-normal">({m?.meal_type})</span>
+                        </td>
+                        <td className="py-3 text-slate-700 dark:text-slate-300">{rec.prepared_qty} {rec.unit}</td>
+                        <td className="py-3 text-slate-700 dark:text-slate-300">{rec.leftover_qty} {rec.unit}</td>
+                        <td className="py-3 text-slate-700 dark:text-slate-300">{rec.actual_attendance || "—"}</td>
+                        <td className="py-3">
+                          <Badge
+                            variant={isHighWaste ? "destructive" : "success"}
+                            className="text-[11px] font-bold"
+                          >
+                            {rec.wastage_percentage}%
+                          </Badge>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </CardContent>
         </Card>
       </div>

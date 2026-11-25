@@ -89,19 +89,60 @@ export default async function StudentMyMealsPage() {
       {/* 2. ASYMMETRIC GRID (8 cols table, 4 cols summary) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column: Scheduled Dining Slots Table */}
-        <div className="lg:col-span-8 bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+        <div className="lg:col-span-8 bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-base font-semibold text-slate-900">
+            <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">
               Upcoming Scheduled Dining Slots
             </h2>
-            <span className="text-xs font-medium text-slate-500">
+            <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
               Next 7 Days
             </span>
           </div>
 
-          <div className="overflow-x-auto">
+          {/* Mobile Responsive Cards (< 768px) */}
+          <div className="md:hidden space-y-3">
+            {upcomingMeals.map((m) => {
+              const dateObj = new Date(m.menu_date + "T00:00:00");
+              const formattedDate = dateObj.toLocaleDateString("en-US", {
+                weekday: "short",
+                month: "short",
+                day: "numeric",
+              });
+
+              return (
+                <div
+                  key={m.id}
+                  className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-850/50 space-y-2"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-xs text-slate-900 dark:text-slate-100">{formattedDate}</span>
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200/60 dark:border-amber-800/60">
+                      {m.meal_type}
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-snug">
+                    {m.items?.map((i) => i.name).join(" • ") || "Scheduled Dishes"}
+                  </p>
+                  <div className="flex items-center justify-between pt-2 border-t border-slate-200/60 dark:border-slate-800 text-[11px] text-slate-500 dark:text-slate-400">
+                    <span>{formatTime(m.serving_start_time)} – {formatTime(m.serving_end_time)}</span>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/60">
+                      <CheckCircle2 className="w-3 h-3" /> Booked
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Desktop Table (>= 768px) */}
+          <div
+            role="region"
+            aria-label="Upcoming Scheduled Dining Slots"
+            tabIndex={0}
+            className="hidden md:block overflow-x-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-xl"
+          >
             <table className="w-full text-left text-xs">
-              <thead className="border-b border-slate-200 text-slate-400 uppercase tracking-wider">
+              <thead className="border-b border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 uppercase tracking-wider">
                 <tr>
                   <th className="pb-3 px-3 font-semibold">Date</th>
                   <th className="pb-3 px-3 font-semibold">Meal Slot</th>
@@ -110,7 +151,7 @@ export default async function StudentMyMealsPage() {
                   <th className="pb-3 px-3 font-semibold text-right">Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {upcomingMeals.map((m) => {
                   const dateObj = new Date(m.menu_date + "T00:00:00");
                   const formattedDate = dateObj.toLocaleDateString("en-US", {
@@ -120,19 +161,19 @@ export default async function StudentMyMealsPage() {
                   });
 
                   return (
-                    <tr key={m.id} className="hover:bg-slate-50 transition-colors">
-                      <td className="py-3.5 px-3 font-semibold text-slate-900">{formattedDate}</td>
-                      <td className="py-3.5 px-3 font-bold uppercase text-[11px] text-amber-700">
+                    <tr key={m.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                      <td className="py-3.5 px-3 font-semibold text-slate-900 dark:text-slate-100">{formattedDate}</td>
+                      <td className="py-3.5 px-3 font-bold uppercase text-[11px] text-amber-700 dark:text-amber-400">
                         {m.meal_type}
                       </td>
-                      <td className="py-3.5 px-3 text-slate-600">
+                      <td className="py-3.5 px-3 text-slate-600 dark:text-slate-300">
                         {m.items?.map((i) => i.name).join(" • ") || "Scheduled Dishes"}
                       </td>
-                      <td className="py-3.5 px-3 text-slate-400">
+                      <td className="py-3.5 px-3 text-slate-400 dark:text-slate-500">
                         {formatTime(m.serving_start_time)} – {formatTime(m.serving_end_time)}
                       </td>
                       <td className="py-3.5 px-3 text-right">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/60">
                           <CheckCircle2 className="w-3 h-3" /> Booked
                         </span>
                       </td>

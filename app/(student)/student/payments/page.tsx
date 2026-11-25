@@ -118,17 +118,70 @@ export default async function StudentPaymentsPage() {
       </div>
 
       {/* 3. Transactions History */}
-      <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-semibold text-slate-900">
+          <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">
             Transaction History
           </h2>
-          <span className="text-xs font-medium text-slate-500">Currency: INR (₹)</span>
+          <span className="text-xs font-medium text-slate-500 dark:text-slate-400">Currency: INR (₹)</span>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Mobile Responsive Cards (< 768px) */}
+        <div className="md:hidden space-y-3">
+          {walletData.transactions.map((tx) => {
+            const isCredit = tx.amount > 0;
+            return (
+              <div
+                key={tx.id}
+                className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-850/50 space-y-2.5"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <div className="flex items-center gap-2.5">
+                    <div
+                      className={`h-9 w-9 rounded-xl flex items-center justify-center shrink-0 ${
+                        isCredit
+                          ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/60"
+                          : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+                      }`}
+                    >
+                      {isCredit ? (
+                        <ArrowDownRight className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                      ) : (
+                        <ArrowUpRight className="w-4 h-4 text-slate-600 dark:text-slate-400" />
+                      )}
+                    </div>
+                    <div>
+                      <p className="font-bold text-xs text-slate-900 dark:text-slate-100">{tx.description}</p>
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500">
+                        {new Date(tx.created_at).toLocaleDateString()}
+                      </span>
+                    </div>
+                  </div>
+                  <span className={`font-black text-sm ${isCredit ? "text-emerald-600 dark:text-emerald-400" : "text-slate-900 dark:text-slate-100"}`}>
+                    {isCredit ? "+" : ""}₹{Math.abs(tx.amount)}
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between pt-2 border-t border-slate-200/60 dark:border-slate-800 text-xs">
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/60">
+                    {tx.status}
+                  </span>
+                  <DownloadReceiptButton transactionId={tx.id} />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Desktop Table (>= 768px) */}
+        <div
+          role="region"
+          aria-label="Transaction History Table"
+          tabIndex={0}
+          className="hidden md:block overflow-x-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-xl"
+        >
           <table className="w-full text-left text-xs">
-            <thead className="border-b border-slate-200 text-slate-400 uppercase tracking-wider">
+            <thead className="border-b border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500 uppercase tracking-wider">
               <tr>
                 <th className="pb-3 px-3 font-semibold">Transaction</th>
                 <th className="pb-3 px-3 font-semibold">Type</th>
@@ -137,46 +190,48 @@ export default async function StudentPaymentsPage() {
                 <th className="pb-3 px-3 font-semibold text-right">Receipt</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
               {walletData.transactions.map((tx) => {
                 const isCredit = tx.amount > 0;
 
                 return (
-                  <tr key={tx.id} className="hover:bg-slate-50 transition-colors">
+                  <tr key={tx.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                     <td className="py-3.5 px-3">
                       <div className="flex items-center gap-2.5">
                         <div
                           className={`h-8 w-8 rounded-xl flex items-center justify-center shrink-0 ${
-                            isCredit ? "bg-emerald-50 text-emerald-700 border border-emerald-200/60" : "bg-slate-100 text-slate-700"
+                            isCredit
+                              ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/60"
+                              : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
                           }`}
                         >
                           {isCredit ? (
-                            <ArrowDownRight className="w-4 h-4 text-emerald-600" />
+                            <ArrowDownRight className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                           ) : (
-                            <ArrowUpRight className="w-4 h-4 text-slate-600" />
+                            <ArrowUpRight className="w-4 h-4 text-slate-600 dark:text-slate-400" />
                           )}
                         </div>
                         <div>
-                          <p className="font-semibold text-slate-900">{tx.description}</p>
-                          <span className="text-[10px] text-slate-400">
+                          <p className="font-semibold text-slate-900 dark:text-slate-100">{tx.description}</p>
+                          <span className="text-[10px] text-slate-400 dark:text-slate-500">
                             {new Date(tx.created_at).toLocaleDateString()}
                           </span>
                         </div>
                       </div>
                     </td>
 
-                    <td className="py-3.5 px-3 capitalize font-medium text-slate-600">
+                    <td className="py-3.5 px-3 capitalize font-medium text-slate-600 dark:text-slate-300">
                       {tx.type.replace("_", " ")}
                     </td>
 
                     <td className="py-3.5 px-3 font-bold text-sm">
-                      <span className={isCredit ? "text-emerald-600" : "text-slate-900"}>
+                      <span className={isCredit ? "text-emerald-600 dark:text-emerald-400" : "text-slate-900 dark:text-slate-100"}>
                         {isCredit ? "+" : ""}₹{Math.abs(tx.amount)}
                       </span>
                     </td>
 
                     <td className="py-3.5 px-3">
-                      <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+                      <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/60">
                         {tx.status}
                       </span>
                     </td>

@@ -15,12 +15,14 @@ import {
   RotateCcw,
   CheckCircle2,
   Info,
+  Building2,
 } from "lucide-react";
 import {
   sendRegistrationOtpAction,
   verifyOtpAndRegisterAction,
 } from "@/app/actions/auth-actions";
 import { QubiteLogo } from "@/components/shared/qubite-logo";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -182,52 +184,64 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center p-4 bg-slate-900 text-slate-100 py-10 selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen flex flex-col justify-center items-center p-4 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 py-10 selection:bg-amber-400 selection:text-slate-950 transition-colors relative">
+      {/* Top Bar with Theme Toggle */}
+      <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-2">
+        <ThemeToggle />
+      </div>
+
       <div className="w-full max-w-lg space-y-6">
         {/* Brand Header */}
         <div className="text-center space-y-2">
-          <Link href="/" className="inline-block hover:scale-105 transition-transform">
+          <Link
+            href="/"
+            className="inline-block hover:scale-105 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-2xl"
+          >
             <QubiteLogo size="xl" />
           </Link>
-          <h1 className="text-2xl font-black text-white tracking-tight">
+          <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
             Smart Mess Student Registration
           </h1>
-          <p className="text-xs text-slate-400 font-medium">
+          <p className="text-xs text-slate-600 dark:text-slate-400 font-medium">
             Campus Dining & Meal Booking Access
           </p>
           <div className="pt-1">
-            <span className="inline-flex items-center gap-1.5 py-1 px-3 bg-slate-800 border border-slate-700/80 rounded-full text-[11px] font-bold text-slate-300 shadow-xs">
-              🏛️ University Hostel Student Portal
+            <span className="inline-flex items-center gap-1.5 py-1 px-3 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-full text-[11px] font-bold text-slate-700 dark:text-slate-300 shadow-xs">
+              <Building2 className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+              <span>University Hostel Student Portal</span>
             </span>
           </div>
         </div>
 
         {/* Card */}
-        <div className="bg-slate-900/90 rounded-3xl border border-slate-800 p-7 shadow-2xl space-y-5 backdrop-blur-md">
+        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-7 shadow-xl space-y-5 transition-colors">
           {step === "details" ? (
             /* STEP 1: STUDENT DETAILS FORM */
             <form onSubmit={handleSendOtp} className="space-y-4">
               <div className="space-y-1">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-lg font-black text-white">Student Details</h2>
-                  <span className="text-[11px] font-bold px-2.5 py-0.5 bg-slate-800 text-indigo-300 rounded-lg border border-slate-700">
+                  <h2 className="text-lg font-black text-slate-900 dark:text-white">Student Details</h2>
+                  <span className="text-[11px] font-bold px-2.5 py-0.5 bg-slate-100 dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 rounded-lg border border-slate-200 dark:border-slate-700">
                     Step 1 of 2
                   </span>
                 </div>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   Enter your hostel and academic details to receive your 6-digit email verification code.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-300">Full Name</label>
+                  <label htmlFor="reg-fullname" className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                    Full Name
+                  </label>
                   <div className="relative">
-                    <User className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
+                    <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
                     <input
+                      id="reg-fullname"
                       type="text"
                       placeholder="Aarav Sharma"
-                      className="w-full h-10 pl-10 pr-3 rounded-xl border border-slate-700 bg-slate-800/80 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       required
@@ -236,13 +250,16 @@ export default function RegisterPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-300">College Email Address</label>
+                  <label htmlFor="reg-email" className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                    College Email Address
+                  </label>
                   <div className="relative">
-                    <Mail className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
+                    <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
                     <input
+                      id="reg-email"
                       type="email"
                       placeholder="student@college.edu"
-                      className="w-full h-10 pl-10 pr-3 rounded-xl border border-slate-700 bg-slate-800/80 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
@@ -253,13 +270,16 @@ export default function RegisterPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-300">Roll Number</label>
+                  <label htmlFor="reg-roll" className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                    Roll Number
+                  </label>
                   <div className="relative">
-                    <Hash className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
+                    <Hash className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
                     <input
+                      id="reg-roll"
                       type="text"
                       placeholder="2024CS099"
-                      className="w-full h-10 pl-10 pr-3 rounded-xl border border-slate-700 bg-slate-800/80 text-xs text-white font-mono uppercase placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-xs text-slate-900 dark:text-white font-mono uppercase placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
                       value={rollNumber}
                       onChange={(e) => setRollNumber(e.target.value)}
                       required
@@ -268,11 +288,14 @@ export default function RegisterPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-300">Hostel Block</label>
+                  <label htmlFor="reg-block" className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                    Hostel Block
+                  </label>
                   <select
+                    id="reg-block"
                     value={hostelBlock}
                     onChange={(e) => setHostelBlock(e.target.value)}
-                    className="w-full h-10 rounded-xl border border-slate-700 bg-slate-800 px-3 text-xs font-medium text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full h-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 text-xs font-medium text-slate-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 transition-colors"
                   >
                     <option value="Block A">Block A</option>
                     <option value="Block B">Block B</option>
@@ -282,13 +305,16 @@ export default function RegisterPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-300">Room No</label>
+                  <label htmlFor="reg-room" className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                    Room No
+                  </label>
                   <div className="relative">
-                    <DoorClosed className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
+                    <DoorClosed className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
                     <input
+                      id="reg-room"
                       type="text"
                       placeholder="204"
-                      className="w-full h-10 pl-10 pr-3 rounded-xl border border-slate-700 bg-slate-800/80 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
                       value={roomNumber}
                       onChange={(e) => setRoomNumber(e.target.value)}
                       required
@@ -299,13 +325,16 @@ export default function RegisterPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-300">Password</label>
+                  <label htmlFor="reg-pass" className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                    Password
+                  </label>
                   <div className="relative">
-                    <Lock className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
+                    <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
                     <input
+                      id="reg-pass"
                       type="password"
                       placeholder="Min 6 characters"
-                      className="w-full h-10 pl-10 pr-3 rounded-xl border border-slate-700 bg-slate-800/80 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
@@ -314,13 +343,16 @@ export default function RegisterPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-slate-300">Confirm Password</label>
+                  <label htmlFor="reg-confirm-pass" className="text-xs font-bold text-slate-700 dark:text-slate-300">
+                    Confirm Password
+                  </label>
                   <div className="relative">
-                    <Lock className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
+                    <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
                     <input
+                      id="reg-confirm-pass"
                       type="password"
                       placeholder="Re-enter password"
-                      className="w-full h-10 pl-10 pr-3 rounded-xl border border-slate-700 bg-slate-800/80 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       required
@@ -330,7 +362,11 @@ export default function RegisterPage() {
               </div>
 
               {errorMsg && (
-                <div className="p-3 bg-red-950/60 border border-red-500/40 text-red-300 rounded-xl text-xs font-medium">
+                <div
+                  role="alert"
+                  aria-live="polite"
+                  className="p-3 bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-500/40 text-red-700 dark:text-red-300 rounded-xl text-xs font-medium"
+                >
                   {errorMsg}
                 </div>
               )}
@@ -338,15 +374,15 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/30 transition-all"
+                className="w-full min-h-[44px] py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-md shadow-indigo-600/30 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 disabled:opacity-50"
               >
                 {loading ? "Sending Verification Code..." : "Continue & Send OTP Code"}
                 <ArrowRight className="w-4 h-4" />
               </button>
 
-              <p className="text-center text-xs text-slate-400 pt-1">
+              <p className="text-center text-xs text-slate-600 dark:text-slate-400 pt-1">
                 Already registered?{" "}
-                <Link href="/login" className="font-bold text-indigo-400 hover:text-indigo-300 hover:underline">
+                <Link href="/login" className="font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 hover:underline">
                   Sign in here
                 </Link>
               </p>
@@ -355,41 +391,50 @@ export default function RegisterPage() {
             /* STEP 2: 6-DIGIT OTP VERIFICATION */
             <form onSubmit={handleVerifyOtp} className="space-y-5">
               <div className="text-center space-y-2">
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 mb-1">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-50 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/30 mb-1">
                   <KeyRound className="h-6 w-6 stroke-[2.5]" />
                 </div>
                 <div className="flex items-center justify-center gap-2">
-                  <h2 className="text-lg font-black text-white">Verify Your Email</h2>
-                  <span className="text-[11px] font-bold px-2.5 py-0.5 bg-slate-800 text-indigo-300 rounded-lg border border-slate-700">
+                  <h2 className="text-lg font-black text-slate-900 dark:text-white">Verify Your Email</h2>
+                  <span className="text-[11px] font-bold px-2.5 py-0.5 bg-slate-100 dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 rounded-lg border border-slate-200 dark:border-slate-700">
                     Step 2 of 2
                   </span>
                 </div>
-                <p className="text-xs text-slate-400 leading-relaxed max-w-sm mx-auto">
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm mx-auto">
                   A 6-digit verification code has been dispatched to: <br />
-                  <strong className="text-white font-extrabold">{email}</strong>
+                  <strong className="text-slate-900 dark:text-white font-extrabold">{email}</strong>
                 </p>
               </div>
 
               {demoOtpNotice && (
-                <div className="p-3 bg-indigo-950/60 border border-indigo-500/50 text-indigo-200 rounded-xl text-xs font-medium flex items-center gap-2">
-                  <Info className="w-4 h-4 text-amber-400 shrink-0" />
+                <div
+                  role="status"
+                  aria-live="polite"
+                  className="p-3 bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/50 text-indigo-800 dark:text-indigo-200 rounded-xl text-xs font-semibold flex items-center gap-2"
+                >
+                  <Info className="w-4 h-4 text-amber-500 shrink-0" />
                   <span>{demoOtpNotice}</span>
                 </div>
               )}
 
               {successNotice && !demoOtpNotice && (
-                <div className="p-3 bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 rounded-xl text-xs font-medium flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <div
+                  role="status"
+                  aria-live="polite"
+                  className="p-3 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-500/40 text-emerald-800 dark:text-emerald-300 rounded-xl text-xs font-medium flex items-center gap-2"
+                >
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                   <span>{successNotice}</span>
                 </div>
               )}
 
               <div className="space-y-2 text-center">
-                <label className="text-xs font-bold text-slate-300 block">
+                <label htmlFor="reg-otp" className="text-xs font-bold text-slate-700 dark:text-slate-300 block">
                   Enter 6-Digit Verification Code
                 </label>
                 <div className="flex justify-center">
                   <input
+                    id="reg-otp"
                     type="text"
                     inputMode="numeric"
                     pattern="[0-9]*"
@@ -397,18 +442,22 @@ export default function RegisterPage() {
                     placeholder="••••••"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
-                    className="w-56 h-14 text-center font-mono text-2xl tracking-[12px] font-black rounded-2xl border-2 border-indigo-500/70 bg-slate-800 text-white focus:outline-none focus:ring-4 focus:ring-indigo-500/30 shadow-inner"
+                    className="w-56 h-14 text-center font-mono text-2xl tracking-[12px] font-black rounded-2xl border-2 border-indigo-500/70 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-500/30 shadow-inner"
                     autoFocus
                     required
                   />
                 </div>
-                <p className="text-[11px] text-slate-400">
+                <p className="text-[11px] text-slate-500 dark:text-slate-400">
                   Code expires in 10 minutes. Check your inbox or spam folder.
                 </p>
               </div>
 
               {errorMsg && (
-                <div className="p-3 bg-red-950/60 border border-red-500/40 text-red-300 rounded-xl text-xs font-medium text-center">
+                <div
+                  role="alert"
+                  aria-live="polite"
+                  className="p-3 bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-500/40 text-red-700 dark:text-red-300 rounded-xl text-xs font-medium text-center"
+                >
                   {errorMsg}
                 </div>
               )}
@@ -416,13 +465,13 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={loading || otp.trim().length !== 6}
-                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full min-h-[44px] py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-md shadow-indigo-600/30 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? "Verifying..." : "Verify & Complete Registration"}
                 <ArrowRight className="w-4 h-4" />
               </button>
 
-              <div className="flex items-center justify-between pt-2 border-t border-slate-800 text-xs text-slate-400">
+              <div className="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
                 <button
                   type="button"
                   onClick={() => {
@@ -431,7 +480,7 @@ export default function RegisterPage() {
                     setSuccessNotice(null);
                     setDemoOtpNotice(null);
                   }}
-                  className="inline-flex items-center gap-1 font-bold text-slate-400 hover:text-white transition-colors"
+                  className="min-h-[44px] inline-flex items-center gap-1 font-bold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />
                   <span>Edit details</span>
@@ -441,7 +490,7 @@ export default function RegisterPage() {
                   type="button"
                   onClick={handleResend}
                   disabled={!canResend || resending}
-                  className="inline-flex items-center gap-1 font-bold text-indigo-400 hover:text-indigo-300 disabled:opacity-40 disabled:no-underline"
+                  className="min-h-[44px] inline-flex items-center gap-1 font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300 disabled:opacity-40 disabled:no-underline cursor-pointer"
                 >
                   <RotateCcw className={`w-3.5 h-3.5 ${resending ? "animate-spin" : ""}`} />
                   <span>

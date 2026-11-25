@@ -43,8 +43,12 @@ export function CutoffCountdown({
 
   if (!status) {
     return (
-      <span className="inline-flex items-center text-xs text-slate-400">
-        <Clock className="w-3.5 h-3.5 mr-1 animate-spin" /> Checking cutoff...
+      <span
+        role="status"
+        aria-live="polite"
+        className="inline-flex items-center text-xs text-slate-500 dark:text-slate-400 font-medium"
+      >
+        <Clock className="w-3.5 h-3.5 mr-1.5 animate-spin" /> Checking cutoff...
       </span>
     );
   }
@@ -52,24 +56,30 @@ export function CutoffCountdown({
   if (status.isPassed) {
     return (
       <span
+        role="status"
+        aria-live="polite"
+        aria-label="Meal plan locked: cutoff deadline has passed"
         className={cn(
-          "inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-red-50 text-red-700 border border-red-200",
+          "inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-900/60 transition-colors",
           className
         )}
       >
-        <Lock className="w-3.5 h-3.5 mr-1" /> Plan Locked (Cutoff Passed)
+        <Lock className="w-3.5 h-3.5 mr-1.5 shrink-0" /> Plan Locked (Cutoff Passed)
       </span>
     );
   }
 
   return (
     <span
+      role="status"
+      aria-live="polite"
+      aria-label={`Cutoff timer: ${status.formattedTimeRemaining} remaining to modify meal plan`}
       className={cn(
-        "inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-amber-50 text-amber-800 border border-amber-200",
+        "inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-50 dark:bg-amber-950/60 text-amber-900 dark:text-amber-200 border border-amber-200 dark:border-amber-800/60 transition-colors",
         className
       )}
     >
-      <Clock className="w-3.5 h-3.5 mr-1" /> Cutoff: {status.formattedTimeRemaining}
+      <Clock className="w-3.5 h-3.5 mr-1.5 text-amber-600 dark:text-amber-400 shrink-0" /> Cutoff: {status.formattedTimeRemaining}
     </span>
   );
 }

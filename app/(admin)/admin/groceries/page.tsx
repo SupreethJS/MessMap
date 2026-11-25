@@ -211,75 +211,67 @@ export default function AdminGroceriesPage() {
 
       {/* Groceries Table */}
       <Card>
-        <CardContent className="p-0 overflow-x-auto">
-          <table className="w-full text-left text-xs">
-            <thead className="border-b border-slate-200 bg-slate-50/70 text-slate-500 uppercase tracking-wider">
-              <tr>
-                <th className="py-3 px-4 font-semibold">Ingredient</th>
-                <th className="py-3 px-4 font-semibold">Category</th>
-                <th className="py-3 px-4 font-semibold">Current Stock</th>
-                <th className="py-3 px-4 font-semibold">Min Reorder Level</th>
-                <th className="py-3 px-4 font-semibold">Status</th>
-                <th className="py-3 px-4 font-semibold text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {groceries.map((item) => {
-                const isLow = item.current_stock <= item.min_threshold;
-                const isEditing = editingId === item.id;
+        <CardContent className="p-4 sm:p-6 space-y-3">
+          {/* Mobile Responsive Cards (< 768px) */}
+          <div className="md:hidden space-y-3">
+            {groceries.map((item) => {
+              const isLow = item.current_stock <= item.min_threshold;
+              const isEditing = editingId === item.id;
 
-                return (
-                  <tr key={item.id} className="hover:bg-slate-50/50">
-                    <td className="py-3.5 px-4 font-semibold text-slate-800">
-                      {item.name}
-                    </td>
-                    <td className="py-3.5 px-4 capitalize text-slate-500">
-                      {item.category}
-                    </td>
-                    <td className="py-3.5 px-4 font-bold text-slate-900">
+              return (
+                <div
+                  key={item.id}
+                  className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-850/50 space-y-2.5"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <h3 className="font-bold text-xs text-slate-900 dark:text-slate-100">{item.name}</h3>
+                      <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400">{item.category}</span>
+                    </div>
+                    {isLow ? (
+                      <Badge variant="destructive" className="flex items-center gap-1 text-[10px]">
+                        <AlertTriangle className="w-3 h-3" /> Low Stock
+                      </Badge>
+                    ) : (
+                      <Badge variant="success" className="text-[10px]">
+                        Adequate
+                      </Badge>
+                    )}
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs pt-2 border-t border-slate-200/60 dark:border-slate-800">
+                    <div>
+                      <span className="text-[10px] text-slate-400 block">Current Stock</span>
                       {isEditing ? (
-                        <div className="flex items-center gap-1.5 w-28">
+                        <div className="flex items-center gap-1.5 mt-1">
                           <Input
                             type="number"
                             min="0"
                             step="0.1"
                             value={editStockValue}
                             onChange={(e) => setEditStockValue(parseFloat(e.target.value) || 0)}
-                            className="h-8 text-xs py-1"
+                            className="h-9 w-20 text-xs py-1"
                           />
                           <Button
                             size="sm"
                             onClick={() => handleSaveStock(item.id)}
-                            className="h-8 w-8 p-0 bg-emerald-600 hover:bg-emerald-700 text-white shrink-0"
+                            className="h-9 min-w-[36px] p-0 bg-emerald-600 hover:bg-emerald-700 text-white shrink-0"
                           >
                             <Check className="w-3.5 h-3.5" />
                           </Button>
                         </div>
                       ) : (
-                        <span>{item.current_stock} {item.unit}</span>
+                        <span className="font-bold text-slate-900 dark:text-slate-100">{item.current_stock} {item.unit}</span>
                       )}
-                    </td>
-                    <td className="py-3.5 px-4 text-slate-500">
-                      {item.min_threshold} {item.unit}
-                    </td>
-                    <td className="py-3.5 px-4">
-                      {isLow ? (
-                        <Badge variant="destructive" className="flex items-center gap-1 w-fit text-[10px]">
-                          <AlertTriangle className="w-3 h-3" /> Low Stock
-                        </Badge>
-                      ) : (
-                        <Badge variant="success" className="text-[10px]">
-                          Adequate
-                        </Badge>
-                      )}
-                    </td>
-                    <td className="py-3.5 px-4 text-right space-x-1">
+                    </div>
+
+                    <div className="text-right flex items-center gap-1">
                       {!isEditing && (
                         <Button
-                          variant="ghost"
+                          variant="outline"
                           size="sm"
                           onClick={() => handleStartEdit(item)}
-                          className="h-8 w-8 p-0 text-slate-500 hover:text-emerald-700"
+                          className="min-h-[36px] min-w-[36px] p-1.5 text-slate-600 dark:text-slate-300"
                           title="Quick Edit Stock"
                         >
                           <Edit2 className="w-3.5 h-3.5" />
@@ -289,17 +281,114 @@ export default function AdminGroceriesPage() {
                         variant="ghost"
                         size="sm"
                         onClick={() => handleDeleteItem(item.id)}
-                        className="h-8 w-8 p-0 text-slate-400 hover:text-red-600 hover:bg-red-50"
+                        className="min-h-[36px] min-w-[36px] p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50"
                         title="Delete item"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </Button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Desktop Table (>= 768px) */}
+          <div
+            role="region"
+            aria-label="Grocery Inventory Table"
+            tabIndex={0}
+            className="hidden md:block overflow-x-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-xl"
+          >
+            <table className="w-full text-left text-xs">
+              <thead className="border-b border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                <tr>
+                  <th className="py-3 px-4 font-semibold">Ingredient</th>
+                  <th className="py-3 px-4 font-semibold">Category</th>
+                  <th className="py-3 px-4 font-semibold">Current Stock</th>
+                  <th className="py-3 px-4 font-semibold">Min Reorder Level</th>
+                  <th className="py-3 px-4 font-semibold">Status</th>
+                  <th className="py-3 px-4 font-semibold text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                {groceries.map((item) => {
+                  const isLow = item.current_stock <= item.min_threshold;
+                  const isEditing = editingId === item.id;
+
+                  return (
+                    <tr key={item.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-850/50">
+                      <td className="py-3.5 px-4 font-semibold text-slate-800 dark:text-slate-100">
+                        {item.name}
+                      </td>
+                      <td className="py-3.5 px-4 capitalize text-slate-500 dark:text-slate-400">
+                        {item.category}
+                      </td>
+                      <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-slate-100">
+                        {isEditing ? (
+                          <div className="flex items-center gap-1.5 w-28">
+                            <Input
+                              type="number"
+                              min="0"
+                              step="0.1"
+                              value={editStockValue}
+                              onChange={(e) => setEditStockValue(parseFloat(e.target.value) || 0)}
+                              className="h-8 text-xs py-1"
+                            />
+                            <Button
+                              size="sm"
+                              onClick={() => handleSaveStock(item.id)}
+                              className="h-8 w-8 p-0 bg-emerald-600 hover:bg-emerald-700 text-white shrink-0"
+                            >
+                              <Check className="w-3.5 h-3.5" />
+                            </Button>
+                          </div>
+                        ) : (
+                          <span>{item.current_stock} {item.unit}</span>
+                        )}
+                      </td>
+                      <td className="py-3.5 px-4 text-slate-500 dark:text-slate-400">
+                        {item.min_threshold} {item.unit}
+                      </td>
+                      <td className="py-3.5 px-4">
+                        {isLow ? (
+                          <Badge variant="destructive" className="flex items-center gap-1 w-fit text-[10px]">
+                            <AlertTriangle className="w-3 h-3" /> Low Stock
+                          </Badge>
+                        ) : (
+                          <Badge variant="success" className="text-[10px]">
+                            Adequate
+                          </Badge>
+                        )}
+                      </td>
+                      <td className="py-3.5 px-4 text-right space-x-1">
+                        {!isEditing && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleStartEdit(item)}
+                            className="h-8 w-8 p-0 text-slate-500 hover:text-emerald-700"
+                            title="Quick Edit Stock"
+                          >
+                            <Edit2 className="w-3.5 h-3.5" />
+                          </Button>
+                        )}
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleDeleteItem(item.id)}
+                          className="h-8 w-8 p-0 text-slate-400 hover:text-red-600 hover:bg-red-50"
+                          title="Delete item"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </Button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </CardContent>
       </Card>
     </div>

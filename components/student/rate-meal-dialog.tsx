@@ -63,7 +63,12 @@ export function RateMealDialog({ menu, onRatingSuccess }: RateMealDialogProps) {
 
   if (!isServed) {
     return (
-      <Button variant="outline" size="sm" disabled className="text-xs text-slate-400">
+      <Button
+        variant="outline"
+        size="sm"
+        disabled
+        className="text-xs text-slate-400 dark:text-slate-500 border-slate-200 dark:border-slate-800 min-h-[36px]"
+      >
         Rate after serving starts
       </Button>
     );
@@ -71,7 +76,7 @@ export function RateMealDialog({ menu, onRatingSuccess }: RateMealDialogProps) {
 
   if (isAlreadyRated) {
     return (
-      <div className="flex items-center gap-1.5 text-xs text-amber-700 bg-amber-50 px-2.5 py-1 rounded-md border border-amber-200">
+      <div className="flex items-center gap-1.5 text-xs font-semibold text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/60 px-3 py-1.5 rounded-lg border border-amber-200 dark:border-amber-800/60">
         <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
         <span>Rated {menu.user_rating?.rating}/5</span>
       </div>
@@ -81,45 +86,50 @@ export function RateMealDialog({ menu, onRatingSuccess }: RateMealDialogProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm" className="text-xs text-emerald-700 border-emerald-300 hover:bg-emerald-50">
-          <Star className="w-3.5 h-3.5 mr-1 text-emerald-600" /> Rate Meal
-        </Button>
+        <button
+          type="button"
+          className="min-h-[44px] px-3.5 py-2 inline-flex items-center justify-center rounded-xl text-xs font-bold text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 cursor-pointer"
+        >
+          <Star className="w-4 h-4 mr-1.5 text-emerald-600 dark:text-emerald-400" /> Rate Meal
+        </button>
       </DialogTrigger>
 
-      <DialogContent>
+      <DialogContent className="max-w-md bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-2xl">
         <form onSubmit={handleSubmit}>
-          <DialogHeader>
-            <DialogTitle className="capitalize">
+          <DialogHeader className="space-y-1">
+            <DialogTitle className="capitalize text-lg font-bold text-slate-900 dark:text-slate-100">
               Rate {menu.meal_type} — {new Date(menu.menu_date).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}
             </DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="text-xs text-slate-500 dark:text-slate-400">
               How was the food quality, taste, and freshness today? Your feedback helps the kitchen optimize preparation.
             </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-5 py-4">
-            <div className="flex flex-col items-center justify-center p-4 bg-slate-50 rounded-xl border border-slate-100">
-              <span className="text-xs text-slate-500 font-medium mb-2">Overall Meal Satisfaction</span>
+            <div className="flex flex-col items-center justify-center p-4 bg-slate-50 dark:bg-slate-800/80 rounded-xl border border-slate-200 dark:border-slate-700">
+              <span className="text-xs text-slate-600 dark:text-slate-300 font-semibold mb-2">Overall Meal Satisfaction</span>
               <StarRating value={rating} onChange={setRating} size="lg" />
-              <span className="text-sm font-semibold text-slate-700 mt-2">
-                {rating === 5 && "Excellent"}
-                {rating === 4 && "Good"}
-                {rating === 3 && "Average"}
-                {rating === 2 && "Poor"}
-                {rating === 1 && "Very Poor"}
+              <span className="text-sm font-bold text-slate-800 dark:text-slate-200 mt-2">
+                {rating === 5 && "Excellent (5/5)"}
+                {rating === 4 && "Good (4/5)"}
+                {rating === 3 && "Average (3/5)"}
+                {rating === 2 && "Poor (2/5)"}
+                {rating === 1 && "Very Poor (1/5)"}
               </span>
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-medium text-slate-700 flex items-center gap-1">
-                <MessageSquare className="w-3.5 h-3.5 text-slate-400" /> Optional Comments or Dish Feedback
+              <label htmlFor="dish-feedback-comments" className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                <MessageSquare className="w-4 h-4 text-slate-400" /> Optional Comments or Dish Feedback
               </label>
               <Textarea
+                id="dish-feedback-comments"
                 placeholder="Mention specific dishes, seasoning, warmth, or quantity..."
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 maxLength={500}
                 rows={3}
+                className="bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100"
               />
               <span className="text-[11px] text-slate-400 text-right block">
                 {comment.length}/500
@@ -127,24 +137,28 @@ export function RateMealDialog({ menu, onRatingSuccess }: RateMealDialogProps) {
             </div>
 
             {error && (
-              <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-xs">
+              <div role="alert" className="p-3 bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-900/60 text-red-700 dark:text-red-300 rounded-xl text-xs font-medium">
                 {error}
               </div>
             )}
           </div>
 
-          <DialogFooter>
-            <Button
+          <DialogFooter className="gap-2.5">
+            <button
               type="button"
-              variant="outline"
               onClick={() => setOpen(false)}
               disabled={loading}
+              className="min-h-[44px] px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
             >
               Cancel
-            </Button>
-            <Button type="submit" disabled={loading} className="bg-emerald-600 hover:bg-emerald-700 text-white">
+            </button>
+            <button
+              type="submit"
+              disabled={loading}
+              className="min-h-[44px] px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-xs transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 disabled:opacity-50"
+            >
               {loading ? "Submitting..." : "Submit Rating"}
-            </Button>
+            </button>
           </DialogFooter>
         </form>
       </DialogContent>

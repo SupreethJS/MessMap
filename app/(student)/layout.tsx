@@ -1,7 +1,6 @@
 import { getCurrentUser } from "@/app/actions/auth-actions";
-import { QubiteSidebar } from "@/components/student/qubite-sidebar";
-import { QubiteHeader } from "@/components/student/qubite-header";
 import { getDbNotifications } from "@/lib/supabase/db";
+import { StudentShell } from "@/components/student/student-shell";
 
 export const dynamic = "force-dynamic";
 
@@ -12,30 +11,18 @@ export default async function StudentLayout({
 }) {
   const user = await getCurrentUser();
   const notifications = user ? await getDbNotifications(user.id) : [];
-  const unreadCount = notifications.filter((n) => !n.is_read).length;
 
   return (
-    <div className="min-h-screen flex bg-slate-50 text-slate-900 antialiased">
-      {/* Desktop Fixed Slate-900 Sidebar */}
-      <div className="hidden lg:block shrink-0">
-        <QubiteSidebar unreadNotifsCount={unreadCount} />
-      </div>
-
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0">
-        {/* Top Header */}
-        <QubiteHeader user={user} notifications={notifications} />
-
-        {/* Page Content */}
-        <main className="flex-1 p-6 md:p-8 max-w-7xl w-full mx-auto space-y-8">
-          {children}
-        </main>
-
-        {/* Minimal Footer */}
-        <footer className="border-t border-slate-200 bg-white/70 py-4 px-8 text-center text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} Smart Mess Management System • Campus Dining Operations Platform</p>
-        </footer>
-      </div>
-    </div>
+    <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2.5 focus:bg-amber-400 focus:text-slate-950 focus:font-extrabold focus:text-xs focus:rounded-xl focus:shadow-xl focus:ring-2 focus:ring-slate-950 transition-all"
+      >
+        Skip to main content
+      </a>
+      <StudentShell user={user} notifications={notifications}>
+        {children}
+      </StudentShell>
+    </>
   );
 }
