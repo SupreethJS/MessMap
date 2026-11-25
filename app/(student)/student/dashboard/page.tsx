@@ -4,7 +4,7 @@ import {
   getDbRecentActivities,
   getDbComplaints,
 } from "@/lib/supabase/db";
-import { QubiteStatCards } from "@/components/student/qubite-stat-card";
+import { MessMapStatCards } from "@/components/student/messmap-stat-card";
 import { NextMealHeroBanner } from "@/components/student/next-meal-hero-banner";
 import { TodaysMenuCard } from "@/components/student/todays-menu-card";
 import { MealAttendanceChart } from "@/components/student/attendance-chart";
@@ -112,7 +112,7 @@ export default async function StudentDashboardPage() {
       <NextMealHeroBanner menus={todayMenus} user={user} />
 
       {/* 3. STATS OVERVIEW CARDS */}
-      <QubiteStatCards
+      <MessMapStatCards
         walletBalance={user?.wallet_balance ?? 450}
         pendingComplaintsCount={pendingComplaints > 0 ? pendingComplaints : 1}
       />

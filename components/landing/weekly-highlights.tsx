@@ -47,11 +47,11 @@ export function LandingWeeklyHighlights() {
       highlightText: "Tender chicken marinated in Kashmiri red chili, curry leaves, and ginger garlic.",
     },
     {
-      name: "Coastal Spiced Fish Curry",
+      name: "Dhaba Style Chicken Curry",
       dayTag: "Thursday Lunch Special",
-      dishKey: "fish_curry",
+      dishKey: "chicken_curry",
       badge: "Regional Authentic",
-      highlightText: "Coastal catch simmered in rich coconut milk with tangy kokum and mustard tempering.",
+      highlightText: "Slow-cooked rustic chicken curry simmered with whole spices, browned onions, and fresh coriander.",
     },
   ];
 

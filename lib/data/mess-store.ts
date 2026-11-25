@@ -1,4 +1,4 @@
-// lib/data/mess-store.ts: Unified Data Layer & QuBite Demo Repository
+// lib/data/mess-store.ts: Unified Data Layer & MessMap Demo Repository
 
 import {
   Profile,
@@ -117,7 +117,7 @@ function generateInitialSeed(): MessStoreState {
       mess_allocation: "Central Mess Hall 1",
       phone: `+91 98110 ${10000 + idx * 77}`,
       role: "student",
-      wallet_balance: 450, // Specified by QuBite design: ₹450
+      wallet_balance: 450, // Specified by MessMap design: ₹450
       avatar_url: `https://api.dicebear.com/7.x/avataaars/svg?seed=${name}`,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
@@ -227,7 +227,7 @@ function generateInitialSeed(): MessStoreState {
       { name: "Amritsari Chana Masala", desc: "Tender chickpeas simmered in a robust, tangy onion-tomato-spice gravy", cat: "main", is_veg: true, image_url: "/images/dishes/chana_masala.jpg" },
       { name: "Dal Rice", desc: "Comforting steamed rice paired with wholesome yellow dal tadka", cat: "rice", is_veg: true, image_url: "/images/dishes/dal_rice.jpg" },
       { name: "Fragrant Chicken Biryani", desc: "Rich and flavorful basmati rice layered with tender marinated chicken and aromatics", cat: "rice", is_veg: false, image_url: "/images/dishes/chicken_biryani.jpg" },
-      { name: "Coastal Spiced Fish Curry", desc: "Fresh fish fillets simmered in a tangy spiced coconut-tamarind gravy", cat: "main", is_veg: false, image_url: "/images/dishes/fish_curry.jpg" },
+      { name: "Dhaba Style Chicken Curry", desc: "Tender chicken pieces slow-cooked in a rich, spiced onion-tomato gravy", cat: "main", is_veg: false, image_url: "/images/dishes/chicken_curry.jpg" },
     ],
     snacks: [
       { name: "Crispy Potato Samosa", desc: "Flaky pastry cones filled with spicy potato and green peas masala", cat: "snack", is_veg: true, image_url: "/images/dishes/samosa.jpg" },
@@ -334,7 +334,7 @@ function generateInitialSeed(): MessStoreState {
           updated_at: new Date(`${dateStr}T${sched.end}`).toISOString(),
         });
 
-        // Ratings (QuBite average 4.6 / 5)
+        // Ratings (MessMap average 4.6 / 5)
         profiles.slice(1, 10).forEach((student, sIdx) => {
           ratings.push({
             id: `rat-${menuId}-${student.id}`,
@@ -411,7 +411,7 @@ function generateInitialSeed(): MessStoreState {
     },
   ];
 
-  // 8. Recent Activities (Matching QuBite Main Screen Section H)
+  // 8. Recent Activities (Matching MessMap Main Screen Section H)
   const activities: ActivityItem[] = [
     {
       id: "act-1",
@@ -454,7 +454,7 @@ function generateInitialSeed(): MessStoreState {
       id: "n-2",
       user_id: "u-student-001",
       title: "Wallet Recharge Successful",
-      message: "₹500 added to your QuBite wallet via UPI. New balance: ₹450.",
+      message: "₹500 added to your MessMap wallet via UPI. New balance: ₹450.",
       type: "payment",
       is_read: false,
       created_at: new Date(Date.now() - 1000 * 60 * 60).toISOString(),

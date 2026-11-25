@@ -23,7 +23,7 @@ const config: Config = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         
-        // QuBite / MessMate Brand Tokens
+        // MessMap Brand Tokens
         brand: {
           yellow: "#FFC83D",
           yellowHover: "#F5BC2E",

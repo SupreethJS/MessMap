@@ -6,7 +6,7 @@ import { NotificationBell } from "@/components/shared/notification-bell";
 import { Button } from "@/components/ui/button";
 import { logoutAction } from "@/app/actions/auth-actions";
 import { Profile, Notification } from "@/lib/types/database";
-import { QubiteLogo } from "@/components/shared/qubite-logo";
+import { MessMapLogo } from "@/components/shared/messmap-logo";
 
 interface NavbarProps {
   user: Profile | null;
@@ -25,8 +25,8 @@ export function Navbar({ user, notifications = [] }: NavbarProps) {
             href={isStudent ? "/student/dashboard" : "/admin/dashboard"}
             className="flex items-center gap-2.5 font-extrabold text-slate-900 text-lg tracking-tight hover:opacity-95 transition-opacity"
           >
-            <QubiteLogo size="sm" />
-            <span>Smart<span className="text-indigo-600">Mess</span></span>
+            <MessMapLogo size="sm" />
+            <span>Mess<span className="text-emerald-600">Map</span></span>
           </Link>
 
           {/* Student Desktop Nav Links */}

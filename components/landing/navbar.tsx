@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { UtensilsCrossed, Zap, ArrowRight, Menu, X, Sparkles } from "lucide-react";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
+import { MessMapLogo } from "@/components/shared/messmap-logo";
 
 interface LandingNavbarProps {
   onOpenDemoModal: () => void;
@@ -28,17 +29,13 @@ export function LandingNavbar({ onOpenDemoModal }: LandingNavbarProps) {
           href="/"
           className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-xl p-1"
         >
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-amber-500 via-amber-400 to-emerald-400 p-[1.5px] shadow-lg shadow-amber-500/20 group-hover:shadow-amber-500/40 transition-all shrink-0">
-            <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-              <UtensilsCrossed className="w-5 h-5 text-amber-400 group-hover:scale-110 transition-transform" />
-            </div>
-          </div>
+          <MessMapLogo size="md" />
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xl font-black tracking-tight text-slate-900 dark:text-white">
-                Qubite
+                Mess<span className="text-emerald-600 dark:text-emerald-400">Map</span>
               </span>
-              <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30 uppercase tracking-wider">
+              <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 uppercase tracking-wider">
                 Smart Mess
               </span>
             </div>

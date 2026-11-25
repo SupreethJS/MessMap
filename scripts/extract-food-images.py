@@ -37,7 +37,7 @@ dishes = [
     # Row 0: Breakfast
     ["idli", "dosa", "masala_dosa", "upma", "pongal", "poori", "aloo_paratha"],
     # Row 1: Lunch
-    ["rice_sambar", "curd_rice", "veg_pulav", "chana_masala", "dal_rice", "chicken_biryani", "fish_curry"],
+    ["rice_sambar", "curd_rice", "veg_pulav", "chana_masala", "dal_rice", "chicken_biryani"],
     # Row 2: Snacks
     ["samosa", "aloo_bonda", "veg_cutlet", "corn_chat", "masala_tea", "egg_roll", "chicken_65"],
     # Row 3: Dinner

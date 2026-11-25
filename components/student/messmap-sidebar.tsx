@@ -17,10 +17,10 @@ import {
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { QubiteLogo } from "@/components/shared/qubite-logo";
+import { MessMapLogo } from "@/components/shared/messmap-logo";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 
-interface QubiteSidebarProps {
+export interface MessMapSidebarProps {
   unreadNotifsCount?: number;
   isOpenMobile?: boolean;
   onCloseMobile?: () => void;
@@ -38,11 +38,11 @@ const navItems = [
   { href: "/student/settings", label: "Settings", icon: Settings },
 ];
 
-export function QubiteSidebar({
+export function MessMapSidebar({
   unreadNotifsCount = 0,
   isOpenMobile = false,
   onCloseMobile,
-}: QubiteSidebarProps) {
+}: MessMapSidebarProps) {
   const pathname = usePathname();
 
   // Escape key handler for mobile drawer
@@ -67,13 +67,13 @@ export function QubiteSidebar({
             onClick={onCloseMobile}
             className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-lg p-1"
           >
-            <QubiteLogo size="md" className="group-hover:scale-105 transition-transform shrink-0" />
+            <MessMapLogo size="md" className="group-hover:scale-105 transition-transform shrink-0" />
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
                 <span className="font-extrabold text-xl text-white tracking-tight">
-                  Smart Mess
+                  Mess<span className="text-emerald-400">Map</span>
                 </span>
-                <span className="text-[10px] font-bold uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-1.5 py-0.5 rounded">
+                <span className="text-[10px] font-bold uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-1.5 py-0.5 rounded">
                   STUDENT
                 </span>
               </div>

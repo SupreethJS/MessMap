@@ -14,13 +14,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Smart Mess Management • Intelligent Campus Dining Platform",
+  title: "MessMap • Intelligent Campus Dining Platform",
   description: "Next-generation campus dining operations and zero-waste platform engineered by Supreeth J Sudheer.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Qubite Mess",
+    title: "MessMap",
   },
   icons: {
     icon: [

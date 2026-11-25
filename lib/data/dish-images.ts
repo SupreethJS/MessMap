@@ -13,7 +13,7 @@ export interface DishImageMeta {
  * Curated high-resolution food photography extracted directly from the official mess food menu chart.
  * Contains all 28 dishes organized by meal categories:
  * - Breakfast: Idli, Dosa, Masala Dosa, Upma, Pongal, Poori, Aloo Paratha
- * - Lunch: Steamed Rice + Sambar, Curd Rice, Vegetable Pulav, Chana Masala, Dal Rice, Chicken Biryani, Fish Curry
+ * - Lunch: Steamed Rice + Sambar, Curd Rice, Vegetable Pulav, Chana Masala, Dal Rice, Chicken Biryani
  * - Snacks: Samosa, Aloo Bonda, Veg Cutlet, Corn Chat, Masala Tea, Egg Roll, Chicken 65
  * - Dinner: Chapati with Dal, Paneer Butter Masala with Naan, Veg Fried Rice, Mixed Vegetable Curry, Curd, Chicken Curry, Egg Curry
  */
@@ -127,14 +127,6 @@ export const DISH_IMAGE_CATALOG: Record<string, DishImageMeta> = {
     name: "Fragrant Chicken Biryani",
     category: "rice",
     calories: 420,
-    isVegetarian: false,
-  },
-  fish_curry: {
-    url: "/images/dishes/fish_curry.jpg",
-    cdnUrl: "/images/dishes/fish_curry.jpg",
-    name: "Coastal Spiced Fish Curry",
-    category: "main",
-    calories: 310,
     isVegetarian: false,
   },
 
@@ -384,9 +376,9 @@ export const DISH_IMAGE_CATALOG: Record<string, DishImageMeta> = {
   papad: {
     url: "/images/dishes/papad.jpg",
     cdnUrl: "/images/dishes/papad.jpg",
-    name: "Crispy Roasted Papad",
+    name: "Crispy Papad & Pickle",
     category: "side",
-    calories: 50,
+    calories: 65,
     isVegetarian: true,
   },
   biscuits: {
@@ -448,7 +440,6 @@ export function getDishKeyByName(dishName?: string | null): string | null {
   if (q.includes("jeera pulao") || q.includes("pulao") || q.includes("pulav")) return "pulao";
   if (q.includes("chicken biryani")) return "chicken_biryani";
   if (q.includes("biryani")) return "biryani";
-  if (q.includes("fish curry") || q.includes("fish")) return "fish_curry";
   if (q.includes("aloo bonda") || q.includes("bonda")) return "aloo_bonda";
   if (q.includes("veg cutlet") || q.includes("cutlet")) return "veg_cutlet";
   if (q.includes("corn chat") || q.includes("corn chaat") || (q.includes("corn") && q.includes("chat"))) return "corn_chat";
@@ -486,7 +477,7 @@ export function getDishKeyByName(dishName?: string | null): string | null {
   // 4. Snacks
   if (q.includes("samosa")) return "samosa";
   if (q.includes("biscuit") || q.includes("cookie")) return "biscuits";
-  if (q.includes("papad")) return "papad";
+  if (q.includes("papad") || q.includes("pickle") || q.includes("achar") || q.includes("appalam")) return "papad";
 
   // 5. Curd & Dairy
   if (q.includes("curd") || q.includes("dahi") || q.includes("yogurt") || q.includes("raita")) return "curd";
@@ -571,7 +562,6 @@ export const DISH_PRESETS = [
   { name: "Amritsari Chana Masala", category: "main" as const, is_vegetarian: true, image_url: DISH_IMAGE_CATALOG.chana_masala.url },
   { name: "Comforting Dal Rice", category: "rice" as const, is_vegetarian: true, image_url: DISH_IMAGE_CATALOG.dal_rice.url },
   { name: "Fragrant Chicken Biryani", category: "rice" as const, is_vegetarian: false, image_url: DISH_IMAGE_CATALOG.chicken_biryani.url },
-  { name: "Coastal Spiced Fish Curry", category: "main" as const, is_vegetarian: false, image_url: DISH_IMAGE_CATALOG.fish_curry.url },
 
   // Snacks
   { name: "Crispy Potato Samosa", category: "snack" as const, is_vegetarian: true, image_url: DISH_IMAGE_CATALOG.samosa.url },
@@ -751,20 +741,20 @@ const CULINARY_DETAILS_REGISTRY: Record<
       { name: "Siddharth J.", roll: "CS21B008", rating: 5, text: "Spicy, crunchy, and savory. Best evening snack hands down.", date: "4 days ago" }
     ]
   },
-  fish_curry: {
-    desc: "Coastal South Indian fish fillets gently simmered in a spiced coconut milk broth with kokum, curry leaves, and mustard tempering.",
-    calories: 360,
-    protein: 28,
-    carbs: 10,
-    fat: 16,
-    rating: 4.7,
-    reviewsCount: 140,
+  papad: {
+    desc: "Crispy roasted and golden-fried sun-dried urad dal papad served with spicy, tangy Indian mango & lime achar in seasoned mustard oil.",
+    calories: 65,
+    protein: 3,
+    carbs: 8,
+    fat: 2,
+    rating: 4.8,
+    reviewsCount: 310,
     mealType: "Lunch",
-    servingWindow: "Central Mess Hall 1 • 12:30 PM – 02:30 PM",
-    ingredients: ["Fresh Sea Bass/Mackerel", "Coconut Milk", "Kokum Extract", "Fenugreek", "Shallots", "Green Chilies"],
-    allergens: ["Fish"],
+    servingWindow: "Central Mess Hall 1 & 2 • 12:30 PM – 02:30 PM",
+    ingredients: ["Urad Dal Flour", "Black Peppercorns", "Asafoetida (Hing)", "Mango Achar", "Lime Pickle", "Mustard Oil"],
+    allergens: [],
     sampleReviews: [
-      { name: "Aswin K.", roll: "CE22B019", rating: 5, text: "Tangy and rich coconut gravy. Taste just like coastal Kerala home food.", date: "5 days ago" }
+      { name: "Rohit V.", roll: "ME21B044", rating: 5, text: "The perfect crunchy accompaniment! The spicy mango achar adds amazing punch to dal rice.", date: "2 days ago" }
     ]
   },
   chana_masala: {

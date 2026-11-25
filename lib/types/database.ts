@@ -1,4 +1,4 @@
-// lib/types/database.ts: Supabase & QuBite Unified Database Interface Definitions
+// lib/types/database.ts: Supabase & MessMap Unified Database Interface Definitions
 
 export type UserRole = "student" | "admin";
 export type MealType = "breakfast" | "lunch" | "snacks" | "dinner";

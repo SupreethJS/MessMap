@@ -1,4 +1,4 @@
-// lib/services/email.ts - Google SMTP Email Notification Service for QuBite / MSRUAS
+// lib/services/email.ts - Google SMTP Email Notification Service for MessMap / Campus Dining
 
 import nodemailer from "nodemailer";
 
@@ -43,7 +43,7 @@ interface SendEmailParams {
 
 export async function sendEmail({ to, subject, html, text }: SendEmailParams) {
   const transporter = getSmtpTransporter();
-  const from = process.env.GOOGLE_SMTP_FROM || `QuBite Mess System <${process.env.GOOGLE_SMTP_USER || "no-reply@msruas.ac.in"}>`;
+  const from = process.env.GOOGLE_SMTP_FROM || `MessMap Dining System <${process.env.GOOGLE_SMTP_USER || "no-reply@campus.edu"}>`;
 
   if (!transporter) {
     console.log(`[SMTP Not Configured] Skipped email to ${to} | Subject: "${subject}"`);
@@ -76,7 +76,7 @@ export async function sendWelcomeStudentEmail(params: {
   hostelBlock?: string;
   roomNumber?: string;
 }) {
-  const subject = "Welcome to QuBite — MSRUAS Hostel Mess System 🍽️";
+  const subject = "Welcome to MessMap — Campus Dining System 🍽️";
   const html = `
     <!DOCTYPE html>
     <html>
@@ -99,7 +99,7 @@ export async function sendWelcomeStudentEmail(params: {
     <body>
       <div class="card">
         <div class="brand">
-          <div class="brand-badge">QuBite • MSRUAS MessMate</div>
+          <div class="brand-badge">MessMap • Campus Dining</div>
         </div>
         <h1 class="title">Welcome, ${params.fullName}! 👋</h1>
         <p style="font-size: 14px; line-height: 1.6; color: #444444;">
@@ -153,7 +153,7 @@ export async function sendOtpVerificationEmail(params: {
   fullName: string;
   otpCode: string;
 }) {
-  const subject = `Your QuBite Verification Code: ${params.otpCode} 🔐`;
+  const subject = `Your MessMap Verification Code: ${params.otpCode} 🔐`;
   const html = `
     <!DOCTYPE html>
     <html>
@@ -175,12 +175,12 @@ export async function sendOtpVerificationEmail(params: {
     <body>
       <div class="card">
         <div class="brand">
-          <div class="brand-badge">QuBite • MSRUAS Mess System</div>
+          <div class="brand-badge">MessMap • Campus Dining System</div>
         </div>
         <h1 class="title">Verify Your College Email</h1>
         <p class="subtitle">
           Hello <strong>${params.fullName}</strong>,<br>
-          Use the 6-digit verification code below to complete your registration for the MSRUAS Hostel Mess Portal:
+          Use the 6-digit verification code below to complete your registration for the MessMap Hostel Mess Portal:
         </p>
 
         <div class="otp-box">
@@ -188,7 +188,7 @@ export async function sendOtpVerificationEmail(params: {
         </div>
 
         <div class="warning-box">
-          <strong>⏰ Valid for 10 minutes:</strong> This code will expire shortly. Never share this verification code with anyone. QuBite or MSRUAS staff will never ask for your OTP.
+          <strong>⏰ Valid for 10 minutes:</strong> This code will expire shortly. Never share this verification code with anyone. MessMap or campus staff will never ask for your OTP.
         </div>
 
         <div class="footer">

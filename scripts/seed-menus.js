@@ -66,7 +66,7 @@ async function seedMenus() {
         { name: "Chana Masala", category: "main", image_url: "/images/dishes/chana_masala.jpg", description: "Tender chickpeas simmered in a robust, tangy spiced tomato-onion gravy.", is_vegetarian: true },
         { name: "Dal Rice", category: "rice", image_url: "/images/dishes/dal_rice.jpg", description: "Comforting steamed rice paired with golden cumin-garlic tempered yellow dal.", is_vegetarian: true },
         { name: "Chicken Biryani", category: "rice", image_url: "/images/dishes/chicken_biryani.jpg", description: "Aromatic dum basmati rice layered with succulent marinated chicken and whole spices.", is_vegetarian: false },
-        { name: "Fish Curry", category: "main", image_url: "/images/dishes/fish_curry.jpg", description: "Tender fish steaks simmered in a coastal spiced coconut and tamarind gravy.", is_vegetarian: false },
+        { name: "Dhaba Style Chicken Curry", category: "main", image_url: "/images/dishes/chicken_curry.jpg", description: "Tender chicken simmered in a rich, spiced onion-tomato gravy.", is_vegetarian: false },
       ],
       snacks: [
         { name: "Samosa", category: "snack", image_url: "/images/dishes/samosa.jpg", description: "Flaky crispy golden pastry stuffed with spicy potato and pea filling.", is_vegetarian: true },

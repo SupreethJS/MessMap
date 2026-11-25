@@ -55,7 +55,7 @@ export function LandingDiningRulesFaq() {
     {
       question: "How do I check in at Central Mess Hall entrance?",
       answer:
-        "Open your Qubite portal on your phone and tap 'Show Meal Pass'. A dynamic QR code with live time verification will be generated. Hold it steady in front of the counter scanner. It automatically verifies your room booking and registers attendance in 2 seconds.",
+        "Open your MessMap portal on your phone and tap 'Show Meal Pass'. A dynamic QR code with live time verification will be generated. Hold it steady in front of the counter scanner. It automatically verifies your room booking and registers attendance in 2 seconds.",
     },
     {
       question: "What if my phone battery dies or I don't have internet?",
@@ -68,7 +68,7 @@ export function LandingDiningRulesFaq() {
         "Yes! Residents can purchase guest dining vouchers directly through their dining wallet balance. Guest passes generate a dedicated QR entry voucher valid for that specific meal slot.",
     },
     {
-      question: "How does Qubite's AI prevent kitchen food wastage?",
+      question: "How does MessMap's AI prevent kitchen food wastage?",
       answer:
         "Our mathematical demand model combines student declared opt-ins with historical turnout trends, day-of-week patterns, and exam schedules to recommend exact cooking batch weights in kilograms, reducing leftover disposal by over 40%.",
     },

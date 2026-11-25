@@ -51,7 +51,7 @@ async function runMigration() {
       }
     }
 
-    console.log('\n🚀 QuBite is now 100% connected to live Supabase cloud database!');
+    console.log('\n🚀 MessMap is now 100% connected to live Supabase cloud database!');
     await client.end();
   } catch (err) {
     console.error('❌ Migration failed:', err.message);

@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* QuBite Crisp Light Surface (#F8FAFC) */
+    /* MessMap Crisp Light Surface (#F8FAFC) */
     --background: 210 40% 98%;
     --foreground: 222.2 84% 4.9%; /* #020817 - 15:1 contrast */
 
@@ -14,7 +14,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    /* QuBite Primary Amber-Gold #FBBF24 */
+    /* MessMap Primary Amber-Gold #FBBF24 */
     --primary: 43 96% 56%;
     --primary-foreground: 222.2 84% 4.9%;
 
@@ -40,7 +40,7 @@
   }
 
   .dark {
-    /* QuBite Deep Slate Surface (#0B0F19) */
+    /* MessMap Deep Slate Surface (#0B0F19) */
     --background: 222.2 47.4% 6%;
     --foreground: 210 40% 98%; /* #F8FAFC - 16:1 contrast */
 

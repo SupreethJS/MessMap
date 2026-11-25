@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { logoutAction } from "@/app/actions/auth-actions";
-import { QubiteLogo } from "@/components/shared/qubite-logo";
+import { MessMapLogo } from "@/components/shared/messmap-logo";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 
 interface AdminSidebarProps {
@@ -67,11 +67,11 @@ export function AdminSidebar({ isOpenMobile = false, onCloseMobile }: AdminSideb
             onClick={onCloseMobile}
             className="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-lg p-1"
           >
-            <QubiteLogo size="md" className="group-hover:scale-105 transition-transform shrink-0" />
+            <MessMapLogo size="md" className="group-hover:scale-105 transition-transform shrink-0" />
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
                 <span className="font-extrabold text-xl text-white tracking-tight">
-                  Smart Mess
+                  Mess<span className="text-emerald-400">Map</span>
                 </span>
                 <span className="text-[10px] font-bold uppercase bg-amber-400/20 text-amber-300 border border-amber-400/30 px-1.5 py-0.5 rounded">
                   ADMIN

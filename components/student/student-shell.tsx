@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { QubiteSidebar } from "@/components/student/qubite-sidebar";
-import { QubiteHeader } from "@/components/student/qubite-header";
+import { MessMapSidebar } from "@/components/student/messmap-sidebar";
+import { MessMapHeader } from "@/components/student/messmap-header";
 import { Notification, Profile } from "@/lib/types/database";
 
 interface StudentShellProps {
@@ -18,7 +18,7 @@ export function StudentShell({ user, notifications, children }: StudentShellProp
   return (
     <div className="min-h-screen flex bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased transition-colors">
       {/* Desktop Fixed & Mobile Drawer Sidebar */}
-      <QubiteSidebar
+      <MessMapSidebar
         unreadNotifsCount={unreadCount}
         isOpenMobile={mobileMenuOpen}
         onCloseMobile={() => setMobileMenuOpen(false)}
@@ -27,7 +27,7 @@ export function StudentShell({ user, notifications, children }: StudentShellProp
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Header */}
-        <QubiteHeader
+        <MessMapHeader
           user={user}
           notifications={notifications}
           onToggleMobileMenu={() => setMobileMenuOpen(!mobileMenuOpen)}

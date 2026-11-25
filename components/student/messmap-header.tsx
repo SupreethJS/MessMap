@@ -7,21 +7,21 @@ import { NotificationBell } from "@/components/shared/notification-bell";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { logoutAction } from "@/app/actions/auth-actions";
 import { Notification, Profile } from "@/lib/types/database";
-import { QubiteLogo } from "@/components/shared/qubite-logo";
+import { MessMapLogo } from "@/components/shared/messmap-logo";
 
-interface QubiteHeaderProps {
+export interface MessMapHeaderProps {
   user: Profile | null;
   notifications?: Notification[];
   onToggleMobileMenu?: () => void;
   isMobileMenuOpen?: boolean;
 }
 
-export function QubiteHeader({
+export function MessMapHeader({
   user,
   notifications = [],
   onToggleMobileMenu,
   isMobileMenuOpen = false,
-}: QubiteHeaderProps) {
+}: MessMapHeaderProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -55,9 +55,9 @@ export function QubiteHeader({
           href="/student/dashboard"
           className="flex items-center gap-2 group min-h-[44px] py-1 px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-lg"
         >
-          <QubiteLogo size="xs" />
-          <span className="font-extrabold text-sm text-slate-900 dark:text-white group-hover:text-indigo-500 transition-colors">
-            Smart Mess
+          <MessMapLogo size="xs" />
+          <span className="font-extrabold text-sm text-slate-900 dark:text-white group-hover:text-emerald-500 transition-colors">
+            MessMap
           </span>
         </Link>
       </div>

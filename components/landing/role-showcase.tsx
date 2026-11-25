@@ -26,7 +26,7 @@ export function LandingRoleShowcase() {
       title: "Smart Meal Opt-Out & Wallet Rebates",
       tagline: "Save up to ₹1,500 every month on skipped meals",
       description:
-        "Heading out for the weekend or studying late? Mark meals as 'Skip' before the daily cutoff or apply for multi-day mess leave. Qubite automatically waives charges and credits ₹150/day into your dining wallet.",
+        "Heading out for the weekend or studying late? Mark meals as 'Skip' before the daily cutoff or apply for multi-day mess leave. MessMap automatically waives charges and credits ₹150/day into your dining wallet.",
       icon: PlaneTakeoff,
       preview: {
         type: "leave",

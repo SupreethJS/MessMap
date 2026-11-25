@@ -70,9 +70,9 @@ async function testOtpLifecycle() {
   // Test 3: Email Dispatch via Google SMTP
   console.log('\n3. Dispatching OTP email via Google SMTP (smtp.gmail.com)...');
   const info = await transporter.sendMail({
-    from: `"QuBite Mess System" <${env.GOOGLE_SMTP_USER}>`,
+    from: `"MessMap Mess System" <${env.GOOGLE_SMTP_USER}>`,
     to: testEmail,
-    subject: `Your QuBite Verification Code: ${testOtp} 🔐`,
+    subject: `Your MessMap Verification Code: ${testOtp} 🔐`,
     html: `
       <div style="font-family: sans-serif; background: #FFF9F3; padding: 24px; color: #171717;">
         <div style="max-width: 500px; margin: 0 auto; background: #ffffff; border-radius: 20px; padding: 28px; border: 1px solid #EEE8E0;">

@@ -35,7 +35,7 @@ export function LandingPublicMenu() {
       // Lunch
       { name: "Steamed Rice with Sambar", mealType: "Lunch", category: "rice", isVegetarian: true },
       { name: "Fragrant Chicken Biryani", mealType: "Lunch", category: "rice", isVegetarian: false },
-      { name: "Coastal Spiced Fish Curry", mealType: "Lunch", category: "main", isVegetarian: false },
+      { name: "Dhaba Style Chicken Curry", mealType: "Lunch", category: "main", isVegetarian: false },
       { name: "Amritsari Chana Masala", mealType: "Lunch", category: "main", isVegetarian: true },
       { name: "Vegetable Pulav", mealType: "Lunch", category: "rice", isVegetarian: true },
       { name: "South Indian Curd Rice", mealType: "Lunch", category: "rice", isVegetarian: true },

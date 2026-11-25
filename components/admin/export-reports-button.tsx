@@ -69,7 +69,7 @@ export function ExportReportsButton({
     const dateStr = new Date().toISOString().split("T")[0];
     downloadCSV(
       csvContent,
-      `qubite_attendance_and_waste_${range}_${dateStr}.csv`
+      `messmap_attendance_and_waste_${range}_${dateStr}.csv`
     );
     setMenuOpen(false);
   };
@@ -109,7 +109,7 @@ export function ExportReportsButton({
     ].join("\n");
 
     const dateStr = new Date().toISOString().split("T")[0];
-    downloadCSV(csvContent, `qubite_waste_audit_report_${dateStr}.csv`);
+    downloadCSV(csvContent, `messmap_waste_audit_report_${dateStr}.csv`);
     setMenuOpen(false);
   };
 
@@ -149,7 +149,7 @@ export function ExportReportsButton({
     ].join("\n");
 
     const dateStr = new Date().toISOString().split("T")[0];
-    downloadCSV(csvContent, `qubite_billing_and_efficiency_${dateStr}.csv`);
+    downloadCSV(csvContent, `messmap_billing_and_efficiency_${dateStr}.csv`);
     setMenuOpen(false);
   };
 

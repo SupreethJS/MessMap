@@ -21,7 +21,7 @@ import {
   sendRegistrationOtpAction,
   verifyOtpAndRegisterAction,
 } from "@/app/actions/auth-actions";
-import { QubiteLogo } from "@/components/shared/qubite-logo";
+import { MessMapLogo } from "@/components/shared/messmap-logo";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 
 export default function RegisterPage() {
@@ -197,10 +197,10 @@ export default function RegisterPage() {
             href="/"
             className="inline-block hover:scale-105 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-2xl"
           >
-            <QubiteLogo size="xl" />
+            <MessMapLogo size="xl" />
           </Link>
           <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
-            Smart Mess Student Registration
+            Mess<span className="text-emerald-600 dark:text-emerald-400">Map</span> Student Registration
           </h1>
           <p className="text-xs text-slate-600 dark:text-slate-400 font-medium">
             Campus Dining & Meal Booking Access

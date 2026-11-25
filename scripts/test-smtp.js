@@ -63,16 +63,16 @@ async function testGoogleSmtp() {
     // Optionally send a verification email to the user
     console.log(`Sending a test email to ${user}...`);
     const info = await transporter.sendMail({
-      from: `"QuBite Mess Portal" <${user}>`,
+      from: `"MessMap Mess Portal" <${user}>`,
       to: user,
-      subject: '✅ Google SMTP Connected — QuBite / MSRUAS Mess System',
+      subject: '✅ Google SMTP Connected — MessMap Campus Dining System',
       html: `
         <div style="font-family: sans-serif; background: #FFF9F3; padding: 24px; color: #171717;">
           <div style="max-width: 500px; margin: 0 auto; background: #ffffff; border-radius: 18px; padding: 28px; border: 1px solid #EEE8E0;">
             <h2 style="color: #43B978; margin-top: 0;">SMTP Test Successful! 🎉</h2>
             <p>Your Google SMTP configuration is working properly.</p>
-            <p>QuBite can now send automated emails to MSRUAS students for meal bookings, cutoff alerts, and mess announcements.</p>
-            <p style="font-size: 12px; color: #777;">Sent from QuBite Mess Management System</p>
+            <p>MessMap can now send automated emails to students for meal bookings, cutoff alerts, and mess announcements.</p>
+            <p style="font-size: 12px; color: #777;">Sent from MessMap Mess Management System</p>
           </div>
         </div>
       `,

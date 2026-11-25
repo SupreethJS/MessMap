@@ -43,7 +43,7 @@ export function LandingReviewsAndMetrics() {
       rating: 5,
       date: "Resident since 2023",
       quote:
-        "The food photography on Qubite is 100% real. When it displays Masala Dosa or Sunday Biryani, that's exactly what gets served on your plate. QR scanning takes 2 seconds flat at the entrance.",
+        "The food photography on MessMap is 100% real. When it displays Masala Dosa or Sunday Biryani, that's exactly what gets served on your plate. QR scanning takes 2 seconds flat at the entrance.",
     },
     {
       name: "Vikramaditya Joshi",
@@ -52,7 +52,7 @@ export function LandingReviewsAndMetrics() {
       rating: 5,
       date: "Hostel Warden Council",
       quote:
-        "Reconciling turnout used to take 2 hours of manual registers and contractor disputes. With Qubite's AI forecast and camera scanner, our surplus waste dropped by 42% in our very first semester.",
+        "Reconciling turnout used to take 2 hours of manual registers and contractor disputes. With MessMap's AI forecast and camera scanner, our surplus waste dropped by 42% in our very first semester.",
     },
     {
       name: "Ananya Deshmukh",

@@ -72,7 +72,7 @@ export function LandingHero({ onOpenDemoModal }: LandingHeroProps) {
 
             {/* Subcopy */}
             <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
-              Qubite transforms university hostel catering into a modern, restaurant-grade culinary experience. View daily menus with full food photography, customize meal plans before cutoffs, scan digital meal passes at entry, and reclaim dining wallet rebates automatically.
+              MessMap transforms university hostel catering into a modern, restaurant-grade culinary experience. View daily menus with full food photography, customize meal plans before cutoffs, scan digital meal passes at entry, and reclaim dining wallet rebates automatically.
             </p>
 
             {/* Primary Action Buttons */}

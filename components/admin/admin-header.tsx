@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Menu } from "lucide-react";
-import { QubiteLogo } from "@/components/shared/qubite-logo";
+import { MessMapLogo } from "@/components/shared/messmap-logo";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { Profile } from "@/lib/types/database";
 
@@ -32,7 +32,7 @@ export function AdminHeader({ user, onToggleMobileMenu, isMobileMenuOpen = false
             href="/admin/dashboard"
             className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-lg p-1"
           >
-            <QubiteLogo size="xs" />
+            <MessMapLogo size="xs" />
           </Link>
           <span className="text-[11px] font-black uppercase tracking-wider text-slate-950 bg-amber-400 px-2 py-0.5 rounded-md">
             Admin Console

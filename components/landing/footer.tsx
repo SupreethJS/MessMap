@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { UtensilsCrossed, Phone, Mail, MapPin, ShieldCheck, Heart } from "lucide-react";
+import { MessMapLogo } from "@/components/shared/messmap-logo";
 
 export function LandingFooter() {
   return (
@@ -11,14 +12,10 @@ export function LandingFooter() {
           {/* Col 1 & 2: Brand Story */}
           <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="inline-flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-500 via-amber-400 to-emerald-400 p-[1.5px] shadow-sm shrink-0">
-                <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-                  <UtensilsCrossed className="w-5 h-5 text-amber-400" />
-                </div>
-              </div>
+              <MessMapLogo size="sm" />
               <div>
                 <span className="text-xl font-black text-slate-900 dark:text-white tracking-tight">
-                  Qubite
+                  Mess<span className="text-emerald-600 dark:text-emerald-400">Map</span>
                 </span>
                 <span className="block text-[11px] font-semibold text-slate-400">
                   Smart Mess Management System
@@ -136,7 +133,7 @@ export function LandingFooter() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px]">
           <p className="text-slate-500 dark:text-slate-400">
-            © {new Date().getFullYear()} Qubite Smart Mess Management. All rights reserved.
+            © {new Date().getFullYear()} MessMap Smart Mess Management. All rights reserved.
           </p>
 
           <p className="text-slate-500 dark:text-slate-400 flex items-center gap-1">

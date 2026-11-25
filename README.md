@@ -20,7 +20,7 @@ Smart Mess Management features an executive high-tech design system built for mo
 ## 📱 Student Dashboard Architecture
 
 1. **A. Left Fixed Dark Sidebar (`#151515`)**:
-   - Official **QuBite** Q-shaped culinary cloche brand logo & *"Eat • Track • Manage"* tagline.
+   - Official **MessMap** dining & map-pin emblem & *"Eat • Track • Manage"* tagline.
    - 9 accessible navigation views:
      - 📊 `Dashboard` (`/student/dashboard`)
      - 📅 `Weekly Menu` (`/student/menu`)

@@ -23,7 +23,6 @@ const testCases = [
   { query: "Chana Masala", expectedSlug: "chana_masala", description: "Amritsari spiced chana masala" },
   { query: "Dal Rice", expectedSlug: "dal_rice", description: "Wholesome dal rice combo" },
   { query: "Chicken Biryani", expectedSlug: "chicken_biryani", description: "Aromatic chicken dum biryani" },
-  { query: "Fish Curry", expectedSlug: "fish_curry", description: "Coastal spiced fish curry" },
 
   // Snacks Items (Row 2)
   { query: "Samosa", expectedSlug: "samosa", description: "Crispy potato pea samosa" },

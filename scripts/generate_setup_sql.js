@@ -10,7 +10,7 @@ const files = [
 ];
 
 let allSql = `-- ========================================================
--- QuBite / MessMate - Comprehensive Supabase Database Setup
+-- MessMap - Comprehensive Supabase Database Setup
 -- Generated for single-step execution in Supabase SQL Editor
 -- Tables, Constraints, RLS Security, Triggers & Seed Data
 -- ========================================================
