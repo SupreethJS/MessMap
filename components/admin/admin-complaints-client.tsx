@@ -192,26 +192,26 @@ export function AdminComplaintsClient({ initialComplaints }: AdminComplaintsClie
       {/* Filter and Search Bar */}
       <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
         {/* Search */}
-        <div className="relative flex-1">
+        <div className="relative flex-1 min-w-0">
           <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3 pointer-events-none" />
           <input
             type="text"
             placeholder="Search complaints by student, title, issue, or ID..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full h-10 pl-10 pr-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+            className="w-full h-10 pl-10 pr-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-base sm:text-xs text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
           />
         </div>
 
         {/* Filter Dropdowns */}
-        <div className="flex items-center gap-2.5">
-          <div className="flex items-center gap-1.5 shrink-0">
-            <Filter className="w-3.5 h-3.5 text-slate-400" />
+        <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
+          <div className="flex items-center gap-1.5 flex-1 sm:flex-none min-w-0">
+            <Filter className="w-3.5 h-3.5 text-slate-400 shrink-0" />
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
               aria-label="Filter complaints by status"
-              className="h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-800 dark:text-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+              className="w-full sm:w-auto h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-800 dark:text-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
             >
               <option value="all">All Statuses</option>
               <option value="open">Pending / Open</option>
@@ -224,7 +224,7 @@ export function AdminComplaintsClient({ initialComplaints }: AdminComplaintsClie
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
             aria-label="Filter complaints by category"
-            className="h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-800 dark:text-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+            className="flex-1 sm:flex-none min-w-0 h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-semibold text-slate-800 dark:text-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
           >
             <option value="all">All Categories</option>
             <option value="Food Quality">Food Quality</option>

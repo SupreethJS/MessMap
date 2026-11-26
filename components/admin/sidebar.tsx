@@ -45,22 +45,28 @@ const navItems = [
 export function AdminSidebar({ isOpenMobile = false, onCloseMobile }: AdminSidebarProps) {
   const pathname = usePathname();
 
-  // Escape key handler for mobile drawer
+  // Escape key handler + body scroll lock for mobile drawer
   useEffect(() => {
-    if (!isOpenMobile || !onCloseMobile) return;
+    if (!isOpenMobile) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
+      if (e.key === "Escape" && onCloseMobile) {
         onCloseMobile();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [isOpenMobile, onCloseMobile]);
 
   const sidebarContent = (
-    <div className="flex flex-col h-full justify-between p-4 bg-slate-900 dark:bg-slate-950 text-slate-300 border-r border-slate-800">
-      {/* Brand Header */}
-      <div>
+    <div className="flex flex-col h-full justify-between p-4 bg-slate-900 dark:bg-slate-950 text-slate-300 border-r border-slate-800 min-h-0">
+      {/* Brand Header + Scrollable Nav */}
+      <div className="flex-1 flex flex-col min-h-0">
         <div className="p-2 pb-4 flex items-center justify-between">
           <Link
             href="/admin/dashboard"
@@ -97,7 +103,7 @@ export function AdminSidebar({ isOpenMobile = false, onCloseMobile }: AdminSideb
         </div>
 
         {/* Semantic Navigation Menu */}
-        <nav aria-label="Admin Navigation" className="px-1 py-1 space-y-1.5 overflow-y-auto max-h-[calc(100vh-270px)]">
+        <nav aria-label="Admin Navigation" className="px-1 py-1 space-y-1.5 overflow-y-auto flex-1 min-h-0">
           {navItems.map((item) => {
             const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
             const Icon = item.icon;
@@ -154,7 +160,7 @@ export function AdminSidebar({ isOpenMobile = false, onCloseMobile }: AdminSideb
       {/* Desktop Sticky Sidebar */}
       <aside
         aria-label="Admin Navigation Sidebar"
-        className="hidden lg:flex flex-col w-64 h-screen shrink-0 sticky top-0 select-none z-40"
+        className="hidden lg:flex flex-col w-64 h-dvh shrink-0 sticky top-0 select-none z-40"
       >
         {sidebarContent}
       </aside>

@@ -15,7 +15,7 @@ export default function LandingPage() {
   const [showDemoModal, setShowDemoModal] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-amber-400 selection:text-slate-950 antialiased font-sans transition-colors">
+    <div className="min-h-dvh overflow-x-clip flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-amber-400 selection:text-slate-950 antialiased font-sans transition-colors">
       {/* Accessible Skip to Content Link */}
       <a
         href="#main-content"

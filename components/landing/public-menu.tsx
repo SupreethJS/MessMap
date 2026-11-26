@@ -119,15 +119,15 @@ export function LandingPublicMenu() {
         </div>
 
         {/* Filter Controls Bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-2 bg-white dark:bg-slate-900/90 rounded-2xl border border-slate-200/90 dark:border-slate-800/90 shadow-xs">
+        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 p-2.5 bg-white dark:bg-slate-900/90 rounded-2xl border border-slate-200/90 dark:border-slate-800/90 shadow-xs">
           {/* Meal Slot Tabs */}
-          <div className="flex items-center gap-1 overflow-x-auto w-full md:w-auto p-1 bg-slate-100 dark:bg-slate-800/80 rounded-xl">
+          <div className="flex items-center gap-1 overflow-x-auto flex-nowrap w-full md:w-auto p-1 bg-slate-100 dark:bg-slate-800/80 rounded-xl">
             {(["lunch", "breakfast", "snacks", "dinner", "all"] as MealSlot[]).map((slot) => (
               <button
                 key={slot}
                 type="button"
                 onClick={() => setSelectedSlot(slot)}
-                className={`px-3.5 py-2 rounded-lg text-xs font-bold capitalize transition-all whitespace-nowrap ${
+                className={`min-h-[40px] px-3.5 py-2 rounded-lg text-xs font-bold capitalize transition-all whitespace-nowrap shrink-0 ${
                   selectedSlot === slot
                     ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-xs"
                     : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
@@ -139,12 +139,12 @@ export function LandingPublicMenu() {
           </div>
 
           {/* Diet Filter Pills & Search */}
-          <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
-            <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-slate-800/80 rounded-xl">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full md:w-auto justify-between md:justify-end">
+            <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-slate-800/80 rounded-xl overflow-x-auto flex-nowrap whitespace-nowrap">
               <button
                 type="button"
                 onClick={() => setDietFilter("all")}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`min-h-[38px] px-3 py-1.5 rounded-lg text-xs font-semibold transition-all shrink-0 ${
                   dietFilter === "all"
                     ? "bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-2xs"
                     : "text-slate-500 hover:text-slate-900 dark:hover:text-white"
@@ -156,7 +156,7 @@ export function LandingPublicMenu() {
               <button
                 type="button"
                 onClick={() => setDietFilter("veg")}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                className={`min-h-[38px] px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
                   dietFilter === "veg"
                     ? "bg-emerald-500 text-white shadow-2xs"
                     : "text-emerald-700 dark:text-emerald-400 hover:bg-emerald-500/10"
@@ -171,7 +171,7 @@ export function LandingPublicMenu() {
               <button
                 type="button"
                 onClick={() => setDietFilter("non-veg")}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                className={`min-h-[38px] px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
                   dietFilter === "non-veg"
                     ? "bg-rose-500 text-white shadow-2xs"
                     : "text-rose-700 dark:text-rose-400 hover:bg-rose-500/10"
@@ -185,20 +185,20 @@ export function LandingPublicMenu() {
             </div>
 
             {/* Real-Time Search Bar */}
-            <div className="relative min-w-[160px] sm:min-w-[220px]">
+            <div className="relative w-full sm:w-auto sm:min-w-[220px]">
               <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 placeholder="Search dishes..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full h-10 pl-9 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="w-full h-10 pl-9 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-base sm:text-xs text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
             </div>
           </div>
         </div>
 
-        {/* 3–4 Column Responsive Food Grid */}
+        {/* 3 Column Responsive Food Grid */}
         {filteredDishes.length === 0 ? (
           <div className="text-center py-16 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 space-y-3">
             <UtensilsCrossed className="w-8 h-8 text-slate-400 mx-auto" />
@@ -221,7 +221,7 @@ export function LandingPublicMenu() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredDishes.map((dish, i) => (
               <DishCard
                 key={`${dish.name}-${i}`}

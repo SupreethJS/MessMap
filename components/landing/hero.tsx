@@ -47,19 +47,19 @@ export function LandingHero({ onOpenDemoModal }: LandingHeroProps) {
   }, []);
 
   return (
-    <section className="relative z-10 pt-8 pb-16 md:pt-14 md:pb-24 overflow-hidden">
+    <section className="relative z-10 pt-6 pb-12 md:pt-14 md:pb-24 overflow-x-clip">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
           {/* Left Column: Copy & Actions */}
-          <div className="lg:col-span-7 space-y-6 text-left">
+          <div className="lg:col-span-7 space-y-5 sm:space-y-6 text-left min-w-0">
             {/* Live Serving Status Pill */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 text-amber-800 dark:text-amber-300 text-xs font-bold shadow-xs">
-              <span className="relative flex h-2.5 w-2.5">
+            <div className="inline-flex max-w-full items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/20 text-amber-800 dark:text-amber-300 text-[11px] sm:text-xs font-bold shadow-xs">
+              <span className="relative flex h-2.5 w-2.5 shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500" />
               </span>
-              <Clock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-              <span>{diningStatus.text}</span>
+              <Clock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
+              <span className="truncate">{diningStatus.text}</span>
             </div>
 
             {/* Main Headline */}
@@ -71,15 +71,15 @@ export function LandingHero({ onOpenDemoModal }: LandingHeroProps) {
             </h1>
 
             {/* Subcopy */}
-            <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-lg leading-relaxed max-w-2xl font-normal">
               MessMap transforms university hostel catering into a modern, restaurant-grade culinary experience. View daily menus with full food photography, customize meal plans before cutoffs, scan digital meal passes at entry, and reclaim dining wallet rebates automatically.
             </p>
 
             {/* Primary Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-2">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 pt-1">
               <a
                 href="#menu"
-                className="min-h-[48px] px-7 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 transition-all group"
+                className="w-full sm:w-auto min-h-[48px] px-7 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 transition-all group"
               >
                 <span>Explore Today&apos;s Menu</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -88,7 +88,7 @@ export function LandingHero({ onOpenDemoModal }: LandingHeroProps) {
               <button
                 type="button"
                 onClick={onOpenDemoModal}
-                className="min-h-[48px] px-6 py-3 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-xs"
+                className="w-full sm:w-auto min-h-[48px] px-6 py-3 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-xs"
               >
                 <Sparkles className="w-4 h-4 text-amber-500" />
                 <span>Try Demo Accounts</span>
@@ -96,14 +96,14 @@ export function LandingHero({ onOpenDemoModal }: LandingHeroProps) {
 
               <Link
                 href="/login"
-                className="min-h-[48px] px-5 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white text-xs sm:text-sm font-semibold transition-colors flex items-center gap-1.5"
+                className="w-full sm:w-auto min-h-[44px] px-5 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1.5"
               >
                 Resident Sign In
               </Link>
             </div>
 
             {/* Trust Proof Badges */}
-            <div className="pt-4 flex flex-wrap items-center gap-6 text-xs text-slate-500 dark:text-slate-400 font-semibold border-t border-slate-200/80 dark:border-slate-800/80">
+            <div className="pt-4 flex flex-wrap items-center gap-3 sm:gap-6 text-xs text-slate-500 dark:text-slate-400 font-semibold border-t border-slate-200/80 dark:border-slate-800/80">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                 <span>2,500+ Daily Residents</span>

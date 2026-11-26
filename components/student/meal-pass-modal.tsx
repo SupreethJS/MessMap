@@ -106,7 +106,7 @@ export function MealPassModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 shadow-2xl overflow-hidden">
+      <DialogContent className="max-w-md bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-4 sm:p-6 shadow-2xl">
         <DialogHeader className="space-y-1">
           <div className="flex items-center gap-2.5 text-slate-900 dark:text-slate-100">
             <div className="h-10 w-10 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500 shrink-0">
@@ -142,7 +142,7 @@ export function MealPassModal({
         </div>
 
         {/* Digital Boarding Pass Ticket */}
-        <div className="relative rounded-2xl border-2 border-dashed border-amber-500/30 bg-gradient-to-b from-amber-500/5 via-transparent to-amber-500/5 p-5 space-y-4">
+        <div className="relative rounded-2xl border-2 border-dashed border-amber-500/30 bg-gradient-to-b from-amber-500/5 via-transparent to-amber-500/5 p-4 space-y-3.5">
           {/* Card Top Branding */}
           <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
             <div>
@@ -212,16 +212,16 @@ export function MealPassModal({
           </div>
 
           {/* QR Code Container */}
-          <div className="flex flex-col items-center justify-center p-3 bg-white dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-inner">
+          <div className="flex flex-col items-center justify-center p-2.5 sm:p-3 bg-white dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-inner">
             {qrDataUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={qrDataUrl}
                 alt="Meal Check-In QR Code"
-                className="w-48 h-48 rounded-lg"
+                className="w-36 h-36 sm:w-48 sm:h-48 rounded-lg"
               />
             ) : (
-              <div className="w-48 h-48 flex items-center justify-center text-slate-400">
+              <div className="w-36 h-36 sm:w-48 sm:h-48 flex items-center justify-center text-slate-400">
                 Generating pass...
               </div>
             )}

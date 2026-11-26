@@ -150,9 +150,8 @@ export function LandingDiningRulesFaq() {
                 >
                   <span>{faq.question}</span>
                   <ChevronDown
-                    className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-200 ${
-                      isOpen ? "rotate-180 text-amber-500" : ""
-                    }`}
+                    className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180 text-amber-500" : ""
+                      }`}
                   />
                 </button>
 

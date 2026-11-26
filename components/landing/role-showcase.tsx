@@ -149,20 +149,20 @@ export function LandingRoleShowcase() {
           </p>
 
           {/* Interactive Role Switcher Toggle */}
-          <div className="inline-flex items-center p-1.5 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 mt-2">
+          <div className="flex flex-wrap sm:inline-flex items-center justify-center gap-1 p-1.5 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 mt-2 max-w-full">
             <button
               type="button"
               onClick={() => {
                 setActiveRole("student");
                 setActiveFeature(0);
               }}
-              className={`px-5 py-2.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 ${
+              className={`px-3.5 sm:px-5 py-2.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 ${
                 activeRole === "student"
                   ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
                   : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
               }`}
             >
-              <User className="w-4 h-4" />
+              <User className="w-4 h-4 shrink-0" />
               <span>For Hostel Students</span>
             </button>
 
@@ -172,13 +172,13 @@ export function LandingRoleShowcase() {
                 setActiveRole("admin");
                 setActiveFeature(0);
               }}
-              className={`px-5 py-2.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 ${
+              className={`px-3.5 sm:px-5 py-2.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 ${
                 activeRole === "admin"
                   ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
                   : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
               }`}
             >
-              <ShieldCheck className="w-4 h-4" />
+              <ShieldCheck className="w-4 h-4 shrink-0" />
               <span>For Catering Committees</span>
             </button>
           </div>

@@ -147,7 +147,7 @@ export default function StudentSettingsPage() {
               <input
                 type="password"
                 placeholder="••••••••"
-                className="w-full h-10 px-3 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:bg-white transition-all"
+                className="w-full h-10 px-3 rounded-xl border border-slate-200 bg-slate-50 text-base sm:text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:bg-white transition-all"
               />
             </div>
             <div className="space-y-1">
@@ -155,13 +155,13 @@ export default function StudentSettingsPage() {
               <input
                 type="password"
                 placeholder="Minimum 6 characters"
-                className="w-full h-10 px-3 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:bg-white transition-all"
+                className="w-full h-10 px-3 rounded-xl border border-slate-200 bg-slate-50 text-base sm:text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:bg-white transition-all"
               />
             </div>
 
             <button
               onClick={() => toast.success("Password updated successfully!")}
-              className="px-4 py-2 rounded-xl bg-slate-900 text-white hover:bg-slate-800 text-xs font-semibold transition-colors shadow-xs"
+              className="w-full sm:w-auto min-h-[40px] px-4 py-2 rounded-xl bg-slate-900 text-white hover:bg-slate-800 text-xs font-semibold transition-colors shadow-xs"
             >
               Update Password
             </button>
@@ -169,16 +169,16 @@ export default function StudentSettingsPage() {
         </div>
 
         {/* Sign Out Card */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex items-center justify-between">
+        <div className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h3 className="text-sm font-semibold text-slate-900">Sign Out of Smart Mess</h3>
+            <h3 className="text-sm font-semibold text-slate-900">Sign Out of MessMap</h3>
             <p className="text-xs text-slate-500">End your active dining portal session</p>
           </div>
 
           <form action={logoutAction}>
             <button
               type="submit"
-              className="px-4 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-semibold flex items-center gap-1.5 transition-colors"
+              className="w-full sm:w-auto min-h-[40px] px-4 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
             >
               <LogOut className="w-4 h-4" />
               <span>Log Out</span>

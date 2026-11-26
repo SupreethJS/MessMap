@@ -119,7 +119,7 @@ export function LandingWeeklyHighlights() {
                     setSelectedDish(details);
                   }
                 }}
-                className="group relative flex-none w-[300px] sm:w-[350px] snap-start rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:border-amber-400/80 transition-all duration-300 overflow-hidden cursor-pointer flex flex-col justify-between text-left"
+                className="group relative flex-none w-[280px] sm:w-[350px] snap-start rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:border-amber-400/80 transition-all duration-300 overflow-hidden cursor-pointer flex flex-col justify-between text-left"
               >
                 {/* 16:10 Full Food Photography Container */}
                 <div className="relative w-full aspect-[16/10] bg-slate-950 overflow-hidden">

@@ -62,7 +62,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center p-4 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-amber-400 selection:text-slate-950 transition-colors relative">
+    <div className="min-h-dvh overflow-x-clip flex flex-col justify-center items-center px-4 py-10 sm:px-6 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-amber-400 selection:text-slate-950 transition-colors relative">
       {/* Top Bar with Home Link & Theme Toggle */}
       <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-2">
         <ThemeToggle />
@@ -111,12 +111,12 @@ export default function LoginPage() {
                     1-Click Test
                   </span>
                 </div>
-                <div className="flex gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <button
                     type="button"
                     disabled={loading}
                     onClick={() => handleQuickLogin("student")}
-                    className="flex-1 min-h-[44px] py-2 px-3 bg-indigo-50 dark:bg-indigo-600/20 hover:bg-indigo-100 dark:hover:bg-indigo-600/30 border border-indigo-200 dark:border-indigo-500/40 text-indigo-800 dark:text-indigo-200 hover:text-indigo-900 dark:hover:text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                    className="w-full min-h-[44px] py-2 px-3 bg-indigo-50 dark:bg-indigo-600/20 hover:bg-indigo-100 dark:hover:bg-indigo-600/30 border border-indigo-200 dark:border-indigo-500/40 text-indigo-800 dark:text-indigo-200 hover:text-indigo-900 dark:hover:text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
                   >
                     <UserCheck className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                     <span>Try Demo Student</span>
@@ -125,7 +125,7 @@ export default function LoginPage() {
                     type="button"
                     disabled={loading}
                     onClick={() => handleQuickLogin("admin")}
-                    className="flex-1 min-h-[44px] py-2 px-3 bg-emerald-50 dark:bg-emerald-600/20 hover:bg-emerald-100 dark:hover:bg-emerald-600/30 border border-emerald-200 dark:border-emerald-500/40 text-emerald-800 dark:text-emerald-200 hover:text-emerald-900 dark:hover:text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+                    className="w-full min-h-[44px] py-2 px-3 bg-emerald-50 dark:bg-emerald-600/20 hover:bg-emerald-100 dark:hover:bg-emerald-600/30 border border-emerald-200 dark:border-emerald-500/40 text-emerald-800 dark:text-emerald-200 hover:text-emerald-900 dark:hover:text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
                   >
                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                     <span>Try Demo Admin</span>
@@ -144,7 +144,7 @@ export default function LoginPage() {
                   id="login-email"
                   type="email"
                   placeholder="darshan.kulkarni@msruas.ac.in"
-                  className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
+                  className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-base sm:text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -162,7 +162,7 @@ export default function LoginPage() {
                   id="login-password"
                   type="password"
                   placeholder="••••••••"
-                  className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
+                  className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-base sm:text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required

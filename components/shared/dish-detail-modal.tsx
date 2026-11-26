@@ -53,9 +53,9 @@ export function DishDetailModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-0 shadow-2xl overflow-hidden focus:outline-none max-h-[90vh] flex flex-col">
+      <DialogContent className="max-w-2xl bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-0 shadow-2xl overflow-hidden focus:outline-none max-h-[90dvh] flex flex-col">
         {/* Full-Bleed High-Res Dish Photography Header */}
-        <div className="relative w-full h-64 sm:h-72 overflow-hidden bg-slate-950 shrink-0">
+        <div className="relative w-full h-48 sm:h-72 overflow-hidden bg-slate-950 shrink-0">
           <Image
             src={dish.imageUrl}
             alt={dish.name}
@@ -67,7 +67,7 @@ export function DishDetailModal({
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
 
           {/* Top Floating Badges */}
-          <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+          <div className="absolute top-3 sm:top-4 left-3 sm:left-4 right-14 flex flex-wrap items-center justify-between gap-2">
             {/* Indian Veg / Non-Veg Emblem */}
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950/85 backdrop-blur-md border border-white/20 shadow-md">
               <div
@@ -110,7 +110,7 @@ export function DishDetailModal({
         </div>
 
         {/* Scrollable Details Body */}
-        <div className="p-6 space-y-6 overflow-y-auto flex-1">
+        <div className="p-4 sm:p-6 space-y-5 sm:space-y-6 overflow-y-auto flex-1">
           {/* Mouth-Watering Culinary Description */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1.5">

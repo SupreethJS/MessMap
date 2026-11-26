@@ -229,8 +229,8 @@ export function AttendanceScanner({
   return (
     <div className="space-y-6">
       {/* 1. TOP MEAL SELECTOR & STATS BAR */}
-      <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="space-y-1">
+      <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="space-y-1 min-w-0 flex-1">
           <label
             htmlFor="active-menu-select"
             className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block"
@@ -244,7 +244,7 @@ export function AttendanceScanner({
               setSelectedMenuId(e.target.value);
               setScanStatus({ type: "idle", message: "" });
             }}
-            className="h-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 text-xs font-semibold text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
+            className="w-full max-w-full min-w-0 h-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 text-base sm:text-xs font-semibold text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
           >
             {menus.map((m) => (
               <option key={m.id} value={m.id}>
@@ -255,30 +255,30 @@ export function AttendanceScanner({
         </div>
 
         {/* Live Counters */}
-        <div className="flex items-center gap-3">
-          <div className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-700/60 text-center min-w-[110px]">
-            <span className="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full md:w-auto shrink-0">
+          <div className="p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-700/60 text-center min-w-0">
+            <span className="text-[10px] uppercase font-bold text-slate-400 block tracking-wider truncate">
               Opted-In
             </span>
-            <span className="text-xl font-extrabold text-slate-800 dark:text-slate-100">
+            <span className="text-lg sm:text-xl font-extrabold text-slate-800 dark:text-slate-100">
               {optedInCount}
             </span>
           </div>
 
-          <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800 text-center min-w-[110px]">
-            <span className="text-[10px] uppercase font-bold text-emerald-700 dark:text-emerald-400 block tracking-wider">
+          <div className="p-2.5 sm:p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800 text-center min-w-0">
+            <span className="text-[10px] uppercase font-bold text-emerald-700 dark:text-emerald-400 block tracking-wider truncate">
               Checked-In
             </span>
-            <span className="text-xl font-extrabold text-emerald-700 dark:text-emerald-400">
+            <span className="text-lg sm:text-xl font-extrabold text-emerald-700 dark:text-emerald-400">
               {checkedInCount}
             </span>
           </div>
 
-          <div className="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl border border-amber-200 dark:border-amber-800 text-center min-w-[90px]">
-            <span className="text-[10px] uppercase font-bold text-amber-700 dark:text-amber-400 block tracking-wider">
+          <div className="p-2.5 sm:p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl border border-amber-200 dark:border-amber-800 text-center min-w-0">
+            <span className="text-[10px] uppercase font-bold text-amber-700 dark:text-amber-400 block tracking-wider truncate">
               Turnout
             </span>
-            <span className="text-xl font-extrabold text-amber-700 dark:text-amber-400">
+            <span className="text-lg sm:text-xl font-extrabold text-amber-700 dark:text-amber-400">
               {attendancePct}%
             </span>
           </div>
@@ -315,17 +315,17 @@ export function AttendanceScanner({
       {/* 3. MAIN WORKSPACE: Camera Scanner (Left) + Manual Fallback & Activity (Right) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left: Camera Scanner Feed */}
-        <div className="lg:col-span-7 bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
-              <QrCode className="w-5 h-5 text-amber-500" />
-              <h2 className="text-base font-bold">Contactless Meal Pass Camera Scanner</h2>
+        <div className="lg:col-span-7 bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 min-w-0">
+          <div className="flex flex-wrap items-center justify-between gap-2.5">
+            <div className="flex items-center gap-2 text-slate-900 dark:text-slate-100 min-w-0">
+              <QrCode className="w-5 h-5 text-amber-500 shrink-0" />
+              <h2 className="text-sm sm:text-base font-bold truncate">Contactless Meal Pass Scanner</h2>
             </div>
             {isScanning ? (
               <button
                 type="button"
                 onClick={handleStopScan}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900 text-rose-600 dark:text-rose-400 text-xs font-semibold hover:bg-rose-100 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900 text-rose-600 dark:text-rose-400 text-xs font-semibold hover:bg-rose-100 transition-colors shrink-0"
               >
                 <CameraOff className="w-3.5 h-3.5" />
                 Stop Scanner
@@ -334,7 +334,7 @@ export function AttendanceScanner({
               <button
                 type="button"
                 onClick={handleStartScan}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500 text-slate-950 text-xs font-bold shadow-sm hover:bg-amber-600 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-xl bg-amber-500 text-slate-950 text-xs font-bold shadow-sm hover:bg-amber-600 transition-colors shrink-0"
               >
                 <Camera className="w-3.5 h-3.5" />
                 Activate Camera
@@ -342,8 +342,8 @@ export function AttendanceScanner({
             )}
           </div>
 
-          <div className="relative rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-slate-950 overflow-hidden min-h-[300px] flex items-center justify-center">
-            <div id="admin-qr-reader" className="w-full max-w-[400px]" />
+          <div className="relative rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-slate-950 overflow-hidden min-h-[240px] sm:min-h-[300px] w-full flex items-center justify-center">
+            <div id="admin-qr-reader" className="w-full max-w-full sm:max-w-[400px] overflow-hidden" />
             {!isScanning && (
               <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-slate-400 bg-slate-900/90 gap-3">
                 <div className="h-14 w-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-500 flex items-center justify-center">
@@ -400,7 +400,7 @@ export function AttendanceScanner({
                   placeholder="e.g. 2024CS001"
                   value={manualRoll}
                   onChange={(e) => setManualRoll(e.target.value)}
-                  className="w-full h-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 text-xs font-bold text-slate-900 dark:text-slate-100 uppercase focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  className="w-full h-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 text-base sm:text-xs font-bold text-slate-900 dark:text-slate-100 uppercase focus:outline-none focus:ring-2 focus:ring-amber-500"
                   required
                 />
               </div>
@@ -418,7 +418,7 @@ export function AttendanceScanner({
                   placeholder="e.g. Darshan Kulkarni"
                   value={manualName}
                   onChange={(e) => setManualName(e.target.value)}
-                  className="w-full h-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  className="w-full h-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 text-base sm:text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"
                 />
               </div>
 

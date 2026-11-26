@@ -65,13 +65,13 @@ export default async function AdminDashboardPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
-          <Button asChild className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs h-9">
+        <div className="flex flex-wrap items-center gap-2.5">
+          <Button asChild className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs min-h-[40px]">
             <Link href="/admin/menus/create">
               <PlusCircle className="w-4 h-4 mr-1.5" /> Publish New Menu
             </Link>
           </Button>
-          <Button asChild variant="outline" className="text-xs h-9">
+          <Button asChild variant="outline" className="text-xs min-h-[40px]">
             <Link href="/admin/food-records">
               <Scale className="w-4 h-4 mr-1.5 text-slate-500" /> Record Wastage
             </Link>
@@ -80,7 +80,7 @@ export default async function AdminDashboardPage() {
       </div>
 
       {/* Metric Cards Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
         <MetricCard
           title="Today's Opt-in Headcount"
           value={totalOptedInToday}
@@ -169,9 +169,9 @@ export default async function AdminDashboardPage() {
             ) : (
               <div className="divide-y divide-slate-100">
                 {todayMenus.map((m) => (
-                  <div key={m.id} className="py-3.5 flex items-center justify-between gap-4">
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
+                  <div key={m.id} className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div className="space-y-1 min-w-0">
+                      <div className="flex flex-wrap items-center gap-2">
                         <span className="font-bold text-slate-900 capitalize text-sm">
                           {m.meal_type}
                         </span>
@@ -197,14 +197,14 @@ export default async function AdminDashboardPage() {
                       )}
                     </div>
 
-                    <div className="flex items-center gap-3 shrink-0">
-                      <div className="text-right">
+                    <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0 pt-2 sm:pt-0 border-t sm:border-0 border-slate-100">
+                      <div className="sm:text-right">
                         <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 block">
                           {m.expected_attendance || 0} students
                         </span>
                         <span className="text-[10px] text-slate-400">Opted in</span>
                       </div>
-                      <Button asChild variant="outline" size="sm" className="text-xs h-8">
+                      <Button asChild variant="outline" size="sm" className="text-xs h-9 min-w-[64px]">
                         <Link href={`/admin/menus`}>Edit</Link>
                       </Button>
                     </div>

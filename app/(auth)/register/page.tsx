@@ -184,7 +184,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center p-4 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 py-10 selection:bg-amber-400 selection:text-slate-950 transition-colors relative">
+    <div className="min-h-dvh overflow-x-clip flex flex-col justify-center items-center px-4 sm:px-6 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 py-10 selection:bg-amber-400 selection:text-slate-950 transition-colors relative">
       {/* Top Bar with Theme Toggle */}
       <div className="absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-2">
         <ThemeToggle />
@@ -241,7 +241,7 @@ export default function RegisterPage() {
                       id="reg-fullname"
                       type="text"
                       placeholder="Darshan Kulkarni"
-                      className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
+                      className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-base sm:text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       required
@@ -259,7 +259,7 @@ export default function RegisterPage() {
                       id="reg-email"
                       type="email"
                       placeholder="darshan.kulkarni@msruas.ac.in"
-                      className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
+                      className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-base sm:text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
@@ -279,7 +279,7 @@ export default function RegisterPage() {
                       id="reg-roll"
                       type="text"
                       placeholder="2024CS099"
-                      className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-xs text-slate-900 dark:text-white font-mono uppercase placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
+                      className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-base sm:text-xs text-slate-900 dark:text-white font-mono uppercase placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
                       value={rollNumber}
                       onChange={(e) => setRollNumber(e.target.value)}
                       required
@@ -295,7 +295,7 @@ export default function RegisterPage() {
                     id="reg-block"
                     value={hostelBlock}
                     onChange={(e) => setHostelBlock(e.target.value)}
-                    className="w-full h-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 text-xs font-medium text-slate-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 transition-colors"
+                    className="w-full h-11 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 text-base sm:text-xs font-medium text-slate-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 transition-colors"
                   >
                     <option value="Block A">Block A</option>
                     <option value="Block B">Block B</option>
@@ -314,7 +314,7 @@ export default function RegisterPage() {
                       id="reg-room"
                       type="text"
                       placeholder="204"
-                      className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
+                      className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-base sm:text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
                       value={roomNumber}
                       onChange={(e) => setRoomNumber(e.target.value)}
                       required
@@ -334,7 +334,7 @@ export default function RegisterPage() {
                       id="reg-pass"
                       type="password"
                       placeholder="Min 6 characters"
-                      className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
+                      className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-base sm:text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
@@ -352,7 +352,7 @@ export default function RegisterPage() {
                       id="reg-confirm-pass"
                       type="password"
                       placeholder="Re-enter password"
-                      className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
+                      className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-base sm:text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       required

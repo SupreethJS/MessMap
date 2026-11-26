@@ -46,12 +46,12 @@ export function AnalyticsCharts({ dailyTrends }: AnalyticsChartsProps) {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="h-72 w-full">
+          <div className="h-64 sm:h-72 w-full min-w-0">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={dailyTrends} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+              <BarChart data={dailyTrends} margin={{ top: 10, right: 8, left: -18, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                <XAxis dataKey="formattedDate" tick={{ fontSize: 11, fill: "#64748b" }} />
-                <YAxis tick={{ fontSize: 11, fill: "#64748b" }} />
+                <XAxis dataKey="formattedDate" interval="preserveStartEnd" tick={{ fontSize: 10, fill: "#64748b" }} />
+                <YAxis tick={{ fontSize: 10, fill: "#64748b" }} />
                 <Tooltip
                   contentStyle={{
                     backgroundColor: "#ffffff",
@@ -79,12 +79,12 @@ export function AnalyticsCharts({ dailyTrends }: AnalyticsChartsProps) {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-64 w-full">
+            <div className="h-60 sm:h-64 w-full min-w-0">
               <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={dailyTrends} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                <AreaChart data={dailyTrends} margin={{ top: 10, right: 8, left: -18, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                  <XAxis dataKey="formattedDate" tick={{ fontSize: 11, fill: "#64748b" }} />
-                  <YAxis tick={{ fontSize: 11, fill: "#64748b" }} domain={[0, "auto"]} />
+                  <XAxis dataKey="formattedDate" interval="preserveStartEnd" tick={{ fontSize: 10, fill: "#64748b" }} />
+                  <YAxis tick={{ fontSize: 10, fill: "#64748b" }} domain={[0, "auto"]} />
                   <Tooltip
                     contentStyle={{
                       backgroundColor: "#ffffff",
@@ -115,12 +115,12 @@ export function AnalyticsCharts({ dailyTrends }: AnalyticsChartsProps) {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-64 w-full">
+            <div className="h-60 sm:h-64 w-full min-w-0">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={dailyTrends} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                <LineChart data={dailyTrends} margin={{ top: 10, right: 8, left: -18, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                  <XAxis dataKey="formattedDate" tick={{ fontSize: 11, fill: "#64748b" }} />
-                  <YAxis tick={{ fontSize: 11, fill: "#64748b" }} domain={[0, "auto"]} />
+                  <XAxis dataKey="formattedDate" interval="preserveStartEnd" tick={{ fontSize: 10, fill: "#64748b" }} />
+                  <YAxis tick={{ fontSize: 10, fill: "#64748b" }} domain={[0, "auto"]} />
                   <Tooltip
                     contentStyle={{
                       backgroundColor: "#ffffff",

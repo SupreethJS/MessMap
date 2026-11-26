@@ -89,8 +89,30 @@ export function NextMealHeroBanner({ menus, user }: NextMealHeroBannerProps) {
   return (
     <>
       <div className="relative w-full rounded-3xl overflow-hidden bg-slate-950 border border-slate-200/80 dark:border-slate-800 shadow-xl group">
-        {/* Background Full-Bleed Food Image */}
-        <div className="absolute inset-0 z-0">
+        {/* Mobile Top Photo (stacked cleanly on phones) */}
+        <div className="relative w-full aspect-[16/9] sm:hidden bg-slate-950">
+          <Image
+            src={details.imageUrl}
+            alt={details.name}
+            fill
+            priority
+            unoptimized
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
+          <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
+            <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500 text-slate-950 shadow-md">
+              Upcoming: {details.mealType}
+            </span>
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-950/80 text-amber-300 font-bold text-xs backdrop-blur-md border border-white/15">
+              <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+              {details.rating}
+            </span>
+          </div>
+        </div>
+
+        {/* Desktop Full-Bleed Food Image */}
+        <div className="hidden sm:block absolute inset-0 z-0">
           <Image
             src={details.imageUrl}
             alt={details.name}
@@ -105,21 +127,21 @@ export function NextMealHeroBanner({ menus, user }: NextMealHeroBannerProps) {
         </div>
 
         {/* Content Container */}
-        <div className="relative z-10 p-6 sm:p-8 md:p-10 text-white space-y-6">
+        <div className="relative z-10 p-5 sm:p-8 md:p-10 text-white space-y-5 sm:space-y-6">
           {/* Top Row: Next Serving Tag + Cutoff Countdown */}
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-2.5">
-              <span className="px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-amber-500 text-slate-950 shadow-md">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="hidden sm:inline-block px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-amber-500 text-slate-950 shadow-md">
                 Upcoming Meal: {details.mealType}
               </span>
-              <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white/10 backdrop-blur-md border border-white/15 text-slate-200">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-white/10 backdrop-blur-md border border-white/15 text-slate-200">
                 <Clock className="w-3.5 h-3.5 text-amber-400" />
                 {details.servingWindow.split("•")[1]?.trim() || "12:30 PM – 02:30 PM"}
               </span>
             </div>
 
             {/* Live Cutoff Timer */}
-            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-white/20 text-xs">
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-white/20 text-xs">
               <span className="text-slate-400 font-medium">Cutoff:</span>
               <CutoffCountdown menuDate={menuDate} cutoffTime={cutoffTime} />
             </div>
@@ -145,13 +167,13 @@ export function NextMealHeroBanner({ menus, user }: NextMealHeroBannerProps) {
                 {details.isVegetarian ? "Pure Vegetarian Main" : "Non-Vegetarian Special"}
               </span>
 
-              <span className="inline-flex items-center gap-1 text-xs text-amber-300 font-bold ml-1">
+              <span className="hidden sm:inline-flex items-center gap-1 text-xs text-amber-300 font-bold ml-1">
                 <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                 {details.rating}
               </span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
               {details.name}
             </h2>
 
@@ -159,7 +181,7 @@ export function NextMealHeroBanner({ menus, user }: NextMealHeroBannerProps) {
               {details.description}
             </p>
 
-            <div className="pt-2 flex flex-wrap items-center gap-3 text-xs text-slate-300 font-medium">
+            <div className="pt-1 sm:pt-2 flex flex-wrap items-center gap-2.5 sm:gap-3 text-xs text-slate-300 font-medium">
               <span className="inline-flex items-center gap-1">
                 <Flame className="w-3.5 h-3.5 text-amber-400" /> {details.calories} kcal
               </span>
@@ -171,25 +193,25 @@ export function NextMealHeroBanner({ menus, user }: NextMealHeroBannerProps) {
           </div>
 
           {/* Action Row: Opt-In Toggles + QR Meal Pass */}
-          <div className="pt-2 flex flex-wrap items-center justify-between gap-4 border-t border-white/10">
+          <div className="pt-3 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center justify-between gap-3 border-t border-white/10">
             {/* Dining Attendance Switcher */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 w-full sm:w-auto">
               <span className="text-xs font-bold text-slate-300 hidden sm:inline">
                 Your Status:
               </span>
 
-              <div className="flex items-center p-1 rounded-2xl bg-slate-900/90 border border-white/20">
+              <div className="grid grid-cols-2 sm:flex items-center p-1 rounded-2xl bg-slate-900/90 border border-white/20 w-full sm:w-auto gap-1">
                 <button
                   type="button"
                   disabled={loading}
                   onClick={() => handleTogglePlan("yes")}
-                  className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1.5 ${
+                  className={`min-h-[44px] px-3 sm:px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 ${
                     optInStatus === "yes"
                       ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/25"
                       : "text-slate-400 hover:text-white"
                   }`}
                 >
-                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
                   <span>I&apos;m Eating</span>
                 </button>
 
@@ -197,14 +219,14 @@ export function NextMealHeroBanner({ menus, user }: NextMealHeroBannerProps) {
                   type="button"
                   disabled={loading}
                   onClick={() => handleTogglePlan("no")}
-                  className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1.5 ${
+                  className={`min-h-[44px] px-3 sm:px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-center gap-1.5 ${
                     optInStatus === "no"
                       ? "bg-rose-500 text-white shadow-md shadow-rose-500/25"
                       : "text-slate-400 hover:text-white"
                   }`}
                 >
-                  <XCircle className="w-3.5 h-3.5" />
-                  <span>Skip Meal (Save Rebate)</span>
+                  <XCircle className="w-3.5 h-3.5 shrink-0" />
+                  <span className="truncate">Skip Meal</span>
                 </button>
               </div>
             </div>
@@ -213,7 +235,7 @@ export function NextMealHeroBanner({ menus, user }: NextMealHeroBannerProps) {
             <button
               type="button"
               onClick={() => setMealPassOpen(true)}
-              className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs shadow-lg shadow-amber-500/20 transition-all flex items-center gap-2 active:scale-95"
+              className="w-full sm:w-auto min-h-[44px] px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs shadow-lg shadow-amber-500/20 transition-all flex items-center justify-center gap-2 active:scale-95"
             >
               <QrCode className="w-4 h-4" />
               <span>Show QR Meal Pass</span>

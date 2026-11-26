@@ -19,7 +19,7 @@ export function MealAttendanceChart() {
   const data = getWeeklyAttendanceChartData(range);
 
   return (
-    <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between">
+    <div className="bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 shadow-sm flex flex-col justify-between min-w-0">
       {/* Header with Title and Range Dropdown */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2.5">

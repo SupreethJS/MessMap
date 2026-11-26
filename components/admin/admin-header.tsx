@@ -14,8 +14,8 @@ interface AdminHeaderProps {
 
 export function AdminHeader({ user, onToggleMobileMenu, isMobileMenuOpen = false }: AdminHeaderProps) {
   return (
-    <header className="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 transition-colors">
-      <div className="flex items-center gap-2.5 sm:gap-3">
+    <header className="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-3 sm:px-6 flex items-center justify-between sticky top-0 z-30 gap-2 transition-colors">
+      <div className="flex items-center gap-2 sm:gap-3 min-w-0">
         {/* Mobile Hamburger Button */}
         <button
           type="button"
@@ -27,14 +27,14 @@ export function AdminHeader({ user, onToggleMobileMenu, isMobileMenuOpen = false
           <Menu className="w-5 h-5" />
         </button>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2 min-w-0">
           <Link
             href="/admin/dashboard"
-            className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-lg p-1"
+            className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-lg p-1 shrink-0"
           >
             <MessMapLogo size="xs" />
           </Link>
-          <span className="text-[11px] font-black uppercase tracking-wider text-slate-950 bg-amber-400 px-2 py-0.5 rounded-md">
+          <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-slate-950 bg-amber-400 px-2 py-0.5 rounded-md truncate">
             Admin Console
           </span>
           <span className="text-xs text-slate-300 dark:text-slate-700 hidden sm:inline">•</span>

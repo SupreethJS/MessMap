@@ -69,7 +69,7 @@ export default async function AdminMenusPage({
               <Card key={menu.id} className="p-5 hover:border-slate-300 transition-colors">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div className="space-y-2">
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                       <span className="font-bold text-slate-900 capitalize text-base">
                         {menu.meal_type}
                       </span>

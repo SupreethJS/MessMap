@@ -38,9 +38,9 @@ export function MessMapHeader({
   );
 
   return (
-    <header className="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 gap-3 transition-colors">
+    <header className="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-3 sm:px-6 flex items-center justify-between sticky top-0 z-30 gap-2 sm:gap-3 transition-colors">
       {/* Mobile Hamburger & Logo */}
-      <div className="lg:hidden flex items-center gap-2 shrink-0">
+      <div className="lg:hidden flex items-center gap-2 min-w-0">
         <button
           type="button"
           onClick={onToggleMobileMenu}
