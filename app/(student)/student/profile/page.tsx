@@ -81,12 +81,16 @@ export default async function StudentProfilePage() {
               {user?.avatar_url ? (
                 <img src={user.avatar_url} alt={user.full_name} className="h-full w-full object-cover" />
               ) : (
-                <span>{user?.full_name?.charAt(0) || "A"}</span>
+                <span>
+                  {user?.full_name
+                    ? user.full_name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase()
+                    : "DK"}
+                </span>
               )}
             </div>
             <div>
-              <h2 className="text-lg font-bold text-slate-900">{user?.full_name || "Aarav Sharma"}</h2>
-              <p className="text-xs text-slate-500">{user?.email || "student1@mess.college.edu"}</p>
+              <h2 className="text-lg font-bold text-slate-900">{user?.full_name || "Darshan Kulkarni"}</h2>
+              <p className="text-xs text-slate-500">{user?.email || "darshan.kulkarni@msruas.ac.in"}</p>
               <span className="inline-block px-2.5 py-0.5 rounded-md bg-amber-400 text-slate-950 text-[10px] font-bold mt-1.5 shadow-2xs">
                 Student Member
               </span>

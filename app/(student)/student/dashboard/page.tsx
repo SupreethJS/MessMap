@@ -31,7 +31,7 @@ export default async function StudentDashboardPage() {
   const greeting =
     hour < 12 ? "Good Morning" : hour < 17 ? "Good Afternoon" : "Good Evening";
 
-  const studentFirstName = user?.full_name?.split(" ")[0] || "Aarav";
+  const studentFirstName = user?.full_name?.split(" ")[0] || "Darshan";
 
   const now = new Date();
   const formattedDate = now.toLocaleDateString("en-US", {

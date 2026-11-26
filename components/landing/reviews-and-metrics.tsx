@@ -28,36 +28,36 @@ export function LandingReviewsAndMetrics() {
 
   const testimonials = [
     {
-      name: "Rohan Verma",
+      name: "Harshith Shetty",
       role: "B.Tech CSE '25 • Hostel Block C",
-      avatar: "RV",
+      avatar: "HS",
       rating: 5,
       date: "Resident since 2022",
       quote:
         "Being able to mark 'Skip' before the 5 PM cutoff whenever I have lab projects or go home saved me over ₹1,200 last month alone. The automatic wallet rebate is an absolute game-changer.",
     },
     {
-      name: "Sneha Nair",
+      name: "Meghana Hegde",
       role: "ECE '24 • Girls Hostel Block 2",
-      avatar: "SN",
+      avatar: "MH",
       rating: 5,
       date: "Resident since 2023",
       quote:
         "The food photography on MessMap is 100% real. When it displays Masala Dosa or Sunday Biryani, that's exactly what gets served on your plate. QR scanning takes 2 seconds flat at the entrance.",
     },
     {
-      name: "Vikramaditya Joshi",
+      name: "Pranav Deshmukh",
       role: "M.Tech Mech • Mess Committee Secretary",
-      avatar: "VJ",
+      avatar: "PD",
       rating: 5,
       date: "Hostel Warden Council",
       quote:
         "Reconciling turnout used to take 2 hours of manual registers and contractor disputes. With MessMap's AI forecast and camera scanner, our surplus waste dropped by 42% in our very first semester.",
     },
     {
-      name: "Ananya Deshmukh",
+      name: "Tanvi Joshi",
       role: "AI & Data Science '26 • Hostel Block A",
-      avatar: "AD",
+      avatar: "TJ",
       rating: 5,
       date: "Resident since 2024",
       quote:

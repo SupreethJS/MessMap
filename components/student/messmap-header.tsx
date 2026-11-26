@@ -148,13 +148,17 @@ export function MessMapHeader({
                   className="h-full w-full object-cover"
                 />
               ) : (
-                <span>{user?.full_name?.charAt(0) || "S"}</span>
+                <span>
+                  {user?.full_name
+                    ? user.full_name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase()
+                    : "DK"}
+                </span>
               )}
             </div>
 
             <div className="text-left hidden sm:block">
               <p className="text-xs font-bold text-slate-900 dark:text-slate-100 leading-tight">
-                {user?.full_name || "Aarav Sharma"}
+                {user?.full_name || "Darshan Kulkarni"}
               </p>
               <div className="flex items-center gap-1.5 mt-0.5">
                 <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
@@ -177,8 +181,8 @@ export function MessMapHeader({
               onMouseLeave={() => setProfileDropdownOpen(false)}
             >
               <div className="p-3 border-b border-slate-100 dark:border-slate-800">
-                <p className="text-xs font-bold text-slate-900 dark:text-slate-100">{user?.full_name || "Aarav Sharma"}</p>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">{user?.email || "student1@mess.college.edu"}</p>
+                <p className="text-xs font-bold text-slate-900 dark:text-slate-100">{user?.full_name || "Darshan Kulkarni"}</p>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">{user?.email || "darshan.kulkarni@msruas.ac.in"}</p>
                 <p className="text-[10px] font-mono text-amber-600 dark:text-amber-400 font-bold mt-1">
                   Roll: {user?.roll_number || "2024CS001"}
                 </p>

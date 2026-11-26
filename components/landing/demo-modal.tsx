@@ -36,24 +36,24 @@ export function LandingDemoModal({ open, onOpenChange }: LandingDemoModalProps) 
           {/* Admin Demo Card */}
           <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-1">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400">Mess Head Administrator</span>
+              <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400">Raghavendra Rao (Mess Manager)</span>
               <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 font-mono font-bold">
                 Full Admin
               </span>
             </div>
-            <div className="text-xs text-slate-700 dark:text-slate-300 font-mono">admin@msruas.ac.in</div>
+            <div className="text-xs text-slate-700 dark:text-slate-300 font-mono">raghavendra.rao@msruas.ac.in</div>
             <div className="text-xs text-slate-500 dark:text-slate-400 font-mono">Password: SecureAdminPassword123!</div>
           </div>
 
           {/* Student Demo Card */}
           <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-1">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-indigo-700 dark:text-indigo-400">Hostel Student Account</span>
+              <span className="text-xs font-bold text-indigo-700 dark:text-indigo-400">Darshan Kulkarni (Hostel Student)</span>
               <span className="text-[10px] px-2 py-0.5 rounded bg-indigo-100 dark:bg-indigo-500/10 text-indigo-800 dark:text-indigo-300 font-mono font-bold">
                 Student
               </span>
             </div>
-            <div className="text-xs text-slate-700 dark:text-slate-300 font-mono">student1@msruas.ac.in</div>
+            <div className="text-xs text-slate-700 dark:text-slate-300 font-mono">darshan.kulkarni@msruas.ac.in</div>
             <div className="text-xs text-slate-500 dark:text-slate-400 font-mono">Password: password123</div>
           </div>
         </div>

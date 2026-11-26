@@ -101,7 +101,9 @@ async function runTestSuite() {
   // Test 5: Duplicate email registration is rejected
   // ---------------------------------------------------------
   const existingEmails = store.profiles.map((p) => p.email);
-  const duplicateDetected = existingEmails.includes("admin@msruas.ac.in") || existingEmails.includes("admin@mess.college.edu");
+  const duplicateDetected =
+    existingEmails.includes("raghavendra.rao@msruas.ac.in") ||
+    existingEmails.includes("admin@msruas.ac.in");
   assert(
     duplicateDetected,
     "T05",

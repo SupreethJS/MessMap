@@ -145,11 +145,11 @@ export function DownloadReceiptButton({
           <table class="details-table">
             <tr>
               <td class="label">Hostel Resident</td>
-              <td class="val">Aarav Sharma (Roll: CS21B001)</td>
+              <td class="val">Darshan Kulkarni (Roll: 2024CS001)</td>
             </tr>
             <tr>
               <td class="label">Hostel Block</td>
-              <td class="val">Block C, Room 304</td>
+              <td class="val">Block A, Room 101</td>
             </tr>
             <tr>
               <td class="label">Transaction Type</td>
@@ -260,7 +260,7 @@ export function DownloadReceiptButton({
               <div className="flex justify-between text-slate-600 dark:text-slate-400">
                 <span>Resident:</span>
                 <span className="font-semibold text-slate-900 dark:text-slate-200">
-                  Aarav Sharma (CS21B001)
+                  Darshan Kulkarni (2024CS001)
                 </span>
               </div>
             </div>

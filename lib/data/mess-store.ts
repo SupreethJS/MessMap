@@ -78,8 +78,8 @@ function generateInitialSeed(): MessStoreState {
   const profiles: Profile[] = [
     {
       id: "u-admin-001",
-      email: "admin@msruas.ac.in",
-      full_name: "Mess Head Administrator",
+      email: "raghavendra.rao@msruas.ac.in",
+      full_name: "Raghavendra Rao",
       roll_number: null,
       department: "Catering Management",
       hostel_block: "Admin Block",
@@ -96,19 +96,20 @@ function generateInitialSeed(): MessStoreState {
 
   // 2. 25 Realistic Student Profiles
   const studentNames = [
-    "Aarav Sharma", "Aditi Patel", "Ananya Verma", "Arjun Reddy", "Deepak Gupta",
-    "Divya Nair", "Ishaan Malhotra", "Kavya Iyer", "Karan Singhania", "Manish Mehra",
-    "Meera Joshi", "Neha Kulkarni", "Nikhil Rao", "Pooja Deshmukh", "Pranav Joshi",
-    "Priyanka Sen", "Rahul Saxena", "Riya Mukherjee", "Rohan Bhattacharya", "Sanya Kapoor",
-    "Siddharth Menon", "Sneha Pillai", "Tanvi Agarwal", "Varun Chopra", "Vikram Bansal",
+    "Darshan Kulkarni", "Harshith Shetty", "Meghana Hegde", "Pranav Deshmukh", "Tanvi Joshi",
+    "Siddharth Menon", "Bhavana Nair", "Kiran Patil", "Nikhil Kamath", "Shreya Kulkarni",
+    "Varun Bhat", "Akash Gowda", "Chinmayi Rao", "Gaurav Deshpande", "Harini Subramanian",
+    "Jatin Naik", "Keerthana Prasad", "Lokesh Murthy", "Madhura Gokhale", "Nandini Shenoy",
+    "Omkar Sawant", "Pallavi Pai", "Rakshith Acharya", "Sanket Nadkarni", "Vaishnavi Kashyap",
   ];
 
   studentNames.forEach((name, idx) => {
     const num = (idx + 1).toString().padStart(3, "0");
     const block = ["A", "B", "C", "D"][idx % 4];
+    const emailSlug = name.toLowerCase().replace(/\s+/g, ".");
     profiles.push({
       id: `u-student-${num}`,
-      email: `student${idx + 1}@msruas.ac.in`,
+      email: `${emailSlug}@msruas.ac.in`,
       full_name: name,
       roll_number: `2024CS${num}`,
       department: "Computer Science & Engineering",
@@ -356,7 +357,7 @@ function generateInitialSeed(): MessStoreState {
     {
       id: "C-104",
       student_id: "u-student-001",
-      student_name: "Aarav Sharma",
+      student_name: "Darshan Kulkarni",
       category: "Food Quality",
       title: "Chapati slightly dry during yesterday's dinner",
       description: "The rotis served during dinner were somewhat hard and lacked butter brushing. Would appreciate keeping them in insulated warmers.",
@@ -368,7 +369,7 @@ function generateInitialSeed(): MessStoreState {
     {
       id: "C-103",
       student_id: "u-student-001",
-      student_name: "Aarav Sharma",
+      student_name: "Darshan Kulkarni",
       category: "Hygiene",
       title: "Hand sanitizing station refill needed",
       description: "Sanitizer dispenser at Dining Hall entrance 2 is empty.",

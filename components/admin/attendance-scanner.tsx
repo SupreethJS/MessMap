@@ -397,7 +397,7 @@ export function AttendanceScanner({
                 <input
                   id="manual-roll-input"
                   type="text"
-                  placeholder="e.g. CS21B001"
+                  placeholder="e.g. 2024CS001"
                   value={manualRoll}
                   onChange={(e) => setManualRoll(e.target.value)}
                   className="w-full h-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 text-xs font-bold text-slate-900 dark:text-slate-100 uppercase focus:outline-none focus:ring-2 focus:ring-amber-500"
@@ -415,7 +415,7 @@ export function AttendanceScanner({
                 <input
                   id="manual-name-input"
                   type="text"
-                  placeholder="e.g. Aarav Sharma"
+                  placeholder="e.g. Darshan Kulkarni"
                   value={manualName}
                   onChange={(e) => setManualName(e.target.value)}
                   className="w-full h-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-500"

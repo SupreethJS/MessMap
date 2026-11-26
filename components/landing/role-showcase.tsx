@@ -50,7 +50,7 @@ export function LandingRoleShowcase() {
         headline: "Digital Boarding Dining Pass",
         badge: "Verified Resident",
         stats: [
-          { label: "Resident", value: "Aarav Sharma (CS21B001)" },
+          { label: "Resident", value: "Darshan Kulkarni (2024CS001)" },
           { label: "Meal Slot", value: "Dinner • 07:30 PM" },
           { label: "Hall", value: "Central Mess Hall 1" },
         ],

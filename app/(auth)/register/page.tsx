@@ -240,7 +240,7 @@ export default function RegisterPage() {
                     <input
                       id="reg-fullname"
                       type="text"
-                      placeholder="Aarav Sharma"
+                      placeholder="Darshan Kulkarni"
                       className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
@@ -258,7 +258,7 @@ export default function RegisterPage() {
                     <input
                       id="reg-email"
                       type="email"
-                      placeholder="student@college.edu"
+                      placeholder="darshan.kulkarni@msruas.ac.in"
                       className="w-full h-11 pl-10 pr-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus:bg-white dark:focus:bg-slate-900 transition-colors"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}

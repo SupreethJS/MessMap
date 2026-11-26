@@ -58,7 +58,9 @@ export function AdminHeader({ user, onToggleMobileMenu, isMobileMenuOpen = false
             aria-label="Admin User Icon"
             className="w-9 h-9 rounded-xl bg-slate-900 dark:bg-slate-800 text-amber-400 border border-slate-700 flex items-center justify-center font-black text-xs shadow-xs"
           >
-            AD
+            {user.full_name
+              ? user.full_name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase()
+              : "RR"}
           </div>
         </div>
       </div>

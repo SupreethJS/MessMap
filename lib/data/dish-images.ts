@@ -639,8 +639,8 @@ const CULINARY_DETAILS_REGISTRY: Record<
     ingredients: ["Aged Basmati Rice", "Bone-in Farm Chicken", "Pure Ghee", "Saffron Milk", "Shahi Biryani Masala", "Mint & Coriander"],
     allergens: ["Dairy"],
     sampleReviews: [
-      { name: "Rohan Verma", roll: "CS21B042", rating: 5, text: "Hands down the best Sunday lunch! The chicken is exceptionally tender and aromatic.", date: "Yesterday" },
-      { name: "Sneha Nair", roll: "EC22B108", rating: 5, text: "Restaurant quality dum biryani with raita. Mess contractor really stepped up.", date: "3 days ago" }
+      { name: "Harshith Shetty", roll: "2024CS042", rating: 5, text: "Hands down the best Sunday lunch! The chicken is exceptionally tender and aromatic.", date: "Yesterday" },
+      { name: "Meghana Hegde", roll: "2024EC108", rating: 5, text: "Restaurant quality dum biryani with raita. Mess contractor really stepped up.", date: "3 days ago" }
     ]
   },
   paneer_naan: {
@@ -656,8 +656,8 @@ const CULINARY_DETAILS_REGISTRY: Record<
     ingredients: ["Fresh Malai Paneer", "San Marzano Tomatoes", "Amul Butter", "Cashew Paste", "Kasuri Methi", "Refined Wheat Flour"],
     allergens: ["Dairy", "Gluten", "Nuts"],
     sampleReviews: [
-      { name: "Ananya Iyer", roll: "BT23B015", rating: 5, text: "The gravy is buttery and sweet-savory perfection. Naans come out hot and soft.", date: "2 days ago" },
-      { name: "Karthik Raja", roll: "ME21B077", rating: 4.5, text: "Very generous paneer chunks! Favorite dinner of the week.", date: "Last week" }
+      { name: "Bhavana Nair", roll: "2024BT015", rating: 5, text: "The gravy is buttery and sweet-savory perfection. Naans come out hot and soft.", date: "2 days ago" },
+      { name: "Kiran Patil", roll: "2024ME077", rating: 4.5, text: "Very generous paneer chunks! Favorite dinner of the week.", date: "Last week" }
     ]
   },
   masala_dosa: {
@@ -673,8 +673,8 @@ const CULINARY_DETAILS_REGISTRY: Record<
     ingredients: ["Fermented Batter", "Yukon Potatoes", "Mustard Seeds", "Fresh Coconut Chutney", "Shallots", "Curry Leaves"],
     allergens: ["Nut-Free"],
     sampleReviews: [
-      { name: "Tanvi Deshmukh", roll: "CS23B089", rating: 5, text: "Golden crispy edges and the coconut chutney was freshly ground. Made my morning!", date: "Today" },
-      { name: "Abhishek Rao", roll: "EE22B034", rating: 4.5, text: "Crispy and not oily. Great coffee pairing.", date: "Yesterday" }
+      { name: "Tanvi Joshi", roll: "2024CS089", rating: 5, text: "Golden crispy edges and the coconut chutney was freshly ground. Made my morning!", date: "Today" },
+      { name: "Nikhil Kamath", roll: "2024EE034", rating: 4.5, text: "Crispy and not oily. Great coffee pairing.", date: "Yesterday" }
     ]
   },
   idli: {
@@ -690,7 +690,7 @@ const CULINARY_DETAILS_REGISTRY: Record<
     ingredients: ["Parboiled Rice", "Urad Dal", "Hing (Asafoetida)", "Fenugreek Seeds", "Tamarind", "Drumsticks"],
     allergens: ["Vegan", "Gluten-Free"],
     sampleReviews: [
-      { name: "Pranav Menon", roll: "AI24B012", rating: 5, text: "Super light and fluffy. Perfect pre-exam breakfast.", date: "2 days ago" }
+      { name: "Pranav Deshmukh", roll: "2024AI012", rating: 5, text: "Super light and fluffy. Perfect pre-exam breakfast.", date: "2 days ago" }
     ]
   },
   samosa: {
@@ -706,7 +706,7 @@ const CULINARY_DETAILS_REGISTRY: Record<
     ingredients: ["Potatoes", "Sweet Peas", "Ajwain Seeds", "All-purpose Flour", "Tamarind Pulp", "Garam Masala"],
     allergens: ["Gluten"],
     sampleReviews: [
-      { name: "Meera Sen", roll: "CS22B114", rating: 5, text: "Crunchy crust and piping hot. Goes brilliantly with evening ginger tea.", date: "Yesterday" }
+      { name: "Shreya Kulkarni", roll: "2024CS114", rating: 5, text: "Crunchy crust and piping hot. Goes brilliantly with evening ginger tea.", date: "Yesterday" }
     ]
   },
   gulab_jamun: {
@@ -722,7 +722,7 @@ const CULINARY_DETAILS_REGISTRY: Record<
     ingredients: ["Khoya (Mawa)", "Green Cardamom", "Kewra Water", "Kashmiri Saffron", "Pure Desi Ghee", "Rose Syrup"],
     allergens: ["Dairy"],
     sampleReviews: [
-      { name: "Devansh Mittal", roll: "ME23B061", rating: 5, text: "Warm and juicy! The whole hostel queues up when these are on the dinner menu.", date: "3 days ago" }
+      { name: "Varun Bhat", roll: "2024ME061", rating: 5, text: "Warm and juicy! The whole hostel queues up when these are on the dinner menu.", date: "3 days ago" }
     ]
   },
   chicken_65: {
@@ -738,7 +738,7 @@ const CULINARY_DETAILS_REGISTRY: Record<
     ingredients: ["Chicken Thigh", "Greek Yogurt", "Kashmiri Degi Mirch", "Curry Leaves", "Rice Flour", "Fresh Lime"],
     allergens: ["Dairy"],
     sampleReviews: [
-      { name: "Siddharth J.", roll: "CS21B008", rating: 5, text: "Spicy, crunchy, and savory. Best evening snack hands down.", date: "4 days ago" }
+      { name: "Siddharth Menon", roll: "2024CS008", rating: 5, text: "Spicy, crunchy, and savory. Best evening snack hands down.", date: "4 days ago" }
     ]
   },
   papad: {
@@ -754,7 +754,7 @@ const CULINARY_DETAILS_REGISTRY: Record<
     ingredients: ["Urad Dal Flour", "Black Peppercorns", "Asafoetida (Hing)", "Mango Achar", "Lime Pickle", "Mustard Oil"],
     allergens: [],
     sampleReviews: [
-      { name: "Rohit V.", roll: "ME21B044", rating: 5, text: "The perfect crunchy accompaniment! The spicy mango achar adds amazing punch to dal rice.", date: "2 days ago" }
+      { name: "Akash Gowda", roll: "2024ME044", rating: 5, text: "The perfect crunchy accompaniment! The spicy mango achar adds amazing punch to dal rice.", date: "2 days ago" }
     ]
   },
   chana_masala: {
@@ -770,7 +770,7 @@ const CULINARY_DETAILS_REGISTRY: Record<
     ingredients: ["Kabuli Chickpeas", "Anardana (Pomegranate)", "Tea-steeped Stock", "Amchur", "Ginger", "Coriander Seeds"],
     allergens: ["Vegan", "Gluten-Free"],
     sampleReviews: [
-      { name: "Kunal Bansal", roll: "IT23B045", rating: 4.5, text: "Rich homestyle flavor without excess oil. Tastes great with jeera rice.", date: "Last week" }
+      { name: "Omkar Sawant", roll: "2024IT045", rating: 4.5, text: "Rich homestyle flavor without excess oil. Tastes great with jeera rice.", date: "Last week" }
     ]
   },
   veg_pulav: {
@@ -786,7 +786,7 @@ const CULINARY_DETAILS_REGISTRY: Record<
     ingredients: ["Basmati Rice", "Carrots & Beans", "Green Peas", "Bay Leaves", "Star Anise", "Desi Ghee"],
     allergens: ["Gluten-Free"],
     sampleReviews: [
-      { name: "Pooja Hegde", roll: "EC23B092", rating: 4.5, text: "Fragrant and fluffy grains. Paired nicely with cucumber raita.", date: "1 week ago" }
+      { name: "Chinmayi Rao", roll: "2024EC092", rating: 4.5, text: "Fragrant and fluffy grains. Paired nicely with cucumber raita.", date: "1 week ago" }
     ]
   }
 };
@@ -868,16 +868,16 @@ export function getDishFullDetails(
   })) || [
     {
       id: `rev-${matchedKey}-1`,
-      studentName: "Aarav Sharma",
-      roll: "CS21B001",
+      studentName: "Darshan Kulkarni",
+      roll: "2024CS001",
       rating: 5,
       comment: `The flavor balance in ${resolvedName} is spot on. Very wholesome!`,
       date: "Yesterday",
     },
     {
       id: `rev-${matchedKey}-2`,
-      studentName: "Diya Patel",
-      roll: "EC22B045",
+      studentName: "Nandini Shenoy",
+      roll: "2024EC045",
       rating: 4.5,
       comment: "Freshly prepared and warm. Consistent quality this semester.",
       date: "3 days ago",

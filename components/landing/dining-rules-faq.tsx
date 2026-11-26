@@ -60,7 +60,7 @@ export function LandingDiningRulesFaq() {
     {
       question: "What if my phone battery dies or I don't have internet?",
       answer:
-        "Central Mess supervisors have a manual roll-number check-in console right at the entrance scanner. Simply state your university roll number (e.g. CS21B001) and hostel room number, and the steward will record your entry manually.",
+        "Central Mess supervisors have a manual roll-number check-in console right at the entrance scanner. Simply state your university roll number (e.g. 2024CS001) and hostel room number, and the steward will record your entry manually.",
     },
     {
       question: "Can I bring guest students or day scholars for lunch?",

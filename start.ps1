@@ -30,10 +30,10 @@ Write-Host ""
 Write-Host "----------------------------------------------------------" -ForegroundColor DarkGray
 Write-Host "  DEMO ACCOUNTS (One-click autofill also available at /login)" -ForegroundColor Cyan
 Write-Host "----------------------------------------------------------" -ForegroundColor DarkGray
-Write-Host "  Admin Account   : admin@mess.college.edu" -ForegroundColor White
+Write-Host "  Admin Account   : raghavendra.rao@msruas.ac.in (Raghavendra Rao)" -ForegroundColor White
 Write-Host "  Admin Password  : SecureAdminPassword123!" -ForegroundColor White
 Write-Host ""
-Write-Host "  Student Account : student1@mess.college.edu" -ForegroundColor White
+Write-Host "  Student Account : darshan.kulkarni@msruas.ac.in (Darshan Kulkarni)" -ForegroundColor White
 Write-Host "  Student Password: password123" -ForegroundColor White
 Write-Host "----------------------------------------------------------" -ForegroundColor DarkGray
 Write-Host ""

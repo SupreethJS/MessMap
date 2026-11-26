@@ -158,8 +158,8 @@ Quick autofill buttons are built directly into the `/login` page:
 
 | Role | Email | Password | Description |
 | :--- | :--- | :--- | :--- |
-| **Admin** | `admin@mess.college.edu` | `SecureAdminPassword123!` | Central Catering Head Administrator |
-| **Student** | `student1@mess.college.edu` | `password123` | Hostel Resident (Block A, Room 101) |
+| **Admin** | `raghavendra.rao@msruas.ac.in` | `SecureAdminPassword123!` | Raghavendra Rao (Mess Operations Manager) |
+| **Student** | `darshan.kulkarni@msruas.ac.in` | `password123` | Darshan Kulkarni (Block A, Room 101) |
 
 ---
 

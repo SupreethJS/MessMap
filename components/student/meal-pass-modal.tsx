@@ -78,9 +78,9 @@ export function MealPassModal({
     );
 
     const payload = JSON.stringify({
-      student_id: user?.id || "demo-student-id",
-      student_roll_number: user?.roll_number || "CS21B001",
-      student_name: user?.full_name || "Aarav Sharma",
+      student_id: user?.id || "u-student-001",
+      student_roll_number: user?.roll_number || "2024CS001",
+      student_name: user?.full_name || "Darshan Kulkarni",
       menu_id: activeMenu?.id || `menu-${today}-${selectedMeal}`,
       meal_type: selectedMeal,
       menu_date: today,
@@ -151,7 +151,7 @@ export function MealPassModal({
                 <span>Central Mess Hall 1</span>
               </div>
               <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
-                Smart Mess Management
+                MessMap Dining Operations
               </p>
             </div>
             <span
@@ -182,7 +182,7 @@ export function MealPassModal({
                 <User className="w-3 h-3" /> Resident
               </span>
               <p className="font-bold text-slate-900 dark:text-slate-100 truncate">
-                {user?.full_name || "Aarav Sharma"}
+                {user?.full_name || "Darshan Kulkarni"}
               </p>
             </div>
             <div>
@@ -190,7 +190,7 @@ export function MealPassModal({
                 <Hash className="w-3 h-3" /> Roll Number
               </span>
               <p className="font-bold text-slate-900 dark:text-slate-100 truncate">
-                {user?.roll_number || "CS21B001"}
+                {user?.roll_number || "2024CS001"}
               </p>
             </div>
             <div>
