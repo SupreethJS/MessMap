@@ -56,11 +56,14 @@ export function AdminHeader({ user, onToggleMobileMenu, isMobileMenuOpen = false
           </div>
           <div
             aria-label="Admin User Icon"
-            className="w-9 h-9 rounded-xl bg-slate-900 dark:bg-slate-800 text-amber-400 border border-slate-700 flex items-center justify-center font-black text-xs shadow-xs"
+            className="w-9 h-9 rounded-xl overflow-hidden bg-slate-900 dark:bg-slate-800 text-amber-400 border border-slate-200 dark:border-slate-700 flex items-center justify-center font-black text-xs shadow-xs shrink-0"
           >
-            {user.full_name
-              ? user.full_name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase()
-              : "RR"}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={user.avatar_url || "/images/avatars/admin-raghavendra.svg"}
+              alt={`Profile picture of ${user.full_name}`}
+              className="h-full w-full object-cover"
+            />
           </div>
         </div>
       </div>

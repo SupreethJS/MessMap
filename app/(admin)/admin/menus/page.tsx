@@ -35,10 +35,10 @@ export default async function AdminMenusPage({
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
             Menu Management
           </h1>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             Publish daily menus, define dishes, and configure meal-specific opt-in cutoffs.
           </p>
         </div>
@@ -66,20 +66,20 @@ export default async function AdminMenusPage({
             });
 
             return (
-              <Card key={menu.id} className="p-5 hover:border-slate-300 transition-colors">
+              <Card key={menu.id} className="p-5 hover:border-slate-300 dark:hover:border-slate-700 transition-colors">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div className="space-y-2">
                     <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                      <span className="font-bold text-slate-900 capitalize text-base">
+                      <span className="font-bold text-slate-900 dark:text-slate-50 capitalize text-base">
                         {menu.meal_type}
                       </span>
-                      <span className="text-xs font-medium text-slate-500 flex items-center gap-1">
-                        <Calendar className="w-3.5 h-3.5 text-slate-400" /> {formattedDate}
+                      <span className="text-xs font-medium text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                        <Calendar className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" /> {formattedDate}
                       </span>
-                      <span className="text-xs font-medium text-slate-500 flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5 text-slate-400" /> Serving: {formatTime(menu.serving_start_time)} – {formatTime(menu.serving_end_time)}
+                      <span className="text-xs font-medium text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                        <Clock className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" /> Serving: {formatTime(menu.serving_start_time)} – {formatTime(menu.serving_end_time)}
                       </span>
-                      <Badge variant="outline" className="text-[10px] bg-slate-50">
+                      <Badge variant="outline" className="text-[10px] bg-slate-50 dark:bg-slate-800/80">
                         Cutoff: {formatTime(menu.cutoff_time)}
                       </Badge>
                     </div>
@@ -105,9 +105,9 @@ export default async function AdminMenusPage({
                   </div>
 
                   {/* Actions & Headcount */}
-                  <div className="flex items-center justify-between md:justify-end gap-4 pt-3 md:pt-0 border-t md:border-0 border-slate-100">
+                  <div className="flex items-center justify-between md:justify-end gap-4 pt-3 md:pt-0 border-t md:border-0 border-slate-100 dark:border-slate-800">
                     <div className="text-right">
-                      <span className="text-sm font-bold text-slate-800 block">
+                      <span className="text-sm font-bold text-slate-800 dark:text-slate-100 block">
                         {menu.expected_attendance || 0} Opt-ins
                       </span>
                       <span className="text-[11px] text-slate-400">Declared attendance</span>

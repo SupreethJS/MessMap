@@ -94,10 +94,10 @@ export default function AdminGroceriesPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
             Pantry & Grocery Inventory
           </h1>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             Maintain raw material levels, track low-stock thresholds, and trigger automated recipe compatibility.
           </p>
         </div>
@@ -133,7 +133,7 @@ export default function AdminGroceriesPage() {
                       id="item-cat"
                       value={newCategory}
                       onChange={(e) => setNewCategory(e.target.value)}
-                      className="w-full h-10 rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs"
+                      className="w-full h-10 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 px-2 py-1 text-xs"
                     >
                       <option value="grains">Grains</option>
                       <option value="pulses">Pulses</option>
@@ -151,7 +151,7 @@ export default function AdminGroceriesPage() {
                       id="item-unit"
                       value={newUnit}
                       onChange={(e) => setNewUnit(e.target.value)}
-                      className="w-full h-10 rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs"
+                      className="w-full h-10 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 px-2 py-1 text-xs"
                     >
                       <option value="kg">Kilograms (kg)</option>
                       <option value="liters">Liters</option>

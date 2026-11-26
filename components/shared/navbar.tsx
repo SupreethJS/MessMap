@@ -17,36 +17,36 @@ export function Navbar({ user, notifications = [] }: NavbarProps) {
   const isStudent = user?.role === "student";
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
+    <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-[#0D1117]/95 backdrop-blur-md">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         {/* Brand */}
         <div className="flex items-center gap-6">
           <Link
             href={isStudent ? "/student/dashboard" : "/admin/dashboard"}
-            className="flex items-center gap-2.5 font-extrabold text-slate-900 text-lg tracking-tight hover:opacity-95 transition-opacity"
+            className="flex items-center gap-2.5 font-extrabold text-slate-900 dark:text-slate-50 text-lg tracking-tight hover:opacity-95 transition-opacity"
           >
             <MessMapLogo size="sm" />
-            <span>Mess<span className="text-emerald-600">Map</span></span>
+            <span>Mess<span className="text-emerald-600 dark:text-emerald-400">Map</span></span>
           </Link>
 
           {/* Student Desktop Nav Links */}
           {isStudent && (
-            <nav className="hidden md:flex items-center gap-1 text-sm font-medium text-slate-600">
+            <nav className="hidden md:flex items-center gap-1 text-sm font-medium text-slate-600 dark:text-slate-300">
               <Link
                 href="/student/dashboard"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:text-slate-900 hover:bg-slate-100 transition-colors"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
                 <LayoutDashboard className="w-4 h-4" /> Today&apos;s Meals
               </Link>
               <Link
                 href="/student/menu"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:text-slate-900 hover:bg-slate-100 transition-colors"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
                 <Calendar className="w-4 h-4" /> 7-Day Menu
               </Link>
               <Link
                 href="/student/ratings"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:text-slate-900 hover:bg-slate-100 transition-colors"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
                 <Star className="w-4 h-4" /> Rate Meals
               </Link>
@@ -60,10 +60,10 @@ export function Navbar({ user, notifications = [] }: NavbarProps) {
 
           {user && (
             <div className="hidden sm:flex flex-col text-right">
-              <span className="text-xs font-semibold text-slate-800">
+              <span className="text-xs font-semibold text-slate-800 dark:text-slate-100">
                 {user.full_name}
               </span>
-              <span className="text-[11px] text-slate-500 capitalize">
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 capitalize">
                 {user.role} {user.roll_number ? `(${user.roll_number})` : ""}
               </span>
             </div>
@@ -74,7 +74,7 @@ export function Navbar({ user, notifications = [] }: NavbarProps) {
               type="submit"
               variant="ghost"
               size="sm"
-              className="text-slate-600 hover:text-red-600 hover:bg-red-50 h-9 px-2.5"
+              className="text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/50 h-9 px-2.5"
               title="Sign out"
             >
               <LogOut className="h-4 w-4 sm:mr-1.5" />

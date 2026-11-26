@@ -21,10 +21,10 @@ export default async function AdminReportsPage({
       {/* Header with Range Toggle */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
             Catering Reports & Analytics
           </h1>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             Comprehensive audit of student headcount, kitchen preparation volume, and food wastage ratios.
           </p>
         </div>

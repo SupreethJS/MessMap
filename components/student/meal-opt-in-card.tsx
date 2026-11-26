@@ -57,20 +57,20 @@ export function MealOptInCard({ menu, onPlanChanged }: MealOptInCardProps) {
   };
 
   return (
-    <Card className="overflow-hidden border border-slate-200/90 shadow-sm hover:shadow transition-all flex flex-col justify-between">
+    <Card className="overflow-hidden border border-slate-200/90 dark:border-slate-800 shadow-sm hover:shadow transition-all flex flex-col justify-between">
       <div>
         {/* Header */}
-        <CardHeader className="bg-slate-50/70 border-b border-slate-100 p-4 sm:p-5">
+        <CardHeader className="bg-slate-50/70 dark:bg-slate-900/60 border-b border-slate-100 dark:border-slate-800 p-4 sm:p-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <div className="p-2 rounded-xl bg-white border border-slate-200 text-brand-dark shadow-xs">
-                <Icon className="w-5 h-5 text-amber-600" />
+              <div className="p-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-brand-dark dark:text-amber-400 shadow-xs">
+                <Icon className="w-5 h-5 text-amber-600 dark:text-amber-400" />
               </div>
               <div>
-                <CardTitle className="text-base font-bold capitalize text-slate-800">
+                <CardTitle className="text-base font-bold capitalize text-slate-800 dark:text-slate-100">
                   {menu.meal_type}
                 </CardTitle>
-                <p className="text-xs text-slate-500 font-medium">
+                <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                   {formatTime(menu.serving_start_time)} – {formatTime(menu.serving_end_time)}
                 </p>
               </div>
@@ -109,17 +109,17 @@ export function MealOptInCard({ menu, onPlanChanged }: MealOptInCardProps) {
           </div>
 
           {/* Expected Attendance Metric */}
-          <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs text-slate-500">
+          <div className="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
             <span className="flex items-center gap-1.5">
-              <Users className="w-3.5 h-3.5 text-slate-400" /> Expected Headcount
+              <Users className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" /> Expected Headcount
             </span>
-            <span className="font-semibold text-slate-800">
+            <span className="font-semibold text-slate-800 dark:text-slate-100">
               {menu.expected_attendance || 0} students opted in
             </span>
           </div>
 
           {errorMsg && (
-            <div className="p-2.5 bg-red-50 border border-red-200 text-red-700 rounded-lg text-xs">
+            <div className="p-2.5 bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800/60 text-red-700 dark:text-red-300 rounded-lg text-xs">
               {errorMsg}
             </div>
           )}
@@ -127,9 +127,9 @@ export function MealOptInCard({ menu, onPlanChanged }: MealOptInCardProps) {
       </div>
 
       {/* Footer Opt-In Actions */}
-      <CardFooter className="bg-slate-50/40 p-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <CardFooter className="bg-slate-50/40 dark:bg-slate-900/50 p-4 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="w-full sm:w-auto">
-          <p className="text-[11px] font-medium text-slate-500 mb-1.5 sm:mb-0">
+          <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400 mb-1.5 sm:mb-0">
             Will you eat this meal?
           </p>
         </div>
@@ -144,7 +144,7 @@ export function MealOptInCard({ menu, onPlanChanged }: MealOptInCardProps) {
             className={`text-xs h-9 px-3 flex-1 sm:flex-none ${
               currentStatus === "yes"
                 ? "bg-brand-yellow text-brand-black hover:bg-brand-yellowHover font-bold"
-                : "hover:border-brand-yellow hover:text-brand-dark"
+                : "hover:border-brand-yellow hover:text-brand-dark dark:hover:text-amber-300"
             }`}
           >
             <Check className="w-3.5 h-3.5 mr-1" /> Yes, I will
@@ -159,7 +159,7 @@ export function MealOptInCard({ menu, onPlanChanged }: MealOptInCardProps) {
             className={`text-xs h-9 px-3 flex-1 sm:flex-none ${
               currentStatus === "no"
                 ? "bg-red-600 text-white hover:bg-red-700"
-                : "hover:border-red-300 hover:text-red-700"
+                : "hover:border-red-300 hover:text-red-700 dark:hover:text-red-400"
             }`}
           >
             <X className="w-3.5 h-3.5 mr-1" /> No, I won&apos;t

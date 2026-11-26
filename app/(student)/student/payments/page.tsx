@@ -15,57 +15,57 @@ export default async function StudentPaymentsPage() {
       {/* 1. TOP HERO HEADER ROW: Left Eyebrow+H1+Subtitle, Right compact KPI stat chips */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">
-            <CreditCard className="w-3.5 h-3.5 text-emerald-600" />
+          <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
+            <CreditCard className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
             <span>Dining Wallet & Transactions</span>
           </div>
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
             Payments & Wallet Balance
           </h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             Manage your prepaid dining credit, review meal deductions, and top up via UPI or Card.
           </p>
         </div>
 
         {/* Right-aligned compact KPI stat cards */}
         <div className="flex flex-wrap items-center gap-3">
-          <div className="bg-white border border-slate-200 rounded-2xl px-4 py-2.5 shadow-sm flex items-center gap-3">
-            <div className="h-9 w-9 rounded-xl bg-emerald-50 border border-emerald-200/60 text-emerald-700 flex items-center justify-center shrink-0">
+          <div className="bg-white dark:bg-[#161B22] border border-slate-200 dark:border-slate-800 rounded-2xl px-4 py-2.5 shadow-sm flex items-center gap-3">
+            <div className="h-9 w-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-400 flex items-center justify-center shrink-0">
               <CreditCard className="w-4 h-4" />
             </div>
             <div>
-              <p className="text-xs font-semibold text-slate-900 leading-tight">
+              <p className="text-xs font-semibold text-slate-900 dark:text-slate-50 leading-tight">
                 ₹{walletData.balance}
               </p>
-              <p className="text-[10px] text-emerald-700 font-medium">
+              <p className="text-[10px] text-emerald-700 dark:text-emerald-400 font-medium">
                 Current Balance
               </p>
             </div>
           </div>
 
-          <div className="bg-white border border-slate-200 rounded-2xl px-4 py-2.5 shadow-sm flex items-center gap-3">
-            <div className="h-9 w-9 rounded-xl bg-amber-50 border border-amber-200/60 text-amber-700 flex items-center justify-center shrink-0">
+          <div className="bg-white dark:bg-[#161B22] border border-slate-200 dark:border-slate-800 rounded-2xl px-4 py-2.5 shadow-sm flex items-center gap-3">
+            <div className="h-9 w-9 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200/60 dark:border-amber-800/60 text-amber-700 dark:text-amber-400 flex items-center justify-center shrink-0">
               <TrendingUp className="w-4 h-4" />
             </div>
             <div>
-              <p className="text-xs font-semibold text-slate-900 leading-tight">
+              <p className="text-xs font-semibold text-slate-900 dark:text-slate-50 leading-tight">
                 ₹1,450
               </p>
-              <p className="text-[10px] text-slate-500 font-medium">
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
                 Spent this Month
               </p>
             </div>
           </div>
 
-          <div className="bg-white border border-slate-200 rounded-2xl px-4 py-2.5 shadow-sm flex items-center gap-3">
-            <div className="h-9 w-9 rounded-xl bg-slate-900 text-amber-400 flex items-center justify-center shrink-0">
+          <div className="bg-white dark:bg-[#161B22] border border-slate-200 dark:border-slate-800 rounded-2xl px-4 py-2.5 shadow-sm flex items-center gap-3">
+            <div className="h-9 w-9 rounded-xl bg-slate-900 dark:bg-slate-800 text-amber-400 border border-slate-800 dark:border-slate-700 flex items-center justify-center shrink-0">
               <Sparkles className="w-4 h-4" />
             </div>
             <div>
-              <p className="text-xs font-semibold text-slate-900 leading-tight">
+              <p className="text-xs font-semibold text-slate-900 dark:text-slate-50 leading-tight">
                 ₹65.90
               </p>
-              <p className="text-[10px] text-slate-500 font-medium">
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
                 Avg Cost / Meal
               </p>
             </div>
@@ -75,7 +75,7 @@ export default async function StudentPaymentsPage() {
 
       {/* 2. Wallet Summary Card & Topup */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <div className="md:col-span-2 p-7 rounded-2xl bg-slate-900 text-white relative overflow-hidden shadow-md flex flex-col justify-between min-h-[190px] border border-slate-800">
+        <div className="md:col-span-2 p-6 sm:p-7 rounded-2xl bg-slate-900 text-white relative overflow-hidden shadow-md flex flex-col justify-between min-h-[190px] border border-slate-800">
           <div className="absolute right-0 top-0 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="flex items-center justify-between relative z-10">
@@ -102,14 +102,14 @@ export default async function StudentPaymentsPage() {
         </div>
 
         {/* Quick Topup CTA Card */}
-        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+        <div className="p-6 rounded-2xl bg-white dark:bg-[#161B22] border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-4">
           <div>
-            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+            <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
               Quick Recharge
             </span>
             <div className="my-2">
-              <span className="text-2xl font-bold text-slate-900">Recharge Balance</span>
-              <p className="text-[11px] text-slate-500 mt-0.5">Instant UPI, NetBanking & Card topup</p>
+              <span className="text-2xl font-bold text-slate-900 dark:text-slate-50">Recharge Balance</span>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Instant UPI, NetBanking & Card topup</p>
             </div>
           </div>
 

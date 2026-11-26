@@ -17,13 +17,13 @@ export default async function StudentMealPlansPage() {
   return (
     <div className="space-y-8">
       <div>
-        <div className="flex items-center gap-2 text-emerald-600 text-xs font-semibold uppercase tracking-wider mb-1">
+        <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-1">
           <Utensils className="w-4 h-4" /> Attendance Opt-In
         </div>
-        <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+        <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
           My Meal Plans
         </h1>
-        <p className="text-xs md:text-sm text-slate-500 mt-1">
+        <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 mt-1">
           Manage your attendance declarations for all upcoming meals before cutoff deadlines.
         </p>
       </div>

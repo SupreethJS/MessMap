@@ -19,18 +19,18 @@ export function MealAttendanceChart() {
   const data = getWeeklyAttendanceChartData(range);
 
   return (
-    <div className="bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 shadow-sm flex flex-col justify-between min-w-0">
+    <div className="bg-white dark:bg-[#161B22] rounded-2xl p-4 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between min-w-0">
       {/* Header with Title and Range Dropdown */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2.5">
-          <div className="h-8 w-8 rounded-xl bg-amber-50 border border-amber-200/60 text-amber-700 flex items-center justify-center">
+          <div className="h-8 w-8 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200/60 dark:border-amber-800/60 text-amber-700 dark:text-amber-400 flex items-center justify-center">
             <BarChart2 className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="font-semibold text-base text-slate-900 tracking-tight">
+            <h3 className="font-semibold text-base text-slate-900 dark:text-slate-50 tracking-tight">
               Meal Attendance
             </h3>
-            <p className="text-[11px] text-slate-500">Weekly student turnout rate</p>
+            <p className="text-[11px] text-slate-500 dark:text-slate-400">Weekly student turnout rate</p>
           </div>
         </div>
 
@@ -39,7 +39,8 @@ export function MealAttendanceChart() {
           <select
             value={range}
             onChange={(e) => setRange(e.target.value as any)}
-            className="appearance-none bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 pr-7 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-400 cursor-pointer"
+            aria-label="Select attendance date range"
+            className="appearance-none bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-1.5 pr-7 text-xs font-semibold text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-amber-400 cursor-pointer"
           >
             <option value="This Week">This Week</option>
             <option value="Last Week">Last Week</option>
@@ -105,12 +106,12 @@ export function MealAttendanceChart() {
       </div>
 
       {/* Legend & Summary Footer */}
-      <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 font-medium">
+      <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-medium">
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full bg-amber-400 border border-amber-500" />
           <span>Highlighted: Today</span>
         </div>
-        <span className="font-semibold text-slate-900">Avg: 84% turn-out</span>
+        <span className="font-semibold text-slate-900 dark:text-slate-100">Avg: 84% turn-out</span>
       </div>
     </div>
   );

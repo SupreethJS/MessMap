@@ -30,14 +30,14 @@ export default async function StudentMyMealsPage() {
       {/* 1. TOP HERO HEADER ROW: Left Eyebrow+H1+Subtitle, Right compact KPI stat chips */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">
+          <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
             <UtensilsCrossed className="w-3.5 h-3.5 text-amber-500" />
             <span>Dining History & Plans</span>
           </div>
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
             My Meals & Attendance History
           </h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             Track consumed meals, upcoming booked dining slots, and your individual consumption footprint.
           </p>
           <div className="mt-3">
@@ -47,43 +47,43 @@ export default async function StudentMyMealsPage() {
 
         {/* Right-aligned compact KPI stat cards */}
         <div className="flex flex-wrap items-center gap-3">
-          <div className="bg-white border border-slate-200 rounded-2xl px-4 py-2.5 shadow-sm flex items-center gap-3">
-            <div className="h-9 w-9 rounded-xl bg-emerald-50 border border-emerald-200/60 text-emerald-700 flex items-center justify-center shrink-0">
+          <div className="bg-white dark:bg-[#161B22] border border-slate-200 dark:border-slate-800 rounded-2xl px-4 py-2.5 shadow-sm flex items-center gap-3">
+            <div className="h-9 w-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-400 flex items-center justify-center shrink-0">
               <CheckCircle2 className="w-4 h-4" />
             </div>
             <div>
-              <p className="text-xs font-semibold text-slate-900 leading-tight">
+              <p className="text-xs font-semibold text-slate-900 dark:text-slate-50 leading-tight">
                 {consumedCount} Meals
               </p>
-              <p className="text-[10px] text-emerald-700 font-medium">
+              <p className="text-[10px] text-emerald-700 dark:text-emerald-400 font-medium">
                 Attended this month
               </p>
             </div>
           </div>
 
-          <div className="bg-white border border-slate-200 rounded-2xl px-4 py-2.5 shadow-sm flex items-center gap-3">
-            <div className="h-9 w-9 rounded-xl bg-amber-50 border border-amber-200/60 text-amber-700 flex items-center justify-center shrink-0">
+          <div className="bg-white dark:bg-[#161B22] border border-slate-200 dark:border-slate-800 rounded-2xl px-4 py-2.5 shadow-sm flex items-center gap-3">
+            <div className="h-9 w-9 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200/60 dark:border-amber-800/60 text-amber-700 dark:text-amber-400 flex items-center justify-center shrink-0">
               <TrendingUp className="w-4 h-4" />
             </div>
             <div>
-              <p className="text-xs font-semibold text-slate-900 leading-tight">
+              <p className="text-xs font-semibold text-slate-900 dark:text-slate-50 leading-tight">
                 {attendanceRate} Rate
               </p>
-              <p className="text-[10px] text-slate-500 font-medium">
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
                 Consistent Resident
               </p>
             </div>
           </div>
 
-          <div className="bg-white border border-slate-200 rounded-2xl px-4 py-2.5 shadow-sm flex items-center gap-3">
-            <div className="h-9 w-9 rounded-xl bg-slate-900 text-amber-400 flex items-center justify-center shrink-0">
+          <div className="bg-white dark:bg-[#161B22] border border-slate-200 dark:border-slate-800 rounded-2xl px-4 py-2.5 shadow-sm flex items-center gap-3">
+            <div className="h-9 w-9 rounded-xl bg-slate-900 dark:bg-slate-800 text-amber-400 border border-slate-800 dark:border-slate-700 flex items-center justify-center shrink-0">
               <Sparkles className="w-4 h-4" />
             </div>
             <div>
-              <p className="text-xs font-semibold text-slate-900 leading-tight">
+              <p className="text-xs font-semibold text-slate-900 dark:text-slate-50 leading-tight">
                 ~2.8 kg
               </p>
-              <p className="text-[10px] text-slate-500 font-medium">
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
                 Food Waste Prevented
               </p>
             </div>
@@ -220,26 +220,26 @@ export default async function StudentMyMealsPage() {
 
         {/* Right Column: Allocation & Eco Impact Cards */}
         <div className="lg:col-span-4 space-y-6">
-          <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
-            <h3 className="font-semibold text-base text-slate-900">
+          <div className="bg-white dark:bg-[#161B22] rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+            <h3 className="font-semibold text-base text-slate-900 dark:text-slate-50">
               Dining Allocation
             </h3>
             <div className="space-y-3 text-xs">
-              <div className="flex justify-between py-2 border-b border-slate-100">
-                <span className="text-slate-500">Hostel Mess</span>
-                <span className="font-semibold text-slate-900">{user?.mess_allocation || "Central Mess Hall 1"}</span>
+              <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800">
+                <span className="text-slate-500 dark:text-slate-400">Hostel Mess</span>
+                <span className="font-semibold text-slate-900 dark:text-slate-50">{user?.mess_allocation || "Central Mess Hall 1"}</span>
               </div>
-              <div className="flex justify-between py-2 border-b border-slate-100">
-                <span className="text-slate-500">Meal Plan</span>
-                <span className="font-semibold text-slate-900">All 4 Slots Included</span>
+              <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800">
+                <span className="text-slate-500 dark:text-slate-400">Meal Plan</span>
+                <span className="font-semibold text-slate-900 dark:text-slate-50">All 4 Slots Included</span>
               </div>
-              <div className="flex justify-between py-2 border-b border-slate-100">
-                <span className="text-slate-500">Dietary Pref</span>
-                <span className="font-semibold text-emerald-700">Vegetarian Friendly</span>
+              <div className="flex justify-between py-2 border-b border-slate-100 dark:border-slate-800">
+                <span className="text-slate-500 dark:text-slate-400">Dietary Pref</span>
+                <span className="font-semibold text-emerald-700 dark:text-emerald-400">Vegetarian Friendly</span>
               </div>
               <div className="flex justify-between py-2">
-                <span className="text-slate-500">Account Standing</span>
-                <span className="font-semibold text-emerald-600">Good Standing</span>
+                <span className="text-slate-500 dark:text-slate-400">Account Standing</span>
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">Good Standing</span>
               </div>
             </div>
           </div>

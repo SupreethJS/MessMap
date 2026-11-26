@@ -25,13 +25,13 @@ export default async function StudentRatingsPage() {
   return (
     <div className="space-y-8">
       <div>
-        <div className="flex items-center gap-2 text-emerald-600 text-xs font-semibold uppercase tracking-wider mb-1">
-          <Star className="w-4 h-4 fill-emerald-600 text-emerald-600" /> Dining Feedback
+        <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-1">
+          <Star className="w-4 h-4 fill-emerald-600 dark:fill-emerald-400 text-emerald-600 dark:text-emerald-400" /> Dining Feedback
         </div>
-        <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+        <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
           Meal Ratings & Reviews
         </h1>
-        <p className="text-xs md:text-sm text-slate-500 mt-1">
+        <p className="text-xs md:text-sm text-slate-500 dark:text-slate-400 mt-1">
           Rate served meals to help mess administrators refine recipes and improve daily quality.
         </p>
       </div>
@@ -39,10 +39,10 @@ export default async function StudentRatingsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Served Meals Ready for Rating */}
         <div className="lg:col-span-2 space-y-4">
-          <h2 className="text-lg font-bold text-slate-800">Recent Meals</h2>
+          <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">Recent Meals</h2>
 
           {pastServedMenus.length === 0 ? (
-            <Card className="p-8 text-center text-slate-500">
+            <Card className="p-8 text-center text-slate-500 dark:text-slate-400">
               No recent meals available for rating.
             </Card>
           ) : (
@@ -56,25 +56,25 @@ export default async function StudentRatingsPage() {
                 });
 
                 return (
-                  <Card key={menu.id} className="p-4 sm:p-5 hover:border-slate-300 transition-colors">
+                  <Card key={menu.id} className="p-4 sm:p-5 hover:border-slate-300 dark:hover:border-slate-700 transition-colors">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-slate-900 capitalize">
+                          <span className="font-bold text-slate-900 dark:text-slate-50 capitalize">
                             {menu.meal_type}
                           </span>
-                          <span className="text-xs text-slate-400">• {formattedDate}</span>
+                          <span className="text-xs text-slate-400 dark:text-slate-500">• {formattedDate}</span>
                         </div>
-                        <p className="text-xs text-slate-600 mt-1">
+                        <p className="text-xs text-slate-600 dark:text-slate-300 mt-1">
                           {menu.items?.map((i) => i.name).join(", ") || "Menu dishes"}
                         </p>
                       </div>
 
-                      <div className="flex items-center justify-between sm:justify-end gap-3 pt-2 sm:pt-0 border-t sm:border-0 border-slate-100">
+                      <div className="flex items-center justify-between sm:justify-end gap-3 pt-2 sm:pt-0 border-t sm:border-0 border-slate-100 dark:border-slate-800">
                         {existingRating ? (
                           <div className="flex flex-col items-end">
                             <StarRating value={existingRating.rating} readOnly size="sm" />
-                            <span className="text-[11px] text-slate-400 mt-0.5">Your rating</span>
+                            <span className="text-[11px] text-slate-400 dark:text-slate-500 mt-0.5">Your rating</span>
                           </div>
                         ) : (
                           <RateMealDialog menu={menu} />
@@ -90,33 +90,33 @@ export default async function StudentRatingsPage() {
 
         {/* User's Rating History Sidebar */}
         <div className="space-y-4">
-          <h2 className="text-lg font-bold text-slate-800">Your Past Feedback</h2>
+          <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100">Your Past Feedback</h2>
           <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-semibold flex items-center justify-between">
                 <span>Submitted Reviews</span>
-                <span className="text-xs font-normal text-slate-400">
+                <span className="text-xs font-normal text-slate-400 dark:text-slate-500">
                   {userRatings.length} total
                 </span>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               {userRatings.length === 0 ? (
-                <p className="text-xs text-slate-400 py-4 text-center">
+                <p className="text-xs text-slate-400 dark:text-slate-500 py-4 text-center">
                   You haven&apos;t submitted any ratings yet.
                 </p>
               ) : (
                 userRatings.slice(0, 5).map((r) => (
-                  <div key={r.id} className="p-3 bg-slate-50 rounded-lg border border-slate-100 space-y-1.5">
+                  <div key={r.id} className="p-3 bg-slate-50 dark:bg-slate-900/70 rounded-lg border border-slate-100 dark:border-slate-800 space-y-1.5">
                     <div className="flex items-center justify-between">
                       <StarRating value={r.rating} readOnly size="sm" />
-                      <span className="text-[10px] text-slate-400">
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500">
                         {new Date(r.created_at).toLocaleDateString()}
                       </span>
                     </div>
                     {r.comment && (
-                      <p className="text-xs text-slate-600 italic flex items-start gap-1">
-                        <MessageSquare className="w-3 h-3 text-slate-400 mt-0.5 flex-shrink-0" />
+                      <p className="text-xs text-slate-600 dark:text-slate-300 italic flex items-start gap-1">
+                        <MessageSquare className="w-3 h-3 text-slate-400 dark:text-slate-500 mt-0.5 flex-shrink-0" />
                         &quot;{r.comment}&quot;
                       </p>
                     )}

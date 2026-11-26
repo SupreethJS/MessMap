@@ -41,7 +41,7 @@ export function AnalyticsCharts({ dailyTrends }: AnalyticsChartsProps) {
       {/* Prepared vs Leftover Quantities */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base font-bold text-slate-800">
+          <CardTitle className="text-base font-bold text-slate-800 dark:text-slate-100">
             Prepared vs. Leftover Quantity (kg)
           </CardTitle>
         </CardHeader>
@@ -74,7 +74,7 @@ export function AnalyticsCharts({ dailyTrends }: AnalyticsChartsProps) {
         {/* Daily Wastage Trend */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-base font-bold text-slate-800">
+            <CardTitle className="text-base font-bold text-slate-800 dark:text-slate-100">
               Wastage Percentage Trend (%)
             </CardTitle>
           </CardHeader>
@@ -110,7 +110,7 @@ export function AnalyticsCharts({ dailyTrends }: AnalyticsChartsProps) {
         {/* Actual Attendance Trend */}
         <Card>
           <CardHeader>
-            <CardTitle className="text-base font-bold text-slate-800">
+            <CardTitle className="text-base font-bold text-slate-800 dark:text-slate-100">
               Actual Dining Turnout Trend
             </CardTitle>
           </CardHeader>

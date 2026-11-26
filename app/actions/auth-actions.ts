@@ -332,6 +332,7 @@ export async function getCurrentUser(): Promise<Profile | null> {
         }
 
         // Construct from user metadata if profile row pending
+        const resolvedRole = (user.user_metadata?.role as "student" | "admin") || "student";
         return {
           id: user.id,
           email: user.email || "",
@@ -341,7 +342,12 @@ export async function getCurrentUser(): Promise<Profile | null> {
           hostel_block: user.user_metadata?.hostel_block || "Block A",
           room_number: user.user_metadata?.room_number || "101",
           mess_allocation: "Central Mess Hall 1",
-          role: (user.user_metadata?.role as "student" | "admin") || "student",
+          role: resolvedRole,
+          avatar_url:
+            user.user_metadata?.avatar_url ||
+            (resolvedRole === "admin"
+              ? "/images/avatars/admin-raghavendra.svg"
+              : "/images/avatars/student-darshan.svg"),
           wallet_balance: 450,
           created_at: user.created_at,
           updated_at: user.updated_at || user.created_at,

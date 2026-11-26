@@ -94,10 +94,10 @@ export default function AdminFoodRecordsPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+        <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
           Food Wastage & Post-Meal Logs
         </h1>
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-slate-500 dark:text-slate-400">
           Enter post-service prepared and leftover quantities to automatically track wastage percentages and turnout compliance.
         </p>
       </div>
@@ -118,7 +118,7 @@ export default function AdminFoodRecordsPage() {
                   id="meal-select"
                   value={selectedMenuId}
                   onChange={(e) => handleMenuSelect(e.target.value)}
-                  className="w-full h-10 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs text-slate-800"
+                  className="w-full h-10 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-1.5 text-xs text-slate-800 dark:text-slate-100"
                 >
                   {sortedMenus.map((m) => (
                     <option key={m.id} value={m.id}>
@@ -174,7 +174,7 @@ export default function AdminFoodRecordsPage() {
                     id="unit"
                     value={unit}
                     onChange={(e) => setUnit(e.target.value as any)}
-                    className="w-full h-10 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs"
+                    className="w-full h-10 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 px-3 py-1.5 text-xs"
                   >
                     <option value="kg">Kilograms (kg)</option>
                     <option value="portions">Portions</option>
@@ -183,30 +183,30 @@ export default function AdminFoodRecordsPage() {
               </div>
 
               {/* Instant Wastage Computation Banner */}
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
-                <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/70 border border-slate-200/80 dark:border-slate-800 space-y-1">
+                <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
                   Calculated Wastage Percentage
                 </span>
                 <div className="flex items-baseline gap-2">
-                  <span className={`text-2xl font-extrabold ${parseFloat(calculatedWastage) > 15 ? "text-rose-600" : "text-emerald-700"}`}>
+                  <span className={`text-2xl font-extrabold ${parseFloat(calculatedWastage) > 15 ? "text-rose-600 dark:text-rose-400" : "text-emerald-700 dark:text-emerald-400"}`}>
                     {calculatedWastage}%
                   </span>
-                  <span className="text-xs text-slate-400">
+                  <span className="text-xs text-slate-400 dark:text-slate-500">
                     ({leftoverQty} / {preparedQty} {unit})
                   </span>
                 </div>
               </div>
 
               {errorMsg && (
-                <div className="p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-xs flex items-center gap-2">
+                <div className="p-3 bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800/60 text-red-700 dark:text-red-300 rounded-lg text-xs flex items-center gap-2">
                   <AlertCircle className="w-4 h-4 shrink-0" />
                   <span>{errorMsg}</span>
                 </div>
               )}
 
               {successMsg && (
-                <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-lg text-xs flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600" />
+                <div className="p-3 bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/60 text-emerald-800 dark:text-emerald-300 rounded-lg text-xs flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
                   <span>{successMsg}</span>
                 </div>
               )}

@@ -88,7 +88,7 @@ function generateInitialSeed(): MessStoreState {
       phone: "+91 98765 43210",
       role: "admin",
       wallet_balance: 0,
-      avatar_url: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80",
+      avatar_url: "/images/avatars/admin-raghavendra.svg",
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     },
@@ -102,11 +102,18 @@ function generateInitialSeed(): MessStoreState {
     "Jatin Naik", "Keerthana Prasad", "Lokesh Murthy", "Madhura Gokhale", "Nandini Shenoy",
     "Omkar Sawant", "Pallavi Pai", "Rakshith Acharya", "Sanket Nadkarni", "Vaishnavi Kashyap",
   ];
+  const femaleIndices = new Set([2, 4, 6, 9, 12, 14, 16, 18, 19, 21, 24]);
 
   studentNames.forEach((name, idx) => {
     const num = (idx + 1).toString().padStart(3, "0");
     const block = ["A", "B", "C", "D"][idx % 4];
     const emailSlug = name.toLowerCase().replace(/\s+/g, ".");
+    const avatarUrl =
+      idx === 0
+        ? "/images/avatars/student-darshan.svg"
+        : femaleIndices.has(idx)
+        ? "/images/avatars/student-female.svg"
+        : "/images/avatars/student-male.svg";
     profiles.push({
       id: `u-student-${num}`,
       email: `${emailSlug}@msruas.ac.in`,
@@ -119,7 +126,7 @@ function generateInitialSeed(): MessStoreState {
       phone: `+91 98110 ${10000 + idx * 77}`,
       role: "student",
       wallet_balance: 450, // Specified by MessMap design: ₹450
-      avatar_url: `https://api.dicebear.com/7.x/avataaars/svg?seed=${name}`,
+      avatar_url: avatarUrl,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     });

@@ -47,18 +47,18 @@ export function RecentActivityCard({ activities = [] }: RecentActivityCardProps)
   };
 
   return (
-    <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between">
+    <div className="bg-white dark:bg-[#161B22] rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h3 className="font-semibold text-base text-slate-900 tracking-tight">
+          <h3 className="font-semibold text-base text-slate-900 dark:text-slate-50 tracking-tight">
             Recent Activity
           </h3>
-          <p className="text-[11px] text-slate-500">Your latest mess events & logs</p>
+          <p className="text-[11px] text-slate-500 dark:text-slate-400">Your latest mess events & logs</p>
         </div>
 
         <Link
           href="/student/notifications"
-          className="text-xs font-semibold text-slate-700 hover:text-amber-600 flex items-center gap-1 group transition-colors"
+          className="text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 flex items-center gap-1 group transition-colors"
         >
           <span>View All</span>
           <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -66,7 +66,7 @@ export function RecentActivityCard({ activities = [] }: RecentActivityCardProps)
       </div>
 
       {/* Vertical Timeline */}
-      <div className="relative pl-6 space-y-4 my-2 before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-[1px] before:bg-slate-200">
+      <div className="relative pl-6 space-y-4 my-2 before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-[1px] before:bg-slate-200 dark:before:bg-slate-800">
         {list.slice(0, 4).map((item) => {
           const cfg = typeConfig[item.type] || typeConfig.meal;
 
@@ -74,11 +74,11 @@ export function RecentActivityCard({ activities = [] }: RecentActivityCardProps)
             <div key={item.id} className="relative flex items-start gap-3 group">
               {/* Timeline Indicator Dot */}
               <span
-                className={`absolute -left-[23px] top-1.5 h-3 w-3 rounded-full ${cfg.dot} ring-4 ring-white shadow-2xs`}
+                className={`absolute -left-[23px] top-1.5 h-3 w-3 rounded-full ${cfg.dot} ring-4 ring-white dark:ring-[#161B22] shadow-2xs`}
               />
 
               <div className="flex-1 space-y-0.5">
-                <p className="text-xs font-semibold text-slate-800 leading-tight group-hover:text-amber-700 transition-colors">
+                <p className="text-xs font-semibold text-slate-800 dark:text-slate-200 leading-tight group-hover:text-amber-700 dark:group-hover:text-amber-400 transition-colors">
                   {item.title}
                 </p>
                 <span className="text-[10px] text-slate-400 flex items-center gap-1 font-medium">
@@ -90,7 +90,7 @@ export function RecentActivityCard({ activities = [] }: RecentActivityCardProps)
         })}
       </div>
 
-      <div className="pt-3 border-t border-slate-100 text-center">
+      <div className="pt-3 border-t border-slate-100 dark:border-slate-800 text-center">
         <span className="text-[10px] text-slate-400">
           Showing real-time student dining activities
         </span>

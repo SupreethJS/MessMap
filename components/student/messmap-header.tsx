@@ -141,19 +141,12 @@ export function MessMapHeader({
             className="flex items-center gap-2 min-h-[44px] bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 p-1.5 pr-2.5 sm:pr-3 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 cursor-pointer"
           >
             <div className="h-8 w-8 rounded-lg overflow-hidden bg-amber-100 dark:bg-amber-900/60 border border-amber-300 dark:border-amber-700 flex items-center justify-center font-bold text-xs text-slate-900 dark:text-amber-200 shrink-0">
-              {user?.avatar_url ? (
-                <img
-                  src={user.avatar_url}
-                  alt={`Profile picture of ${user.full_name}`}
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <span>
-                  {user?.full_name
-                    ? user.full_name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase()
-                    : "DK"}
-                </span>
-              )}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={user?.avatar_url || "/images/avatars/student-darshan.svg"}
+                alt={`Profile picture of ${user?.full_name || "Darshan Kulkarni"}`}
+                className="h-full w-full object-cover"
+              />
             </div>
 
             <div className="text-left hidden sm:block">

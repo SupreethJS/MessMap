@@ -25,10 +25,10 @@ export default async function AdminRatingsPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+        <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-50 tracking-tight">
           Student Ratings & Dining Reviews
         </h1>
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-slate-500 dark:text-slate-400">
           Monitor student meal satisfaction, inspect dish-level commentary, and assess preparation standards.
         </p>
       </div>
@@ -37,7 +37,7 @@ export default async function AdminRatingsPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Rating Score Card */}
         <Card className="flex flex-col justify-center items-center p-6 text-center">
-          <span className="text-5xl font-black text-slate-900 tracking-tight">
+          <span className="text-5xl font-black text-slate-900 dark:text-slate-50 tracking-tight">
             {avgScore}
           </span>
           <StarRating value={parseFloat(avgScore)} readOnly size="lg" className="my-2" />
@@ -48,16 +48,16 @@ export default async function AdminRatingsPage() {
 
         {/* Rating Distribution Progress */}
         <Card className="md:col-span-2 p-6">
-          <h2 className="text-sm font-bold text-slate-800 mb-4">
+          <h2 className="text-sm font-bold text-slate-800 dark:text-slate-100 mb-4">
             Rating Distribution
           </h2>
           <div className="space-y-2.5">
             {distribution.map(({ stars, count, percentage }) => (
               <div key={stars} className="flex items-center gap-3 text-xs">
-                <span className="w-12 font-medium text-slate-600 flex items-center gap-1">
+                <span className="w-12 font-medium text-slate-600 dark:text-slate-300 flex items-center gap-1">
                   {stars} <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                 </span>
-                <div className="flex-1 h-2 rounded-full bg-slate-100 overflow-hidden">
+                <div className="flex-1 h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
                   <div
                     className="h-full bg-emerald-600 rounded-full transition-all"
                     style={{ width: `${percentage}%` }}
@@ -186,17 +186,17 @@ export default async function AdminRatingsPage() {
       {/* Recent Feedback Stream */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base font-bold text-slate-800 flex items-center gap-2">
-            <MessageSquare className="w-4 h-4 text-emerald-600" /> Recent Student Comments & Dish Feedback
+          <CardTitle className="text-base font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+            <MessageSquare className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> Recent Student Comments & Dish Feedback
           </CardTitle>
         </CardHeader>
         <CardContent>
           {ratings.length === 0 ? (
-            <div className="p-8 text-center text-slate-400 text-sm">
+            <div className="p-8 text-center text-slate-400 dark:text-slate-500 text-sm">
               No ratings submitted yet.
             </div>
           ) : (
-            <div className="divide-y divide-slate-100">
+            <div className="divide-y divide-slate-100 dark:divide-slate-800">
               {ratings.slice(-15).reverse().map((r) => {
                 const studentName = (r as any).student?.full_name || "Student";
                 const mealTypeLabel = r.meal_type || "Meal";
@@ -206,21 +206,21 @@ export default async function AdminRatingsPage() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
                         <StarRating value={r.rating} readOnly size="sm" />
-                        <span className="font-semibold text-xs text-slate-800">
+                        <span className="font-semibold text-xs text-slate-800 dark:text-slate-100">
                           {studentName}
                         </span>
-                        <span className="text-[11px] text-slate-400 capitalize">
+                        <span className="text-[11px] text-slate-400 dark:text-slate-500 capitalize">
                           ({mealTypeLabel})
                         </span>
                       </div>
 
-                      <span className="text-[11px] text-slate-400">
+                      <span className="text-[11px] text-slate-400 dark:text-slate-500">
                         {r.created_at ? new Date(r.created_at).toLocaleDateString() : "Recent"}
                       </span>
                     </div>
 
                     {r.comment && (
-                      <p className="text-xs text-slate-600 bg-slate-50 p-3 rounded-lg border border-slate-100 italic leading-relaxed">
+                      <p className="text-xs text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-900/70 p-3 rounded-lg border border-slate-100 dark:border-slate-800 italic leading-relaxed">
                         &quot;{r.comment}&quot;
                       </p>
                     )}
